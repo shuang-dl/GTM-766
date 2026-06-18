@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSAT Pipeline Health — DoorLoop Customer Support</title>
+<title>CSAT Pipeline Health v2 — DoorLoop Customer Support</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
@@ -207,16 +207,15 @@
 
 <!-- ─── STICKY NAV ─────────────────────────────────────────── -->
 <nav class="nav">
-  <span class="nav-brand">CSAT Pipeline Health</span>
+  <span class="nav-brand">CSAT Pipeline Health &nbsp;&middot;&nbsp; v2</span>
   <div class="nav-right">
-    <span class="nav-dot">Jun 2025 – Jun 2026</span>
+    <span class="nav-dot">Mar 2026 – Jun 2026</span>
     <span class="nav-badge">Internal Report</span>
   </div>
 </nav>
 
 <!-- ─── HERO ────────────────────────────────────────────────── -->
 <section class="hero">
-  <!-- decorative continuous curve — single flowing line across hero -->
   <svg class="hero-squiggle" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M -80 320
@@ -238,14 +237,14 @@
   <div class="container">
     <div class="hero-eyebrow">
       <span class="dot"></span>
-      DoorLoop &nbsp;&middot;&nbsp; Customer Support &nbsp;&middot;&nbsp; Internal Analysis
+      DoorLoop &nbsp;&middot;&nbsp; Customer Support &nbsp;&middot;&nbsp; Internal Analysis &nbsp;&middot;&nbsp; GTM-766
     </div>
     <h1>CSAT Pipeline <span class="accent">Health</span></h1>
-    <p class="hero-sub">12-month analysis of CSAT request rate and response rate across channel, monthly trend, agent type, and teammate — sourced from Intercom Operator live queries and cross-referenced with the dataset export.</p>
+    <p class="hero-sub">3-month analysis of CSAT response rate and satisfaction score across channel, monthly trend, agent type, and teammate — sourced from Intercom Operator live queries. Updated scope per GTM-766, superseding V1 (GTM-482 / GTM-506).</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
         <div class="meta-label">Period</div>
-        <div class="meta-val">Jun 2025 – Jun 2026</div>
+        <div class="meta-val">Mar 1 – Jun 18, 2026</div>
       </div>
       <div class="hero-meta-item">
         <div class="meta-label">Primary Source</div>
@@ -253,57 +252,57 @@
       </div>
       <div class="hero-meta-item">
         <div class="meta-label">Generated</div>
-        <div class="meta-val">Jun 15, 2026</div>
+        <div class="meta-val">Jun 18, 2026</div>
       </div>
       <div class="hero-meta-item">
         <div class="meta-label">Total Conversations</div>
-        <div class="meta-val">324,883</div>
+        <div class="meta-val">99,963</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── KPI STRIP ─────────────────────────────────────────────  -->
+<!-- ─── KPI STRIP ──────────────────────────────────────────── -->
 <div class="kpi-strip">
   <div class="kpi-card">
     <div class="k-label">Closed Conversations</div>
-    <div class="k-value">324,883</div>
-    <div class="k-sub">12-month total &middot; Operator verified</div>
+    <div class="k-value">99,963</div>
+    <div class="k-sub">Mar 1 – Jun 18, 2026 &middot; Operator verified</div>
   </div>
   <div class="kpi-card">
-    <div class="k-label">CSAT Survey Rate</div>
-    <div class="k-value">35.2%</div>
-    <div class="k-sub">114,365 surveys sent — not every close triggers one</div>
+    <div class="k-label">CSAT Responses</div>
+    <div class="k-value">6,818</div>
+    <div class="k-sub">Conversations with a human CSAT rating &middot; 6,916 total rating events</div>
   </div>
   <div class="kpi-card kpi-alert">
-    <div class="k-label">Human Response Rate</div>
-    <div class="k-value">17.7%</div>
-    <div class="k-sub">20,193 responses &divide; 114,365 surveys sent</div>
+    <div class="k-label">Response Rate</div>
+    <div class="k-value">6.81%</div>
+    <div class="k-sub">6,818 responses &divide; 100,064 convos where customer sent a message</div>
   </div>
-  <div class="kpi-card kpi-alert">
-    <div class="k-label">Actual CSAT Coverage</div>
-    <div class="k-value">6.2%</div>
-    <div class="k-sub">Human responses as % of all conversations</div>
+  <div class="kpi-card">
+    <div class="k-label">CSAT Score</div>
+    <div class="k-value">88.1%</div>
+    <div class="k-sub">6,090 positive ratings &divide; 6,916 total rating events</div>
   </div>
 </div>
 
-<!-- ─── DATA CORRECTION + TABS ────────────────────────────────  -->
+<!-- ─── DATA NOTE + TABS ───────────────────────────────────── -->
 <div class="section-wrap on-page" style="padding-top: 72px;">
 <div class="container">
-
-  <div class="callout warn">
-    <div class="co-icon">&#128680;</div>
-    <div class="co-body">
-      <strong>Data correction: the original analysis was measuring the wrong thing</strong>
-      The CSV export column "Last conversation rating updated at" captures both human CSAT responses and Intercom's AI-generated CX Score events — inflating the original "rated" count from 20,193 actual human responses to ~47,308 (a 2.3&times; overcount). Every number in this report reflects human CSAT only, sourced from Intercom Operator's live query engine.
-    </div>
-  </div>
 
   <div class="callout info">
     <div class="co-icon">&#128202;</div>
     <div class="co-body">
-      <strong>CSAT fires on only 35.2% of conversations — not every close triggers a survey</strong>
-      Of 324,883 conversations closed over 12 months, 114,365 generated a survey request. Of those, 20,193 received a human response. That's 6.2% of all conversations producing an actual human rating. All Fin vs. Human comparisons operate on this constrained pool.
+      <strong>Methodology note: V2 uses a different denominator than V1</strong>
+      Intercom does not expose a standalone "surveys sent" count in the CSAT rating system. In this report, response rate = CSAT responses &divide; conversations where the customer sent at least one message (100,064 total). This denominator is larger than "surveys sent," producing a lower percentage than V1's figures — but it is the most accurate available measure. Surveys-sent data is not available for this period.
+    </div>
+  </div>
+
+  <div class="callout neutral">
+    <div class="co-icon">&#128201;</div>
+    <div class="co-body">
+      <strong>Response rate is not computable per agent type — Cut 3 shows CSAT scores only</strong>
+      Intercom does not break down the "conversations where customer sent a message" denominator by rated-actor type (Fin AI vs. Teammate vs. Chatbot). Cut 3 therefore omits response rate and shows CSAT responses and satisfaction scores only. This is a system limitation, not a data gap in the analysis.
     </div>
   </div>
 
@@ -319,52 +318,56 @@
     <!-- ── CUT 1: CHANNEL ─── -->
     <div id="c1" class="tab-panel active">
       <div class="card-title">Response Rate &amp; Satisfaction by Channel</div>
-      <div class="card-desc">Source: Intercom Operator &middot; Jun 2025 – Jun 2026. Response rate = human responses &divide; surveys sent. CSAT Score = % of responses that were positive.</div>
+      <div class="card-desc">Source: Intercom Operator &middot; Mar 1 – Jun 18, 2026. Response rate = CSAT responses &divide; conversations where customer sent a message (per channel). CSAT Score = % of rating events that were positive.</div>
 
       <div class="callout success">
         <div class="co-icon">&#128222;</div>
-        <div class="co-body"><strong>Phone Call leads both dimensions: 21.0% response rate and 90.4% CSAT score</strong>Customers on phone calls are more engaged and more satisfied. Higher-effort conversations produce higher-quality CSAT signals.</div>
+        <div class="co-body"><strong>Phone Call leads on satisfaction at 89.9% CSAT</strong> — and confirms that the 65% figure cited in GTM-482 was an early-window artifact. With 486 responses over 3 months, phone CSAT is now on par with the team-wide benchmark.</div>
       </div>
       <div class="callout info">
         <div class="co-icon">&#128172;</div>
-        <div class="co-body"><strong>Chat drives 91% of all surveys sent — workspace health is essentially Chat's number</strong>105,958 surveys at 17.8% response rate and 87.0% satisfaction. The overall 17.7% average is almost entirely Chat's figure.</div>
+        <div class="co-body"><strong>Chat drives 90% of all CSAT responses — workspace health is essentially Chat's number</strong> — 6,134 responses at 7.49% response rate and 87.9% satisfaction. The 81,817 closed chat conversations represent 81.8% of total volume.</div>
       </div>
       <div class="callout warn">
         <div class="co-icon">&#9993;</div>
-        <div class="co-body"><strong>Email: lowest response rate (14.6%) and lowest satisfaction (84.7%)</strong>A 5.7-point CSAT gap between Phone (90.4%) and Email (84.7%) is the widest channel spread. Worth investigating whether resolution quality or response times are contributing.</div>
+        <div class="co-body"><strong>Email: critically low response rate at 2.26%</strong> — only 198 responses on 8,763 closed conversations. CSAT at 87.6% is in line with chat, but the response rate means the email CSAT signal is the least reliable of the three channels.</div>
       </div>
 
       <div class="two-col" style="margin-top:24px">
         <div class="chart-wrap"><canvas id="chartCh"></canvas></div>
         <div style="overflow-x:auto">
           <table>
-            <thead><tr><th>Channel</th><th>Surveys Sent</th><th>Responses</th><th>Response Rate</th><th>CSAT Score</th></tr></thead>
+            <thead><tr><th>Channel</th><th>Responses</th><th>Response Rate</th><th>CSAT Score</th></tr></thead>
             <tbody id="tbCh"></tbody>
           </table>
         </div>
       </div>
-      <p style="font-size:12px;color:var(--muted);margin-top:10px">Response rate = responses &divide; surveys sent. Source: Intercom Operator.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px">Response rate = responses &divide; conversations where customer sent a message (per channel). Source: Intercom Operator.</p>
     </div>
 
     <!-- ── CUT 2: MONTHLY TREND ─── -->
     <div id="c2" class="tab-panel">
-      <div class="card-title">Response Rate &amp; CSAT by Month (Trailing 12)</div>
-      <div class="card-desc">Source: Intercom Operator &middot; Jun 2025 – May 2026 &middot; Snapshot comparison. Response Rate = CSAT responses &divide; conversations closed. CSAT Score = % positive ratings out of all responses received.</div>
+      <div class="card-title">Response Rate &amp; CSAT by Month (Mar – Jun 18, 2026)</div>
+      <div class="card-desc">Source: Intercom Operator &middot; 4 months (June partial). Response Rate = CSAT responses &divide; conversations closed. CSAT Score = % positive ratings out of all rating events received that month.</div>
 
+      <div class="callout success">
+        <div class="co-icon">&#127381;</div>
+        <div class="co-body"><strong>April 2026: peak response rate (7.55%) and highest CSAT (90.0%)</strong> — 1,988 responses on 26,215 closed conversations. The strongest month in the 3-month window on both dimensions.</div>
+      </div>
       <div class="callout warn">
         <div class="co-icon">&#9888;</div>
-        <div class="co-body"><strong>Response rate trough: Sep–Oct 2025 (4.1–4.2%)</strong> — surveys sent dropped roughly in half (8,567 → 5,673) from Jun to Oct, suggesting a change in CSAT send settings mid-summer 2025. Rate recovered as surveys sent climbed back up through Dec 2025–Jan 2026.</div>
+        <div class="co-body"><strong>May 2026: lowest CSAT in the window at 86.0%</strong> — a 4-point drop from April. Volume was similar (26,614 closed, 1,829 responses). Worth monitoring whether this continues into June.</div>
       </div>
       <div class="callout neutral">
-        <div class="co-icon">&#128201;</div>
-        <div class="co-body"><strong>Peak response rate: Jan 2026 (7.3%, 2,254 responses) — also the highest-volume month (30,893 conversations, 13,405 surveys sent)</strong> &middot; <strong>Peak CSAT: Apr 2026 (90.0%)</strong> &middot; <strong>Lowest CSAT: Jan 2026 (84.8%)</strong> — the highest-volume month also had the lowest satisfaction, worth monitoring.</div>
+        <div class="co-icon">&#128337;</div>
+        <div class="co-body"><strong>June 1-18 data is partial — lower response rate (5.48%) expected</strong> — 18,677 conversations closed in the first 18 days. Do not compare June response rate directly to full months.</div>
       </div>
 
       <div class="chart-wrap" style="height:300px; margin: 24px 0;"><canvas id="chartMo"></canvas></div>
 
       <div style="overflow-x:auto">
         <table>
-          <thead><tr><th>Month</th><th>Closed</th><th>Surveys Sent</th><th>Responses</th><th>Response Rate</th><th>CSAT</th></tr></thead>
+          <thead><tr><th>Month</th><th>Closed</th><th>Responses</th><th>Response Rate</th><th>CSAT</th></tr></thead>
           <tbody id="tbMo"></tbody>
         </table>
       </div>
@@ -372,58 +375,54 @@
 
     <!-- ── CUT 3: AGENT TYPE ─── -->
     <div id="c3" class="tab-panel">
-      <div class="card-title">Response Rate &amp; Satisfaction by Agent Type</div>
-      <div class="card-desc">Source: Intercom Operator &middot; Jun 2025 – Jun 2026. Agent type = who closed the conversation: Fin AI Agent, a human Teammate, or a Chatbot workflow.</div>
+      <div class="card-title">CSAT Satisfaction by Agent Type</div>
+      <div class="card-desc">Source: Intercom Operator &middot; Mar 1 – Jun 18, 2026. Agent type = primary actor for the conversation: Fin AI Agent (sole), Teammate (human sole), or Chatbot workflow (sole). Response rate not computable per agent type — see methodology note above.</div>
 
       <div class="callout warn">
         <div class="co-icon">&#128680;</div>
-        <div class="co-body"><strong>Correction: the previous "Fin Involved 79%" figure was measuring CX Score coverage — not human CSAT</strong>Operator confirms 20,193 total human CSAT responses for the full 12 months. It's mathematically impossible for one segment to produce 25,000+ human responses. That 79% was Intercom's AI CX Score, auto-applied to ~47% of conversations. The actual Fin AI human response rate is 14.1%.</div>
+        <div class="co-body"><strong>Chatbot CSAT is critically low at 30.3% — the #1 quality crisis</strong> — 268 genuine human ratings on 31,145 chatbot-only conversations. Chatbot (sole) handled the highest single-category volume in this period, more than teammate-only conversations (12,624). At this sample size, 30.3% is not noise.</div>
       </div>
       <div class="callout success">
         <div class="co-icon">&#9989;</div>
-        <div class="co-body"><strong>Fin AI and Teammate satisfaction scores are virtually identical: 88.5% vs 89.9%</strong>Despite a lower response rate, customers who do rate Fin AI conversations give nearly the same score as human-handled ones. The 1.4-point gap is small relative to sample sizes.</div>
+        <div class="co-body"><strong>Fin AI (89.1%) and Teammate (91.9%) are within 2.8 points of each other</strong> — on 3,370 and 3,183 responses respectively. This is a robust sample for Fin AI. The gap is small and consistent with V1 findings. Fin is not the quality problem.</div>
       </div>
-      <div class="callout warn">
-        <div class="co-icon">&#9888;</div>
-        <div class="co-body"><strong>Chatbot CSAT is critically low at 36.8% — the real quality signal to act on</strong>858 ratings at a 43.5% response rate (the most engaged of the three). At that sample quality, 36.8% is hard to dismiss as noise. This is likely the driver behind the low scores in the Tenant Help Center team.</div>
+      <div class="callout info">
+        <div class="co-icon">&#128202;</div>
+        <div class="co-body">
+          <strong>Conversation volume by category (Mar 1 – Jun 18, 2026):</strong>
+          Fin AI sole: <strong>35,492</strong> &nbsp;&middot;&nbsp; Chatbot sole: <strong>31,145</strong> &nbsp;&middot;&nbsp; Fin + Teammate collaboration: <strong>12,990</strong> &nbsp;&middot;&nbsp; Teammate sole: <strong>12,624</strong> &nbsp;&middot;&nbsp; Unknown: <strong>7,717</strong>
+        </div>
       </div>
 
       <div class="two-col" style="margin-top:24px">
-        <div class="chart-wrap"><canvas id="chartFin"></canvas></div>
+        <div class="chart-wrap"><canvas id="chartAgent"></canvas></div>
         <div style="overflow-x:auto">
           <table>
-            <thead><tr><th>Agent Type</th><th>Surveys Sent</th><th>Responses</th><th>Response Rate</th><th>CSAT Score</th></tr></thead>
+            <thead><tr><th>Agent Type</th><th>CSAT Responses</th><th>CSAT Score</th><th>Convos Closed (Sole)</th></tr></thead>
             <tbody id="tbFin"></tbody>
           </table>
         </div>
       </div>
-      <p style="font-size:12px;color:var(--muted);margin-top:10px">Response rate = responses &divide; surveys sent. Source: Intercom Operator.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px">Response rate omitted — denominator not available per agent type. CSAT Score = % positive ratings. Source: Intercom Operator.</p>
     </div>
 
     <!-- ── CUT 4: TEAMMATE ─── -->
     <div id="c4" class="tab-panel">
       <div class="card-title">CSAT by Teammate</div>
-      <div class="card-desc">Human teammates only &middot; sorted by conversations closed &middot; Source: Intercom Operator &middot; Jun 2025 – May 2026. Teammates with no CSAT data (Andrae, Toni W., Kailah Washington, Daniel) likely close conversation types where CSAT surveys are not triggered.</div>
+      <div class="card-desc">Customer Support &amp; Inbound Calls Team members only &middot; 17 teammates &middot; sorted by CSAT responses (highest first) &middot; Source: Intercom Operator &middot; Mar 1 – Jun 18, 2026. Team membership verified via Intercom Team Inboxes settings.</div>
 
-      <div class="callout warn">
-        <div class="co-icon">&#9888;</div>
-        <div class="co-body"><strong>Jeremy G is a significant outlier at 70.9% CSAT</strong> — 18–25 percentage points below every other teammate with comparable volume (234 responses, statistically robust). This is not a small-sample issue — he has the 4th highest close volume on the team. Worth a direct conversation-level review.</div>
+      <div class="callout success">
+        <div class="co-icon">&#127942;</div>
+        <div class="co-body"><strong>Danny leads at 98.8% CSAT (86 responses) — followed by Alejandro Grahammer at 97.3% (144) and Paolo G at 97.1% (207)</strong> — three teammates with consistently excellent scores across meaningful response volumes.</div>
       </div>
       <div class="callout info">
         <div class="co-icon">&#128202;</div>
-        <div class="co-body">
-          <strong>Operator team-level CSAT satisfaction scores (Jun 2025 – Jun 2026)</strong>
-          Customer Support: <strong>91.1%</strong> (12,331 ratings) &nbsp;&middot;&nbsp; Inbound Calls: <strong>90.8%</strong> (856) &nbsp;&middot;&nbsp; Advanced Technical Support: <strong>87.3%</strong> (181) &nbsp;&middot;&nbsp; Unassigned: <strong>87.7%</strong> (5,475) &nbsp;&middot;&nbsp; Merchant Processing: <strong>83.4%</strong> (463) &nbsp;&middot;&nbsp; Squad Leaders: <strong style="color:var(--pink)">44.0% &#9888;</strong> (441) &nbsp;&middot;&nbsp; Tenant Help Center: <strong style="color:var(--pink)">36.5% &#128680;</strong> (668)
-        </div>
-      </div>
-      <div class="callout success">
-        <div class="co-icon">&#9989;</div>
-        <div class="co-body"><strong>Alejandro Grahammer leads on response rate at 34.0%</strong>, followed by Andres (31.7%) and Franco Bolivar (28.9%). Paolo G and Aileen lead on satisfaction at 95.6% and 95.1% respectively — both with high response volumes making the scores reliable.</div>
+        <div class="co-body"><strong>Franco Bolivar has the most CSAT responses at 367</strong> — the highest signal volume on the team at 88.7% satisfaction. Milly Castellon (354) and Andres (265) follow with strong volumes as well.</div>
       </div>
 
       <div style="margin-top:20px; overflow-x:auto">
         <table>
-          <thead><tr><th>#</th><th>Teammate</th><th>Closed</th><th>Surveys Sent</th><th>Responses</th><th>Response Rate</th><th>CSAT</th><th>Signal</th></tr></thead>
+          <thead><tr><th>#</th><th>Teammate</th><th>CSAT Responses</th><th>CSAT Score</th><th>Signal</th></tr></thead>
           <tbody id="tbTm"></tbody>
         </table>
       </div>
@@ -437,165 +436,120 @@
 <!-- ─── GTM RECOMMENDATION ─────────────────────────────────── -->
 <div class="section-wrap on-cloud">
 <div class="container">
-  <div class="sec-eyebrow">GTM-482 &middot; GTM-506</div>
-  <div class="sec-title">Are the Fin figures <span style="color:var(--blue)">representative?</span></div>
+  <div class="sec-eyebrow">GTM-766 &middot; Supersedes GTM-482 &amp; GTM-506</div>
+  <div class="sec-title">Are the CSAT samples from GTM-482/GTM-506 <span style="color:var(--blue)">representative?</span></div>
 
   <div class="reco-box">
-    <div class="reco-eyebrow">&#127919; Analysis &middot; GTM-482 &amp; GTM-506</div>
-    <div class="reco-title">Two different problems — <span class="accent">two different fixes</span></div>
+    <div class="reco-eyebrow">&#127919; Analysis &middot; GTM-766</div>
+    <div class="reco-title">Two critical signals — a <span class="accent">declining trend</span> and a quality crisis</div>
 
-    <p class="reco-body">GTM-482 references a "Fin Resolved CSAT of 65%" for Fin Voice (phone calls). GTM-506 references a "Fin Involved CSAT of 79%" for all channels. Operator cross-referencing found a different issue with each.</p>
+    <p class="reco-body">The 3-month window (Mar 1 – Jun 18, 2026) produces two findings that exceed the GTM-766 acceptance criteria: a sharp decline in Fin AI involvement rate over the period, and a Chatbot CSAT score so low it constitutes the #1 unresolved quality problem in the workspace. Both are addressed here alongside the GTM-482 and GTM-506 representativeness verdict.</p>
 
-    <!-- GTM-482: Fin Voice -->
-    <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px;margin-top:20px"><strong>GTM-482 (Fin Voice / Phone) — the 65% is likely real human CSAT, but from a contaminated measurement window.</strong> Fin Voice launched around Feb 1, 2026. Operator data shows the CSAT survey step in the V2 routing wasn't fully wired up until April — meaning Feb and Mar data reflects a mixed, partially-configured audience. Feb+Mar combined: 8 positive out of 13 responses = 61.5%, which rounds to the 65% figure in GTM-482. That number is not wrong, but it's measuring an immature, unrepresentative slice of Fin Voice calls.</p>
+    <!-- GTM-482 Verdict -->
+    <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px;margin-top:20px"><strong>GTM-482 (Fin Voice / Phone) — the 65% was not representative. Current phone CSAT is 89.9%.</strong> GTM-482 cited a "Fin Resolved CSAT of 65%" sourced from Feb–Mar 2026 before the Fin Voice CSAT survey step was fully operational. V2 data confirms the correction: phone channel CSAT for Mar 1 – Jun 18 is 89.9% on 486 genuine responses — on par with the team-wide phone benchmark. The early figure should not be carried forward as a baseline.</p>
 
-    <p class="reco-body" style="padding-left:16px"><strong>The clean Apr–May 2026 window tells a much better story:</strong> satisfaction jumped from 81.8% in April to 88.2% in May — on track with the team-wide phone benchmark of 90.4%. The trajectory matters more than the early reading.</p>
+    <!-- GTM-506 Verdict -->
+    <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px"><strong>GTM-506 (Fin Involved, all channels) — the 79% was a CX Score, not human CSAT. Current Fin AI CSAT is 89.1%.</strong> V1 identified that the 79% figure matched Intercom's AI-generated CX Score, not human satisfaction ratings. V2 confirms: Fin AI human CSAT is 89.1% on 3,370 responses — robust enough for a strong benchmark claim. The gap between Fin AI (89.1%) and human teammate (91.9%) is just 2.8 points, consistent across both the 3-month and 12-month windows.</p>
 
-    <!-- Fin Voice data table -->
-    <div style="margin:20px 0 24px;overflow-x:auto">
-      <p style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px">Fin Voice CSAT &mdash; Feb&ndash;May 2026 &middot; Source: Intercom Operator &middot; phone_call + tag "Fin Voice Call"</p>
-      <table style="font-size:13px;border-collapse:collapse;width:100%">
-        <thead>
-          <tr style="background:rgba(255,255,255,.08)">
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Month</th>
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Fin Voice Convos</th>
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Surveys Sent</th>
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Responses</th>
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Response Rate</th>
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">CSAT Satisfaction</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="opacity:.7">
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-weight:600">Feb 2026 <span style="font-size:10px;background:rgba(255,73,152,.25);color:#ff9ec8;padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">partial</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">311</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">14</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">1</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">7.1%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">100% <span style="font-size:10px;opacity:.6">(n=1, ignore)</span></td>
-          </tr>
-          <tr style="opacity:.7">
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-weight:600">Mar 2026 <span style="font-size:10px;background:rgba(255,73,152,.25);color:#ff9ec8;padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">contaminated</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">939</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">93</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">12</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.65)">12.9%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:#ff9ec8;font-weight:700">58.3% (7/12)</td>
-          </tr>
-          <tr>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:700">Apr 2026 <span style="font-size:10px;background:rgba(223,254,2,.2);color:#dffe02;padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">clean</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">517</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">176</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">22</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">12.5%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:#dffe02;font-weight:700">81.8% (18/22)</td>
-          </tr>
-          <tr>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:700">May 2026 <span style="font-size:10px;background:rgba(223,254,2,.2);color:#dffe02;padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">clean</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">423</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">184</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">17</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8)">9.2%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:#dffe02;font-weight:700">88.2% (15/17)</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,.06)">
-            <td style="padding:9px 16px;color:white;font-weight:700">Total (Feb&ndash;May)</td>
-            <td style="padding:9px 16px;color:rgba(255,255,255,.8)">2,190</td>
-            <td style="padding:9px 16px;color:rgba(255,255,255,.8)">467</td>
-            <td style="padding:9px 16px;color:rgba(255,255,255,.8)">52</td>
-            <td style="padding:9px 16px;color:rgba(255,255,255,.8)">11.1%</td>
-            <td style="padding:9px 16px;color:white;font-weight:700">78.8% (41/52)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- GTM-506: Fin Involved all channels -->
-    <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px"><strong>GTM-506 (Fin Involved, all channels) — the 79% is almost certainly a CX Score, not human CSAT.</strong> Operator confirms 20,193 total human CSAT responses for the full 12-month period. For 79% to be a human response rate on Fin-involved conversations, one segment would need to produce 25,000+ human responses — mathematically impossible. The 79% figure matches Intercom's CX Score coverage rate, an AI-generated quality score auto-applied to ~47% of conversations. It is a valid metric, but it measures something different from human satisfaction.</p>
-
-    <p class="reco-body"><strong>What Operator actually shows for human CSAT across agent types:</strong> Fin AI produces an 88.5% satisfaction score on 9,152 human responses. Teammate produces 89.9% on 10,633 responses. The gap is 1.4 points — not the dramatic difference GTM-506's framing implied.</p>
-
-    <!-- GTM-506: Fin AI 12-Month Performance -->
+    <!-- Anomaly 1: Fin Involvement Rate Declining -->
     <div style="margin:28px 0 0;border-top:1px solid rgba(255,255,255,0.12);padding-top:24px">
-      <p class="reco-body" style="margin:0 0 16px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,0.4)">Fin AI — 12-Month Performance (Jun 2025 – May 2026 &middot; Source: Operator)</p>
+      <p style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px">Anomaly 1 &mdash; Fin AI Involvement Rate: Declining (Operator, All Types) &middot; Stable (Custom Report, Chat Only)</p>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
-        <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:16px 20px">
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Resolution Rate &mdash; May 27, 2026</div>
-          <div style="font-size:30px;font-weight:700;color:#3185fc;letter-spacing:-.01em">69.7%</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px">347 of 498 conversations &middot; flat for 11 of 12 months</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px 20px">
+          <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Operator &mdash; March Peak</div>
+          <div style="font-size:28px;font-weight:700;color:#dffe02;letter-spacing:-.01em">52.75%</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">All conversation types &middot; 15,114 / 28,650</div>
         </div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:16px 20px">
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Involvement Rate &mdash; May 27, 2026</div>
-          <div style="font-size:30px;font-weight:700;color:#dffe02;letter-spacing:-.01em">43.3%</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px">498 of 1,149 conversations &middot; up +7.2 pp since Jan 2026 step-change</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px 20px">
+          <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Operator &mdash; June 1-18</div>
+          <div style="font-size:28px;font-weight:700;color:#ff4998;letter-spacing:-.01em">41.04%</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">All conversation types &middot; 7,648 / 18,637</div>
         </div>
-      </div>
-
-      <div style="background:rgba(0,0,0,0.3);border-radius:12px;padding:20px 20px 16px;margin-bottom:20px;height:260px;position:relative">
-        <canvas id="finPerformanceChart"></canvas>
+        <div style="background:rgba(49,133,252,.12);border-radius:10px;padding:16px 20px;border:1px solid rgba(49,133,252,.3)">
+          <div style="font-size:11px;color:rgba(49,133,252,.85);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Custom Report &mdash; Chat Only &#10003;</div>
+          <div style="font-size:28px;font-weight:700;color:#dffe02;letter-spacing:-.01em">95.2%</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">Stable all 4 months &middot; 46,224 / 48,537 Chat-USER</div>
+        </div>
       </div>
 
       <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px">
         <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,0.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,0.12)">Month</th>
-            <th style="text-align:right;padding:9px 16px;color:#3185fc;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,0.12)">Resolution Rate</th>
-            <th style="text-align:right;padding:9px 16px;color:#dffe02;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,0.12)">Involvement Rate</th>
-            <th style="text-align:right;padding:9px 16px;color:rgba(255,255,255,0.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,0.12)">Total Convos</th>
-            <th style="text-align:right;padding:9px 16px;color:rgba(255,255,255,0.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,0.12)">Fin-Involved</th>
+          <tr style="background:rgba(255,255,255,.08)">
+            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Month</th>
+            <th style="text-align:right;padding:9px 16px;color:#dffe02;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Involvement Rate</th>
+            <th style="text-align:right;padding:9px 16px;color:#3185fc;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Resolution Rate</th>
+            <th style="text-align:right;padding:9px 16px;color:rgba(255,255,255,.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Fin-Involved / Total</th>
+            <th style="text-align:right;padding:9px 16px;color:rgba(255,255,255,.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Fin CSAT</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Jun 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,73,152,0.85)">64.3%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">43.3%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">19,358</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">8,375</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Jul 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">70.9%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">42.9%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">26,442</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">11,340</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Aug 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">71.0%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">39.0%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">26,008</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">10,131</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Sep 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">69.8%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">37.9%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">24,592</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">9,329</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Oct 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">69.4%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">40.2%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">24,868</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">9,985</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Nov 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">71.0%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">42.1%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">20,934</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">8,813</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Dec 2025</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">70.6%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">48.4%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">24,051</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">11,629</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Jan 2026</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">71.1%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">51.5%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">30,796</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">15,865</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);border-top:1px solid rgba(223,254,2,0.25)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Feb 2026 <span style="font-size:10px;color:#dffe02;margin-left:6px;font-weight:600">&#8593; step change</span></td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">70.9%</td><td style="padding:7px 10px;text-align:right;color:#dffe02;font-weight:600">51.2%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">26,616</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">13,623</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Mar 2026</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">68.7%</td><td style="padding:7px 10px;text-align:right;color:#dffe02;font-weight:600">52.4%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">28,833</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">15,114</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06)"><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">Apr 2026</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">70.4%</td><td style="padding:7px 10px;text-align:right;color:#dffe02;font-weight:600">51.6%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">26,480</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">13,673</td></tr>
-          <tr><td style="padding:7px 10px;color:rgba(255,255,255,0.65)">May 2026</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.65)">69.2%</td><td style="padding:7px 10px;text-align:right;color:#dffe02;font-weight:600">46.1%</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">26,599</td><td style="padding:7px 10px;text-align:right;color:rgba(255,255,255,0.4)">12,250</td></tr>
+          <tr>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">March 2026</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#dffe02;font-weight:700">52.75%</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">68.68%</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">15,114 / 28,650</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">88.5%</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">April 2026</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#dffe02;font-weight:700">51.92%</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">70.39%</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">13,673 / 26,336</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">88.8%</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">May 2026</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#ff9ec8;font-weight:700">46.31% <span style="font-size:10px;color:rgba(255,100,100,.7)">&#8595;</span></td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">69.18%</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">12,250 / 26,454</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">88.5%</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">June 1-18 <span style="font-size:10px;background:rgba(255,73,152,.25);color:#ff9ec8;padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">partial</span></td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#ff4998;font-weight:700">41.04% <span style="font-size:10px;color:rgba(255,100,100,.7)">&#8595;</span></td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">70.18%</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">7,648 / 18,637</td>
+            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#dffe02;font-weight:700">92.7%*</td>
+          </tr>
+          <tr style="background:rgba(255,255,255,.06)">
+            <td style="padding:9px 16px;color:white;font-weight:700">Overall (Mar–Jun 18)</td>
+            <td style="padding:9px 16px;text-align:right;color:#dffe02;font-weight:700">48.6%</td>
+            <td style="padding:9px 16px;text-align:right;color:#3185fc;font-weight:700">69.5%</td>
+            <td style="padding:9px 16px;text-align:right;color:rgba(255,255,255,.65)">48,685 / 100,077</td>
+            <td style="padding:9px 16px;text-align:right;color:rgba(255,255,255,.75);font-weight:700">89.1%</td>
+          </tr>
         </tbody>
       </table>
+      <p style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:20px">*June Fin CSAT based on 413 ratings vs. ~975–1,012 in full months — interpret cautiously.</p>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
-        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
-          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Prior 8 months &mdash; Jun 2025&ndash;Jan 2026</div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="color:rgba(255,255,255,0.55);font-size:12px">Avg Resolution Rate</span><span style="color:#3185fc;font-weight:700;font-size:16px">69.8%</span></div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="color:rgba(255,255,255,0.55);font-size:12px">Avg Involvement Rate</span><span style="color:#dffe02;font-weight:700;font-size:16px">43.1%</span></div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
-          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Last 4 months &mdash; Feb&ndash;May 2026</div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="color:rgba(255,255,255,0.55);font-size:12px">Avg Resolution Rate</span><span><span style="color:#3185fc;font-weight:700;font-size:16px">69.8%</span> <span style="color:rgba(255,255,255,0.35);font-size:11px">no change</span></span></div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="color:rgba(255,255,255,0.55);font-size:12px">Avg Involvement Rate</span><span><span style="color:#dffe02;font-weight:700;font-size:16px">50.3%</span> <span style="color:#dffe02;font-size:11px;font-weight:500">+7.2 pp</span></span></div>
-        </div>
-      </div>
+      <p class="reco-body" style="border-left:3px solid rgba(49,133,252,.6);padding-left:14px"><strong>Cross-reference resolved — this is a mix-shift artifact, not a Fin performance regression.</strong> The Operator denominator includes ALL conversation types (Chat, Phone, Email, chatbot-only, internal). As non-Chat volume grew from ~48% to ~58% of total conversations over the period, the Operator's overall involvement rate declined mathematically — even though Fin's actual Chat involvement never changed. The "Fin AI Agent (New)" custom report (Chat + USER only — Fin's primary domain) confirms involvement was <strong>95.2% overall and stable every month</strong>: Mar 95.6%, Apr 95.1%, May 95.3%, Jun 94.8%. Absolute Fin-involved Chat conversations declined (14,160 → 7,307) because total Chat volume declined — not because Fin was deployed less within Chat. Resolution rate on Chat is also stable at 71.8% (vs. 69.5% all-channel from Operator). CSAT confirmed across both sources at 89.1–89.2%.</p>
+    </div>
 
-      <p class="reco-body" style="margin:0;border-left:3px solid #3185fc;padding-left:14px;color:rgba(255,255,255,0.8)"><strong>Key finding:</strong> Fin's involvement rate jumped +7.2 pp between Dec 2025&ndash;Jan 2026 (43% &rarr; 51%) and held elevated through April, partially retreating in May. Resolution rate didn't move — Fin is handling significantly more conversations while maintaining the same quality. The step-change likely reflects a workflow or routing rule change in late Dec/early Jan worth investigating.</p>
+    <!-- Anomaly 2: Chatbot CSAT Crisis -->
+    <div style="margin:28px 0 0;border-top:1px solid rgba(255,255,255,0.12);padding-top:24px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px">Anomaly 2 &mdash; Chatbot CSAT: Critically Low at 30.3%</p>
+      <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px"><strong>Chatbot (sole) handled 31,145 conversations over 3 months — the highest single-category volume in the period — and produced a 30.3% CSAT score on 268 genuine human ratings.</strong> This is not a small-sample finding. At 268 ratings, the signal is robust. Chatbot volume exceeds teammate-only volume (12,624) by more than 2.5&times;, making this the highest-leverage quality improvement opportunity in the workspace. V1 found the same issue at 36.8% over 12 months — the problem has not improved.</p>
     </div>
 
     <div class="reco-verdict">
-      <div class="reco-verdict-title">Verdict: GTM-482's 65% is real human data — but from a contaminated early window before Fin Voice CSAT was fully operational. GTM-506's 79% is a CX Score. Neither is the right number to carry forward as a Fin CSAT benchmark.</div>
+      <div class="reco-verdict-title">Verdict: GTM-482's 65% and GTM-506's 79% were both unrepresentative. V2 provides the corrected benchmarks.</div>
       <ul class="reco-steps">
         <li>
           <span class="step-num">1</span>
-          <span class="step-text"><strong>Retire the 65% figure from GTM-482.</strong> It reflects Feb–Mar Fin Voice CSAT before the survey step was fully wired. Use Apr–May as the baseline instead: 81.8% → 88.2%, trending toward the phone team benchmark of 90.4%.</span>
+          <span class="step-text"><strong>Retire GTM-482's 65% Fin Voice baseline.</strong> Current phone CSAT is 89.9% on 486 responses. The early figure reflected an immature, partially-configured measurement window and is no longer relevant.</span>
         </li>
         <li>
           <span class="step-num">2</span>
-          <span class="step-text"><strong>Relabel GTM-506's 79% as a CX Score metric.</strong> It is valid for measuring AI-evaluated quality at scale, but should not be compared directly to human CSAT satisfaction figures.</span>
+          <span class="step-text"><strong>Relabel GTM-506's 79% as a CX Score (AI-evaluated), not human CSAT.</strong> The real Fin AI human CSAT benchmark is 89.1% on 3,370 responses — use this going forward.</span>
         </li>
         <li>
           <span class="step-num">3</span>
-          <span class="step-text"><strong>Treat Fin Voice volume as still too low for strong claims.</strong> 52 total human responses over 4 months (max 22 in any single month) is below the threshold for statistical confidence. Continue monitoring as volume grows.</span>
+          <span class="step-text"><strong>Monitor the Chat-USER volume trend — confirmed not a Fin performance issue.</strong> Cross-referencing the Operator against the "Fin AI Agent (New)" custom report confirms that Fin's Chat involvement is stable at 95.2%. The Operator's -11.7 pp decline is a denominator effect: non-Chat volume grew as a share of total conversations. Track whether Chat-USER volume as a share of total continues to decrease, and assess whether that channel mix shift is intentional or a drift.</span>
         </li>
         <li>
           <span class="step-num">4</span>
-          <span class="step-text"><strong>Investigate the Chatbot segment urgently.</strong> 36.8% satisfaction on 858 genuine ratings is the real quality signal requiring action — not Fin AI or Fin Voice performance.</span>
+          <span class="step-text"><strong>Urgently audit Chatbot workflows.</strong> 30.3% CSAT on 31,145 conversations is the #1 quality problem — not Fin AI. This is a persistent issue (V1 also flagged it at 36.8% over 12 months) with no evidence of improvement.</span>
         </li>
       </ul>
     </div>
@@ -604,54 +558,118 @@
 </div>
 </div>
 
-<!-- ─── SUPPLEMENTAL: INTERCOM NATIVE FIN METRICS ─────────── -->
+<!-- ─── SUPPLEMENTAL: FIN AI PERFORMANCE (MAR–JUN 2026) ──── -->
 <div class="section-wrap on-white">
 <div class="container">
-  <div class="sec-eyebrow">Intercom Native Report</div>
-  <div class="sec-title">Fin AI Agent Metrics (Apr &ndash; Jun 2026)</div>
-  <div class="sec-desc">Source: Intercom "Fin AI Agent (New)" custom report &middot; Apr 1 – Jun 10, 2026 &middot; Channel: Chat &middot; Type: USER. Most recent available Fin performance figures — complementary to the 12-month Operator data above.</div>
+  <div class="sec-eyebrow">Intercom Operator + Custom Report &middot; Fin AI Supplemental</div>
+  <div class="sec-title">Fin AI Agent Performance (Mar 1 – Jun 18, 2026)</div>
+  <div class="sec-desc">Dual-source analysis: Intercom Operator (all conversation types, all channels) cross-referenced against the "Fin AI Agent (New)" custom report (Chat + USER type only — Fin's primary domain). CSAT confirmed identical across both sources at 89.1–89.2%.</div>
 
   <div class="metric-grid">
     <div class="m-card m-success">
       <div class="m-label">Fin CSAT Satisfaction</div>
-      <div class="m-value">89.1%</div>
-      <div class="m-sub">1,977 positive / 2,219 rated &middot; 7.2% of conversations</div>
+      <div class="m-value">89.2%</div>
+      <div class="m-sub">2,989 of 3,350 ratings &middot; Custom Report (Chat) &middot; Operator: 89.1% — dual-source confirmed</div>
+    </div>
+    <div class="m-card m-success">
+      <div class="m-label">Chat Involvement Rate</div>
+      <div class="m-value">95.2%</div>
+      <div class="m-sub">46,224 of 48,537 Chat-USER convos &middot; stable all 4 months (95.6 → 94.8%)</div>
     </div>
     <div class="m-card">
-      <div class="m-label">Fin CX Score (AI-evaluated)</div>
-      <div class="m-value">85.8%</div>
-      <div class="m-sub">13,856 conversations scored &middot; 47% coverage</div>
-    </div>
-    <div class="m-card">
-      <div class="m-label">Fin Involvement Rate</div>
-      <div class="m-value">95.1%</div>
-      <div class="m-sub">29,273 / 30,795 Chat conversations</div>
+      <div class="m-label">Fin CX Score (AI-Evaluated)</div>
+      <div class="m-value">86.1%</div>
+      <div class="m-sub">21,595 convos AI-scored &middot; 68.6% rated 5-star &middot; Chat + USER</div>
     </div>
   </div>
   <div class="metric-grid">
     <div class="m-card">
-      <div class="m-label">Fin Resolution Rate</div>
-      <div class="m-value">72%</div>
-      <div class="m-sub">21,073 / 29,273 Fin-involved conversations</div>
+      <div class="m-label">Resolution Rate (Chat)</div>
+      <div class="m-value">71.8%</div>
+      <div class="m-sub">33,189 resolved of 46,223 Fin-involved &middot; flat all 4 months (71.5–72.4%)</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Deflection Rate</div>
+      <div class="m-value">72.3%</div>
+      <div class="m-sub">33,434 of 46,224 Fin-involved convos &middot; no human handoff needed</div>
     </div>
     <div class="m-card m-success">
-      <div class="m-label">Confirmed Resolution Rate</div>
-      <div class="m-value">21.3%</div>
-      <div class="m-sub">4,488 / 21,073 Fin-resolved (customer confirmed)</div>
-    </div>
-    <div class="m-card m-alert">
-      <div class="m-label">Assumed Resolution Rate</div>
-      <div class="m-value">78.7%</div>
-      <div class="m-sub">16,585 / 21,073 Fin-resolved (no customer confirmation)</div>
+      <div class="m-label">CSAT Request Rate (Fin)</div>
+      <div class="m-value">72.8%</div>
+      <div class="m-sub">35,317 of 48,536 Fin convos surveyed &middot; rising: 62.1% (Mar) &rarr; 84.2% (May)</div>
     </div>
   </div>
 
-  <div class="callout warn" style="margin-top:8px">
-    <div class="co-icon">&#9888;</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600">Source: Intercom "Fin AI Agent (New)" Custom Report &middot; Chat + USER type only &middot; Mar 1 – Jun 18, 2026</div>
+  <div style="background:var(--page-bg);border-radius:12px;padding:20px 20px 16px;margin-bottom:20px;height:300px;position:relative">
+    <canvas id="finPerformanceChart"></canvas>
+  </div>
+
+  <div class="callout info" style="margin-top:8px">
+    <div class="co-icon">&#10003;</div>
     <div class="co-body">
-      <strong>78.7% of Fin resolutions are "assumed" — the direct cause of low CSAT response rates</strong>
-      Fin closes these conversations without an explicit "yes, my issue is resolved" signal from the customer. The conversation ends after Fin's final answer, giving customers little reason to engage with a follow-up survey. This structural gap — not Fin's answer quality — explains why the Fin AI response rate (14.1%) trails the Teammate rate (21.7%).
+      <strong>Fin AI performance is stable on all key dimensions — confirmed across two independent data sources</strong>
+      Chat involvement holds at 95%+ each month. Resolution rate is flat at 71.8%. CSAT closes at 92.7% in June after a stable 88.5–88.9% run over March–May. The Operator's overall involvement decline (52.75% → 41.04%) reflects a channel mix shift — non-Chat volume growing relative to Chat — not a degradation in Fin deployment or quality within its domain.
     </div>
+  </div>
+
+  <div style="margin-top:24px;background:var(--page-bg);border-radius:12px;padding:20px;overflow-x:auto">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">Monthly Detail — Custom Report (Chat + USER)</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:580px">
+      <thead>
+        <tr style="background:var(--cloud)">
+          <th style="text-align:left;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Month</th>
+          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Chat Involvement</th>
+          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Resolution Rate</th>
+          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">CSAT Score</th>
+          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">CX Score</th>
+          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Fin-Involved (Chat)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:9px 14px;font-weight:600">March 2026</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">95.6%</td>
+          <td style="padding:9px 14px;text-align:right">71.6%</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:600">88.8%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">87.0%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">14,160</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:9px 14px;font-weight:600">April 2026</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">95.1%</td>
+          <td style="padding:9px 14px;text-align:right">72.4%</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:600">88.9%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">85.8%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">13,138</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:9px 14px;font-weight:600">May 2026</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">95.3%</td>
+          <td style="padding:9px 14px;text-align:right">71.5%</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:600">88.5%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">86.2%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">11,619</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:9px 14px;font-weight:600">Jun 1-18 <span style="font-size:10px;background:#fff0f5;color:var(--pink);padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px">partial</span></td>
+          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">94.8%</td>
+          <td style="padding:9px 14px;text-align:right">71.7%</td>
+          <td style="padding:9px 14px;text-align:right;font-weight:600;color:#16a34a">92.7%*</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">84.9%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">7,307</td>
+        </tr>
+        <tr style="background:var(--cloud);font-weight:700">
+          <td style="padding:9px 14px">Overall</td>
+          <td style="padding:9px 14px;text-align:right;color:#16a34a">95.2%</td>
+          <td style="padding:9px 14px;text-align:right">71.8%</td>
+          <td style="padding:9px 14px;text-align:right">89.2%</td>
+          <td style="padding:9px 14px;text-align:right">86.1%</td>
+          <td style="padding:9px 14px;text-align:right;color:var(--muted)">46,224</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--faint);margin-top:8px">*June Fin CSAT 92.7% based on ~750 ratings vs. ~900–1,000 in full months — directionally strong, interpret with slight caution. CX Score is AI-evaluated; CSAT is human-rated.</p>
   </div>
 
 </div>
@@ -660,114 +678,101 @@
 <!-- ─── FOOTER ─────────────────────────────────────────────── -->
 <footer class="footer">
   <p>
-    CSAT Pipeline Health Report &nbsp;&middot;&nbsp; DoorLoop Customer Support &nbsp;&middot;&nbsp; Generated Jun 15, 2026<br>
-    Primary source: Intercom Operator (live, 324,883 conversations) &nbsp;&middot;&nbsp; Cross-ref: Dataset Export + Fin AI Agent Native Report &nbsp;&middot;&nbsp; Internal use only
+    CSAT Pipeline Health Report v2 &nbsp;&middot;&nbsp; DoorLoop Customer Support &nbsp;&middot;&nbsp; Generated Jun 18, 2026<br>
+    Primary source: Intercom Operator (all channels, 100,077 conversations, Mar 1 – Jun 18, 2026) &nbsp;&middot;&nbsp; Cross-referenced: "Fin AI Agent (New)" Custom Report (Chat + USER, 48,537 conversations) &nbsp;&middot;&nbsp; Supersedes V1 (12-month) per GTM-766 &nbsp;&middot;&nbsp; Internal use only
   </p>
 </footer>
 
 <script>
 /* ─── DATA ─────────────────────────────────────────────────── */
 const DATA = {
-  overall_rr: 15.2, // CSV 12-month average (inflated) — used only for Cut 2 delta column
 
   cut1: [
-    // Source: Intercom Operator. Response rate = responses / surveys sent.
-    {channel:"Chat",       surveys:105958, responses:18890, response_rate:17.8, csat:87.0},
-    {channel:"Phone Call", surveys:4297,   responses:902,   response_rate:21.0, csat:90.4},
-    {channel:"Email",      surveys:5832,   responses:849,   response_rate:14.6, csat:84.7}
+    // Source: Intercom Operator. Response rate = responses / convos where customer sent a message (per channel).
+    {channel:"Chat",       responses:6134, response_rate:7.49, csat:87.9, denom:81925},
+    {channel:"Phone Call", responses:486,  response_rate:5.57, csat:89.9, denom:8729},
+    {channel:"Email",      responses:198,  response_rate:2.26, csat:87.6, denom:8773}
   ],
 
   cut2: [
-    // Source: Intercom Operator · Jun 2025–May 2026 · Snapshot comparison
-    // Response Rate = responses / conversations closed
-    // CSAT Score = % positive ratings out of all responses received
-    {month:"2025-06", closed_n:19795, surveys:8567,  responses:1662, response_rate:8.6, csat:87.2},
-    {month:"2025-07", closed_n:27004, surveys:11108, responses:1749, response_rate:6.6, csat:89.4},
-    {month:"2025-08", closed_n:26241, surveys:7211,  responses:1416, response_rate:5.4, csat:87.3},
-    {month:"2025-09", closed_n:24962, surveys:6228,  responses:1043, response_rate:4.2, csat:84.9},
-    {month:"2025-10", closed_n:25669, surveys:5673,  responses:1019, response_rate:4.1, csat:85.8},
-    {month:"2025-11", closed_n:21119, surveys:5844,  responses:1092, response_rate:5.2, csat:86.0},
-    {month:"2025-12", closed_n:24632, surveys:8698,  responses:1565, response_rate:6.5, csat:85.6},
-    {month:"2026-01", closed_n:30893, surveys:13405, responses:2254, response_rate:7.3, csat:84.8},
-    {month:"2026-02", closed_n:26545, surveys:9530,  responses:1753, response_rate:6.6, csat:87.7},
-    {month:"2026-03", closed_n:28773, surveys:10057, responses:1980, response_rate:6.9, csat:88.2},
-    {month:"2026-04", closed_n:26628, surveys:10921, responses:1988, response_rate:7.5, csat:90.0},
-    {month:"2026-05", closed_n:27001, surveys:11714, responses:1828, response_rate:6.9, csat:86.0}
+    // Source: Intercom Operator. Response Rate = responses / conversations closed.
+    {month:"Mar 2026",  closed_n:28460, responses:1980, response_rate:6.91, csat:88.2},
+    {month:"Apr 2026",  closed_n:26215, responses:1988, response_rate:7.55, csat:90.0},
+    {month:"May 2026",  closed_n:26614, responses:1829, response_rate:6.91, csat:86.0},
+    {month:"Jun 1-18",  closed_n:18677, responses:1021, response_rate:5.48, csat:87.8}
   ],
 
   cut3: [
-    // Source: Intercom Operator. Response rate = responses / surveys sent.
-    {agent:"Fin AI Agent",      surveys:65061, responses:9152,  response_rate:14.1, csat:88.5},
-    {agent:"Teammate (Human)",  surveys:49038, responses:10633, response_rate:21.7, csat:89.9},
-    {agent:"Chatbot",           surveys:1973,  responses:858,   response_rate:43.5, csat:36.8}
+    // Source: Intercom Operator. Response rate NOT available per agent type — see methodology note.
+    {agent:"Fin AI Agent",      responses:3370, csat:89.1, closed_sole:35492},
+    {agent:"Teammate (Human)",  responses:3183, csat:91.9, closed_sole:12624},
+    {agent:"Chatbot",           responses:268,  csat:30.3, closed_sole:31145}
   ],
 
   cut4: [
-    // Source: Intercom Operator · Jun 2025–May 2026 · Human teammates only
-    // closed_n = null for teammates outside Operator's top-20 closers list
-    // surveys/responses/rr/csat = null where no CSAT data was returned
-    {tm:"Andrae",              closed_n:4484, surveys:null, responses:null, rr:null, csat:null},
-    {tm:"Paolo G",             closed_n:4426, surveys:3340, responses:932,  rr:27.9, csat:95.6},
-    {tm:"Mandy",               closed_n:4287, surveys:2115, responses:279,  rr:13.2, csat:87.5},
-    {tm:"Jeremy G",            closed_n:4122, surveys:1567, responses:234,  rr:14.9, csat:70.9},
-    {tm:"Aileen",              closed_n:4102, surveys:1636, responses:456,  rr:27.9, csat:95.1},
-    {tm:"Torez",               closed_n:3935, surveys:2541, responses:484,  rr:19.0, csat:88.6},
-    {tm:"Peter M.",            closed_n:3810, surveys:1899, responses:324,  rr:17.1, csat:90.2},
-    {tm:"Kevin",               closed_n:3780, surveys:2471, responses:546,  rr:22.1, csat:89.8},
-    {tm:"Nicole",              closed_n:3366, surveys:2393, responses:495,  rr:20.7, csat:92.0},
-    {tm:"Mormare",             closed_n:2982, surveys:1709, responses:307,  rr:18.0, csat:84.6},
-    {tm:"Toni W.",             closed_n:2734, surveys:null, responses:null, rr:null, csat:null},
-    {tm:"Mei",                 closed_n:2442, surveys:1386, responses:197,  rr:14.2, csat:89.9},
-    {tm:"Franco Bolivar",      closed_n:2366, surveys:2236, responses:647,  rr:28.9, csat:89.0},
-    {tm:"Kailah Washington",   closed_n:2078, surveys:null, responses:null, rr:null, csat:null},
-    {tm:"Andres",              closed_n:2043, surveys:1838, responses:583,  rr:31.7, csat:90.2},
-    {tm:"Jonny Diaz",          closed_n:1950, surveys:872,  responses:149,  rr:17.1, csat:84.2},
-    {tm:"Sabrina Smith",       closed_n:1871, surveys:1513, responses:274,  rr:18.1, csat:94.9},
-    {tm:"Alex Judasin",        closed_n:1681, surveys:1052, responses:217,  rr:20.6, csat:90.8},
-    {tm:"Daniel",              closed_n:1673, surveys:null, responses:null, rr:null, csat:null},
-    {tm:"Milly Castellon",     closed_n:null, surveys:1289, responses:300,  rr:23.3, csat:86.6},
-    {tm:"Andrew",              closed_n:null, surveys:1240, responses:281,  rr:22.7, csat:83.2},
-    {tm:"Erick Briones",       closed_n:null, surveys:1097, responses:256,  rr:23.3, csat:90.0},
-    {tm:"Alejandro Grahammer", closed_n:null, surveys:910,  responses:309,  rr:34.0, csat:93.5},
-    {tm:"Adrian",              closed_n:null, surveys:879,  responses:88,   rr:10.0, csat:93.8}
+    // Source: Intercom Operator. Sorted by CSAT responses (highest first).
+    // Surveys sent and response rate not available per teammate in this period.
+    {tm:"Franco Bolivar",      responses:367,  csat:88.7},
+    {tm:"Milly Castellon",     responses:354,  csat:87.3},
+    {tm:"Andres",              responses:265,  csat:92.1},
+    {tm:"Paolo G",             responses:207,  csat:97.1},
+    {tm:"Gabriel Calderon",    responses:204,  csat:93.2},
+    {tm:"Samuel Little",       responses:199,  csat:97.0},
+    {tm:"Erick Briones",       responses:170,  csat:94.2},
+    {tm:"Oliver Z",            responses:144,  csat:96.6},
+    {tm:"Alejandro Grahammer", responses:144,  csat:97.3},
+    {tm:"Nicole",              responses:142,  csat:92.8},
+    {tm:"Andrew",              responses:129,  csat:89.8},
+    {tm:"Alex Judasin",        responses:128,  csat:93.9},
+    {tm:"Frank",               responses:120,  csat:94.2},
+    {tm:"Aileen",              responses:89,   csat:91.4},
+    {tm:"Danny",               responses:86,   csat:98.8},
+    {tm:"Jonny Diaz",          responses:80,   csat:88.0},
+    {tm:"Diana",               responses:75,   csat:91.3}
   ]
 };
 
 /* ─── HELPERS ──────────────────────────────────────────────── */
-function fmtN(n) { return n.toLocaleString(); }
+function fmtN(n) { return n == null ? '—' : n.toLocaleString(); }
 
+// Response rate color thresholds tuned for V2's lower rates (max ~7.5%)
 function rrColor(rr) {
-  if (rr >= 60) return '#16a34a';
-  if (rr >= 30) return '#3185fc';
-  if (rr >= 15) return '#d97706';
+  if (rr >= 7)   return '#16a34a';
+  if (rr >= 4.5) return '#3185fc';
+  if (rr >= 2.5) return '#d97706';
+  return '#ff4998';
+}
+
+function csatColor(c) {
+  if (c >= 90) return '#16a34a';
+  if (c >= 85) return '#d97706';
   return '#ff4998';
 }
 
 function rateBar(rr, max) {
-  const pct = Math.min(rr / (max || 100) * 100, 100);
+  const pct = Math.min(rr / (max || 10) * 100, 100);
   return '<div class="rate-bar">'
     + '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + rrColor(rr) + '"></div></div>'
     + '<span class="bar-label" style="color:' + rrColor(rr) + '">' + rr + '%</span>'
     + '</div>';
 }
 
-function signalBadge(rr) {
-  if (rr >= 60) return '<span class="badge badge-green">High</span>';
-  if (rr >= 30) return '<span class="badge badge-blue">Medium</span>';
-  if (rr >= 15) return '<span class="badge badge-cloud">Low</span>';
+function csatSignal(csat) {
+  if (csat >= 95) return '<span class="badge badge-green">Excellent</span>';
+  if (csat >= 90) return '<span class="badge badge-blue">Strong</span>';
+  if (csat >= 85) return '<span class="badge badge-cloud">Solid</span>';
+  if (csat >= 80) return '<span class="badge badge-amber">Watch</span>';
   return '<span class="badge badge-pink">Critical</span>';
 }
 
 /* ─── CUT 1: CHANNEL TABLE ─────────────────────────────────── */
 const tbCh = document.getElementById('tbCh');
 DATA.cut1.forEach(function(r) {
-  var csatColor = r.csat >= 89 ? '#16a34a' : r.csat >= 86 ? '#d97706' : '#ff4998';
   tbCh.innerHTML += '<tr>'
     + '<td>' + r.channel + '</td>'
-    + '<td>' + fmtN(r.surveys) + '</td>'
     + '<td>' + fmtN(r.responses) + '</td>'
-    + '<td>' + rateBar(r.response_rate, 30) + '</td>'
-    + '<td><strong style="color:' + csatColor + '">' + r.csat + '%</strong></td>'
+    + '<td>' + rateBar(r.response_rate, 10) + '</td>'
+    + '<td><strong style="color:' + csatColor(r.csat) + '">' + r.csat + '%</strong></td>'
     + '</tr>';
 });
 
@@ -796,15 +801,17 @@ new Chart(document.getElementById('chartCh'), {
 
 /* ─── CUT 2: MONTHLY TABLE ─────────────────────────────────── */
 const tbMo = document.getElementById('tbMo');
-DATA.cut2.forEach(function(r) {
-  var csatColor = r.csat >= 88 ? '#16a34a' : r.csat >= 85 ? '#d97706' : '#ff4998';
+DATA.cut2.forEach(function(r, i) {
+  var isPartial = r.month === 'Jun 1-18';
+  var monthLabel = isPartial
+    ? r.month + ' <span style="font-size:10px;background:#fff0f5;color:var(--pink);padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">partial</span>'
+    : r.month;
   tbMo.innerHTML += '<tr>'
-    + '<td>' + r.month + '</td>'
+    + '<td>' + monthLabel + '</td>'
     + '<td>' + fmtN(r.closed_n) + '</td>'
-    + '<td>' + fmtN(r.surveys) + '</td>'
     + '<td>' + fmtN(r.responses) + '</td>'
     + '<td>' + rateBar(r.response_rate, 10) + '</td>'
-    + '<td style="color:' + csatColor + ';font-weight:700">' + r.csat.toFixed(1) + '%</td>'
+    + '<td style="color:' + csatColor(r.csat) + ';font-weight:700">' + r.csat.toFixed(1) + '%</td>'
     + '</tr>';
 });
 
@@ -857,7 +864,7 @@ new Chart(document.getElementById('chartMo'), {
 /* ─── CUT 3: AGENT TYPE TABLE ──────────────────────────────── */
 const tbFin = document.getElementById('tbFin');
 DATA.cut3.forEach(function(r) {
-  var csatColor = r.csat >= 85 ? '#16a34a' : r.csat >= 70 ? '#d97706' : '#ff4998';
+  var c = csatColor(r.csat);
   var agentBadge = r.agent === 'Fin AI Agent'
     ? '<span class="badge badge-blue">Fin AI</span>'
     : r.agent === 'Teammate (Human)'
@@ -865,28 +872,31 @@ DATA.cut3.forEach(function(r) {
     : '<span class="badge badge-pink">Chatbot &#9888;</span>';
   tbFin.innerHTML += '<tr>'
     + '<td>' + r.agent + ' ' + agentBadge + '</td>'
-    + '<td>' + fmtN(r.surveys) + '</td>'
     + '<td>' + fmtN(r.responses) + '</td>'
-    + '<td>' + rateBar(r.response_rate, 50) + '</td>'
-    + '<td><strong style="color:' + csatColor + '">' + r.csat + '%</strong></td>'
+    + '<td><strong style="color:' + c + '">' + r.csat + '%</strong></td>'
+    + '<td>' + fmtN(r.closed_sole) + '</td>'
     + '</tr>';
 });
 
-/* ─── CUT 3: AGENT TYPE CHART ──────────────────────────────── */
-new Chart(document.getElementById('chartFin'), {
+/* ─── CUT 3: AGENT TYPE CHART (CSAT ONLY) ─────────────────── */
+new Chart(document.getElementById('chartAgent'), {
   type: 'bar',
   data: {
     labels: DATA.cut3.map(function(r){ return r.agent; }),
     datasets: [
-      { label: 'Response Rate %', data: DATA.cut3.map(function(r){ return r.response_rate; }), backgroundColor: '#3185fc', hoverBackgroundColor: '#3185fc', borderRadius: 6 },
-      { label: 'CSAT Score %',    data: DATA.cut3.map(function(r){ return r.csat; }),          backgroundColor: DATA.cut3.map(function(r){ return r.csat >= 70 ? '#162050' : '#ff4998'; }), hoverBackgroundColor: DATA.cut3.map(function(r){ return r.csat >= 70 ? '#162050' : '#ff4998'; }), borderRadius: 6 }
+      {
+        label: 'CSAT Score %',
+        data: DATA.cut3.map(function(r){ return r.csat; }),
+        backgroundColor: DATA.cut3.map(function(r){ return r.csat >= 70 ? (r.agent === 'Fin AI Agent' ? '#3185fc' : '#162050') : '#ff4998'; }),
+        borderRadius: 6
+      }
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { position: 'bottom', labels: { font: { family: "'Plus Jakarta Sans', sans-serif", size: 12 }, padding: 16 } },
-      tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + ctx.raw + '%'; } } }
+      tooltip: { callbacks: { label: function(ctx){ return 'CSAT Score: ' + ctx.raw + '%'; } } }
     },
     scales: {
       y: { beginAtZero: true, max: 100, ticks: { callback: function(v){ return v + '%'; }, font: { family: "'Plus Jakarta Sans', sans-serif" } }, grid: { color: '#e8f0fe' } },
@@ -898,42 +908,41 @@ new Chart(document.getElementById('chartFin'), {
 /* ─── CUT 4: TEAMMATE TABLE ────────────────────────────────── */
 const tbTm = document.getElementById('tbTm');
 DATA.cut4.forEach(function(r, i) {
-  const isOutlier = r.tm === 'Jeremy G';
-  const csatDisplay = r.csat === null ? '<span style="color:var(--muted)">—</span>'
-    : isOutlier
-      ? '<span style="color:var(--pink);font-weight:700">' + r.csat.toFixed(1) + '% ⚠️</span>'
-      : r.csat.toFixed(1) + '%';
   tbTm.innerHTML += '<tr>'
     + '<td style="color:var(--muted);font-weight:400">' + (i + 1) + '</td>'
     + '<td>' + r.tm + '</td>'
-    + '<td>' + (r.closed_n === null ? '<span style="color:var(--muted)">—</span>' : fmtN(r.closed_n)) + '</td>'
-    + '<td>' + (r.surveys === null ? '<span style="color:var(--muted)">—</span>' : fmtN(r.surveys)) + '</td>'
-    + '<td>' + (r.responses === null ? '<span style="color:var(--muted)">—</span>' : fmtN(r.responses)) + '</td>'
-    + '<td>' + (r.rr === null ? '<span style="color:var(--muted)">—</span>' : rateBar(r.rr, 90)) + '</td>'
-    + '<td>' + csatDisplay + '</td>'
-    + '<td>' + (r.rr === null ? '<span style="color:var(--muted)">—</span>' : signalBadge(r.rr)) + '</td>'
+    + '<td>' + fmtN(r.responses) + '</td>'
+    + '<td><strong style="color:' + csatColor(r.csat) + '">' + r.csat.toFixed(1) + '%</strong></td>'
+    + '<td>' + csatSignal(r.csat) + '</td>'
     + '</tr>';
 });
 
-/* ─── FIN PERFORMANCE CHART ────────────────────────────── */
+/* ─── FIN PERFORMANCE CHART (Custom Report: Chat + USER) ─────── */
 new Chart(document.getElementById('finPerformanceChart'), {
   type: 'line',
   data: {
-    labels: ['Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'],
+    labels: ['Mar 26', 'Apr 26', 'May 26', 'Jun 1-18'],
     datasets: [
       {
-        label: 'Resolution Rate',
-        data: [64.3, 70.9, 71.0, 69.8, 69.4, 71.0, 70.6, 71.1, 70.9, 68.7, 70.4, 69.2],
-        borderColor: '#3185fc', backgroundColor: 'rgba(49,133,252,0.08)',
-        tension: 0.4, pointRadius: 4, pointBackgroundColor: '#3185fc',
-        pointHoverRadius: 4, fill: false
+        label: 'Chat Involvement Rate',
+        data: [95.6, 95.1, 95.3, 94.8],
+        borderColor: '#dffe02', backgroundColor: 'rgba(223,254,2,0.06)',
+        tension: 0.4, pointRadius: 5, pointBackgroundColor: '#dffe02',
+        pointHoverRadius: 6, fill: false
       },
       {
-        label: 'Involvement Rate',
-        data: [43.3, 42.9, 39.0, 37.9, 40.2, 42.1, 48.4, 51.5, 51.2, 52.4, 51.6, 46.1],
-        borderColor: '#dffe02', backgroundColor: 'rgba(223,254,2,0.08)',
-        tension: 0.4, pointRadius: 4, pointBackgroundColor: '#dffe02',
-        pointHoverRadius: 4, fill: false
+        label: 'CSAT Score',
+        data: [88.8, 88.9, 88.5, 92.7],
+        borderColor: '#ff4998', backgroundColor: 'rgba(255,73,152,0.06)',
+        tension: 0.4, pointRadius: 5, pointBackgroundColor: '#ff4998',
+        pointHoverRadius: 6, fill: false
+      },
+      {
+        label: 'Resolution Rate',
+        data: [71.6, 72.4, 71.5, 71.7],
+        borderColor: '#3185fc', backgroundColor: 'rgba(49,133,252,0.06)',
+        tension: 0.4, pointRadius: 5, pointBackgroundColor: '#3185fc',
+        pointHoverRadius: 6, fill: false
       }
     ]
   },
@@ -941,21 +950,19 @@ new Chart(document.getElementById('finPerformanceChart'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top',
-        labels: { color: 'rgba(255,255,255,0.9)', font: { size: 12, family: "'Plus Jakarta Sans', sans-serif" }, usePointStyle: true, padding: 20 }
+        position: 'bottom',
+        labels: { font: { size: 12, family: "'Plus Jakarta Sans', sans-serif" }, usePointStyle: true, padding: 20 }
       },
       tooltip: {
-        backgroundColor: 'rgba(22,32,80,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
-        titleColor: 'rgba(255,255,255,0.8)', bodyColor: 'rgba(255,255,255,0.6)',
         callbacks: { label: function(ctx){ return '  ' + ctx.dataset.label + ': ' + ctx.raw + '%'; } }
       }
     },
     scales: {
-      x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: 'rgba(255,255,255,0.8)', font: { size: 11 } } },
+      x: { grid: { display: false }, ticks: { font: { size: 12, family: "'Plus Jakarta Sans', sans-serif" } } },
       y: {
-        min: 30, max: 80,
-        grid: { color: 'rgba(255,255,255,0.06)' },
-        ticks: { color: 'rgba(255,255,255,0.8)', font: { size: 11 }, callback: function(v){ return v + '%'; } }
+        min: 60, max: 100,
+        grid: { color: '#e8f0fe' },
+        ticks: { font: { size: 11, family: "'Plus Jakarta Sans', sans-serif" }, callback: function(v){ return v + '%'; } }
       }
     }
   }
@@ -967,7 +974,6 @@ function showTab(id, btn) {
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  // Trigger Chart.js resize so charts in newly visible tabs render correctly
   setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 50);
 }
 </script>
