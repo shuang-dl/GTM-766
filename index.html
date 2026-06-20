@@ -3,73 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSAT Analysis — Mar 1 to Jun 19, 2026</title>
+<title>CSAT Analysis — DoorLoop · Mar 1–Jun 19, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg:#f6f7f9; --card:#ffffff; --ink:#1c2430; --muted:#6b7785;
-    --line:#e6e9ee; --blue:#3b6fe0; --green:#22a06b; --amber:#e0a73b;
-    --red:#d2484b; --purple:#8b5cf6; --teal:#13b6c4;
-    --shadow:0 1px 3px rgba(20,30,50,.07),0 1px 2px rgba(20,30,50,.04);
+    --core:#3185fc; --navy:#162050; --neon:#dffe02; --pink:#ff4998;
+    --lightblue:#dbeaff; --cloud:#f0efeb; --white:#ffffff;
+    --line:#e8f0fe; --bg:#f8fafc;
+    --body:#475569; --muted:#64748b; --faint:#94a3b8;
+    --shadow:0 2px 16px rgba(22,32,80,.08);
+    /* legacy aliases used by inline styles, mapped to brand */
+    --blue:#3185fc; --green:#3185fc; --amber:#ff4998; --red:#ff4998;
+    --ink:#162050; --card:#ffffff; --purple:#162050; --teal:#3185fc;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.5;}
-  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px;}
-  header.page{margin-bottom:8px;}
-  h1{font-size:26px;margin:0 0 4px;}
-  .sub{color:var(--muted);font-size:14px;margin:0 0 4px;}
-  .pill{display:inline-block;background:#eef2fb;color:var(--blue);
-    font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;margin-top:6px;}
-  h2{font-size:19px;margin:38px 0 4px;padding-top:14px;border-top:1px solid var(--line);}
-  h2:first-of-type{border-top:none;}
-  .lead{color:var(--muted);font-size:14px;margin:0 0 16px;max-width:760px;}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:18px 0;}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);}
-  .card .lbl{font-size:13px;color:var(--muted);margin-bottom:6px;}
-  .card .val{font-size:30px;font-weight:700;letter-spacing:-.5px;}
-  .card .note{font-size:12px;color:var(--muted);margin-top:4px;}
-  .chartbox{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:18px;box-shadow:var(--shadow);margin:16px 0;}
-  .chartbox h3{margin:0 0 2px;font-size:15px;}
-  .chartbox .cap{font-size:12.5px;color:var(--muted);margin:0 0 14px;}
+  body{margin:0;background:var(--bg);color:var(--body);
+    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;}
+
+  /* ---- Nav ---- */
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    height:54px;padding:0 24px;background:var(--white);border-bottom:1px solid var(--line);}
+  .brand{display:flex;align-items:center;gap:9px;}
+  .brand .glyph{width:26px;height:26px;border-radius:7px;background:var(--core);display:flex;align-items:center;justify-content:center;}
+  .brand .word{font-weight:800;font-size:19px;letter-spacing:-.02em;color:var(--navy);}
+  .brand .word sup{font-size:9px;font-weight:700;top:-.7em;}
+  .nav-badge{background:var(--neon);color:var(--navy);font-weight:700;font-size:11.5px;
+    letter-spacing:.04em;border-radius:999px;padding:5px 13px;text-transform:uppercase;}
+
+  /* ---- Hero ---- */
+  .hero{position:relative;overflow:hidden;color:#fff;
+    background:linear-gradient(135deg,#3185fc 0%,#2a5fd6 45%,#162050 100%);}
+  .hero-inner{position:relative;max-width:1120px;margin:0 auto;padding:44px 24px 52px;z-index:1;}
+  .eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;
+    font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;border-radius:999px;padding:6px 13px;}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--neon);}
+  .hero h1{font-size:clamp(34px,5vw,56px);font-weight:900;letter-spacing:-.03em;line-height:1.04;
+    margin:16px 0 12px;color:#fff;max-width:880px;}
+  .hero h1 .accent{color:var(--neon);}
+  .hero-sub{font-size:16px;color:rgba(255,255,255,.74);max-width:680px;margin:0 0 18px;font-weight:500;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;}
+  .hero-meta .m{font-size:13px;}
+  .hero-meta .m .k{display:block;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:2px;}
+  .hero-meta .m .v{color:rgba(255,255,255,.92);font-weight:600;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:32px 24px 90px;}
+
+  h2{font-size:27px;font-weight:800;letter-spacing:-.02em;color:var(--navy);
+    margin:46px 0 4px;padding-top:26px;border-top:1px solid var(--line);display:flex;align-items:center;gap:11px;}
+  h2:first-of-type{border-top:none;padding-top:6px;}
+  h2 .badge{width:30px;height:30px;border-radius:9px;background:var(--lightblue);color:var(--core);
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex:none;}
+  .lead{color:var(--body);font-size:15px;line-height:1.65;margin:6px 0 18px;max-width:780px;}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0;}
+  .card{background:var(--white);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);
+    border-top:3px solid var(--core);transition:transform .15s ease;}
+  .card:hover{transform:translateY(-2px);}
+  .card .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:8px;}
+  .card .val{font-size:34px;font-weight:800;letter-spacing:-.02em;color:var(--core);line-height:1;}
+  .card .note{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.5;}
+
+  .chartbox{background:var(--white);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);margin:16px 0;
+    transition:box-shadow .15s ease;}
+  .chartbox:hover{box-shadow:0 4px 22px rgba(22,32,80,.12);}
+  .chartbox h3{margin:0 0 3px;font-size:17px;font-weight:700;letter-spacing:-.01em;color:var(--navy);}
+  .chartbox .cap{font-size:12.5px;color:var(--muted);margin:0 0 14px;line-height:1.55;}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   @media(max-width:760px){.grid2{grid-template-columns:1fr;}}
   canvas{max-width:100%;}
-  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);
-    border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
-  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);}
-  th{background:#f1f4f9;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);cursor:pointer;user-select:none;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--white);
+    border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+  th,td{text-align:left;padding:12px 18px;border-bottom:1px solid var(--line);}
+  th{background:var(--cloud);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);cursor:pointer;user-select:none;}
+  td:first-child{color:var(--navy);font-weight:600;}
   td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
   tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:#f8faff;}
   .bar-cell{position:relative;}
-  .bar-fill{position:absolute;left:0;top:0;bottom:0;background:#e8f0ff;z-index:0;}
+  .bar-fill{position:absolute;left:0;top:0;bottom:0;background:var(--lightblue);z-index:0;}
   .bar-cell span{position:relative;z-index:1;}
-  .tag{font-size:11px;font-weight:600;border-radius:6px;padding:2px 7px;}
-  .tag.low{background:#fdecec;color:var(--red);}
-  .analysis{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 24px 20px;box-shadow:var(--shadow);}
-  .analysis h3{font-size:15.5px;margin:20px 0 6px;color:var(--ink);}
-  .analysis p,.analysis li{font-size:14px;color:#33404f;}
-  .conf{font-weight:700;font-size:11px;border-radius:5px;padding:1px 6px;margin-right:4px;vertical-align:middle;}
-  .c-confirmed{background:#e4f6ee;color:#1b7a52;}
-  .c-likely{background:#eef2fb;color:#3b6fe0;}
-  .c-unverified{background:#fdf3e3;color:#b27a18;}
-  .footnotes{font-size:12px;color:var(--muted);margin-top:26px;border-top:1px solid var(--line);padding-top:14px;}
-  .footnotes a{color:var(--blue);}
+  .tag{font-size:10.5px;font-weight:700;border-radius:6px;padding:2px 7px;text-transform:uppercase;letter-spacing:.03em;}
+  .tag.low{background:#fff0f5;color:var(--pink);}
+
+  .analysis{background:var(--white);border-radius:16px;padding:10px 26px 22px;box-shadow:var(--shadow);}
+  .analysis h3{font-size:16px;font-weight:700;margin:22px 0 6px;color:var(--navy);}
+  .analysis p,.analysis li{font-size:14.5px;color:var(--body);line-height:1.65;}
+  .conf{font-weight:700;font-size:10.5px;border-radius:5px;padding:1px 6px;margin-right:4px;vertical-align:middle;text-transform:uppercase;letter-spacing:.03em;}
+  .c-confirmed{background:#eafaf0;color:#15803d;}
+  .c-likely{background:var(--lightblue);color:var(--core);}
+  .c-unverified{background:#fff0f5;color:var(--pink);}
+  .footnotes{font-size:12px;color:rgba(255,255,255,.7);margin-top:40px;background:var(--navy);
+    border-radius:16px;padding:22px 26px;line-height:1.7;}
+  .footnotes strong{color:#fff;}
+  .footnotes a{color:#8fc0ff;text-decoration:none;}
   .legend-inline{font-size:12px;color:var(--muted);margin:6px 0 0;}
-  .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:middle;}
+  .swatch{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 10px;vertical-align:middle;}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="page">
-    <h1>Customer Satisfaction (CSAT) Analysis <span style="font-size:14px;font-weight:600;color:var(--blue);background:#eef2fb;border-radius:6px;padding:2px 8px;vertical-align:middle;">V2</span></h1>
-    <p class="sub">DoorLoop · Intercom · Customer Support + Inbound Calls teams vs. Fin AI</p>
-    <span class="pill">Date range: March 1 – June 19, 2026 · New York time (GMT‑4)</span>
-    <p class="sub" style="margin-top:8px;font-size:12.5px;">V2 adds: a weekly CSAT trend (§1), response rate by channel &amp; segment (§5), CSAT by topic (§6), the human‑vs‑Fin split of negative ratings with their comments (§7), and first‑response‑time + SLA columns per teammate (§3).</p>
+  <nav>
+    <div class="brand">
+      <span class="glyph" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="13" height="18" rx="2.5" stroke="#fff" stroke-width="2.2"/><circle cx="13.5" cy="12" r="1.6" fill="#fff"/><path d="M17 7c3.2 0 4.4 4.2 1.6 5.6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </span>
+      <span class="word">doorloop<sup>®</sup></span>
+    </div>
+    <span class="nav-badge">CX Report · Mar 1–Jun 19, 2026</span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="dot"></span>Customer Experience · CSAT Analysis</span>
+      <h1>Customer <span class="accent">Satisfaction</span>, end to end.</h1>
+      <p class="hero-sub">How customers rate the Customer Support &amp; Inbound Calls teams versus the Fin AI agent — with the channel, topic, response‑rate, and operational story behind the score.</p>
+      <div class="hero-meta">
+        <div class="m"><span class="k">Date range</span><span class="v">Mar 1 – Jun 19, 2026 · NY (GMT‑4)</span></div>
+        <div class="m"><span class="k">Source</span><span class="v">Intercom Reports</span></div>
+        <div class="m"><span class="k">Scope</span><span class="v">21 Customer Support team members</span></div>
+        <div class="m"><span class="k">Version</span><span class="v">V2 · weekly trend, topics, channels, negatives</span></div>
+      </div>
+    </div>
   </header>
+
+<div class="wrap">
 
   <!-- KPI CARDS -->
   <div class="cards">
@@ -98,11 +159,11 @@
   <p class="lead">Roster is now the <strong>21 actual members of the Customer Support team</strong> (from Settings → Teams), with each person's team role shown. The Inbound Calls (phone) Team has 6 members — all of them are also secondary members of Customer Support, so they're tagged "Cust. Support (sec.) + Inbound Calls". "Ratings" = positive / total ratings received. Two operational drivers now sit beside CSAT: <strong>median first response time</strong> and <strong>SLA miss rate</strong> (the share of SLA‑tracked conversations that missed their target — higher is worse; team average 73.8%). Colors flag slower responses (amber/red) and higher SLA misses (red ≥75%). Click any column heading to sort.</p>
   <div class="cards">
     <div class="card"><div class="lbl">Customer Support · primary (11)</div><div class="val" style="color:var(--green);font-size:26px">96.9%</div><div class="note">1,999 / 2,063 ratings</div></div>
-    <div class="card"><div class="lbl">Inbound Calls Team (6)</div><div class="val" style="color:var(--teal);font-size:26px">93.5%</div><div class="note">575 / 615 ratings</div></div>
+    <div class="card"><div class="lbl">Inbound Calls Team (6)</div><div class="val" style="color:var(--navy);font-size:26px">93.5%</div><div class="note">575 / 615 ratings</div></div>
     <div class="card"><div class="lbl">Customer Support · secondary only (4)</div><div class="val" style="font-size:26px">97.4%</div><div class="note">38 / 39 ratings · very low volume</div></div>
   </div>
   <div class="chartbox"><h3>CSAT score by teammate</h3><p class="cap">Sorted highest to lowest. Color = team group (green = CS primary, teal = Inbound Calls, grey = CS secondary). Teammates with fewer than 10 ratings (low confidence) use a lighter shade.</p>
-    <p class="legend-inline"><span class="swatch" style="background:#22a06b"></span>CS primary<span class="swatch" style="background:#13b6c4"></span>Inbound Calls<span class="swatch" style="background:#9aa6b2"></span>CS secondary</p>
+    <p class="legend-inline"><span class="swatch" style="background:#3185fc"></span>CS primary<span class="swatch" style="background:#162050"></span>Inbound Calls<span class="swatch" style="background:#94a3b8"></span>CS secondary</p>
     <canvas id="c_teammates" height="300"></canvas></div>
   <table id="tbl_team">
     <thead><tr>
@@ -132,11 +193,11 @@
   </div>
 
   <!-- SECTION 5: RESPONSE RATE BY CHANNEL & SEGMENT -->
-  <h2>5. Response rate by channel &amp; segment</h2>
-  <p class="lead">What share of conversations come back with a rating, split by channel and by customer segment. Read from each filtered monthly response‑rate line, so treat these as approximate (±1–2 pts). The headline: response rate barely moves by segment, but varies a lot by channel — <strong>email customers almost never rate</strong>.</p>
+  <h2>5. Request &amp; response rate by channel &amp; segment</h2>
+  <p class="lead"><strong>Request rate</strong> = share of conversations a CSAT survey was sent on. <strong>Response rate</strong> = share that came back with a rating. The gap between the two bars is how much feedback is being left on the table. Read from each filtered chart, so treat as approximate (±1–2 pts); request rate is the recent (≈ May–Jun) level and climbed over the period (e.g., Chat ~62% → ~84%, Phone ~14% → ~50%). Two headlines: <strong>Email is barely surveyed and barely rated</strong> (~18% sent, ~4% returned), and request/response rates are <strong>flat across segments</strong> — the variation is all by channel.</p>
   <div class="grid2">
-    <div class="chartbox"><h3>Response rate by channel</h3><p class="cap">% of conversations that received a rating.</p><canvas id="c_channelRR" height="210"></canvas></div>
-    <div class="chartbox"><h3>Response rate by segment</h3><p class="cap">Consistent ~10–12% across all segments.</p><canvas id="c_segmentRR" height="210"></canvas></div>
+    <div class="chartbox"><h3>By channel</h3><p class="cap">Request vs. response rate per channel. Chat is surveyed most; email least.</p><canvas id="c_channelRR" height="230"></canvas></div>
+    <div class="chartbox"><h3>By segment</h3><p class="cap">Both rates are consistent across SMB, Mid‑Market, Emerging, and Upper‑Market.</p><canvas id="c_segmentRR" height="230"></canvas></div>
   </div>
 
   <!-- SECTION 6: CSAT BY TOPIC -->
@@ -154,10 +215,10 @@
   </div>
   <div class="grid2">
     <div class="chartbox"><h3 style="color:var(--blue)">Human‑agent complaints</h3><p class="cap">Theme: the problem wasn't resolved or the question wasn't addressed.</p>
-      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#33404f;line-height:1.9">
+      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--body);line-height:1.9">
         <li>“problem no resolved”</li><li>“Problem still isn't fixed”</li><li>“my question was not addressed…”</li><li>“I can't believe Samuel is asking me to quantify the…”</li><li>“This is annoying… this product has so many dra…”</li></ul></div>
     <div class="chartbox"><h3 style="color:var(--amber)">Fin AI complaints</h3><p class="cap">Theme: wanting a human / the bot looping without helping.</p>
-      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#33404f;line-height:1.9">
+      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--body);line-height:1.9">
         <li>“I need a live agent please”</li><li>“I am talking to a stupid non human”</li><li>“This did not help at all. When I tried to post anoth…”</li><li>“I just kept doing the same thing over and over unt…”</li></ul></div>
   </div>
 
@@ -176,7 +237,7 @@
       <li><span class="conf c-confirmed">CONFIRMED</span> Conversation volume (type‑is‑User): 59,683 total; ~79% involved Fin; 56% Fin‑resolved; 34% closed by a teammate.</li>
       <li><span class="conf c-confirmed">CONFIRMED</span> Negative ratings (Terrible + Bad): <strong>304</strong> total — <strong>151 on human agents, 147 on Fin</strong> (~6 chatbot). Team SLA miss rate 73.8% (11,057/14,985); team median first response 2m.</li>
       <li><span class="conf c-confirmed">CONFIRMED</span> Weekly CSAT is volatile; Fin's strongest week was the week of Jun 1 (~93.4%), right after ~85.7% the prior week — the monthly "June jump" is one spike, not a steady climb.</li>
-      <li><span class="conf c-likely">LIKELY</span> Response rate by channel (read from chart): Chat ~11%, Phone ~9%, Email ~4%. By segment: all ~10–12%. CSAT by topic: 86–94% across all topics.</li>
+      <li><span class="conf c-likely">LIKELY</span> Request rate by channel (recent): Chat ~84%, Phone ~50%, Email ~18%; response rate Chat ~11%, Phone ~9%, Email ~4%. By segment both rates are flat (request ~73–75%, response ~10–12%). CSAT by topic: 86–94% across all topics.</li>
     </ul>
 
     <h3>Analysis</h3>
@@ -197,7 +258,7 @@
       <li>Per‑teammate <strong>request</strong> counts (surveys sent) are not exposed in these reports — only ratings received. So request rate is reported at team level only.</li>
       <li>Email and Phone <strong>Fin</strong> CSAT (100% and 66.7%) rest on a handful of ratings and are not statistically meaningful. Slack and SMS had no CSAT ratings at all.</li>
       <li>"June" is a partial month (through the 19th), so June volumes are lower than full months by construction.</li>
-      <li>Response rates by channel and segment were read from each filtered monthly response‑rate line (no single aggregate number is exposed), so they are approximate to within ~1–2 points.</li>
+      <li>Request and response rates by channel and segment were read from each filtered monthly line (no single aggregate number is exposed), so they are approximate (±1–2 pts). Response rate is roughly flat across the period; request rate climbed, so the request figures shown are the recent (≈ May–Jun) level, not a period average.</li>
       <li>CSAT‑by‑topic uses Intercom's AI conversation topics. Topic names are auto‑generated (some are internal‑sounding) and a conversation can match multiple topics, so topic "volume" overlaps and should be read as relative size, not a clean count.</li>
       <li>The negative‑rating count (304) is for Terrible + Bad with type‑is‑User and excludes the small "Phone switch" channel; most negative ratings carry no written comment, so the themes come from the minority that do. The human (151) / Fin (147) / chatbot (~6) split uses Intercom's "Agent rated type."</li>
       <li>Weekly CSAT values were read from the Fin Surveyed CSAT "by week" chart (approximate, ±1–2 pts), and the first plotted week (Mar 23) is partial. The conclusion — Fin's June lift is one spike week — holds regardless of small reading errors.</li>
@@ -238,7 +299,7 @@ const vsFin = {
   labels:["Support team\n(CS + Inbound)","All teammates\n(every team)","Fin AI"],
   vals:[96.1,91.8,89.1],
   detail:["2,696 / 2,805","3,019 / 3,287","3,018 / 3,387"],
-  colors:["#22a06b","#3b6fe0","#e0a73b"]
+  colors:["#3185fc","#162050","#ff4998"]
 };
 const supportMonthly = [97.6,97.1,96.0,97.8];   // exec dashboard "Support CSAT"
 const finMonthly     = [88.8,89.0,88.5,92.5];   // exec dashboard "Fin AI CSAT"
@@ -299,9 +360,10 @@ const topics = [
   {t:"Blockers (“stuck / can’t proceed”)", vol:2157, csat:90}
 ];
 
-// Section: response rate by channel and by segment (% of conversations returning a rating; read from monthly response-rate line, approximate)
-const channelRR = [{k:"Chat (incl. in‑app)", v:11}, {k:"Phone (call + switch)", v:9}, {k:"Email", v:4}];
-const segmentRR = [{k:"SMB", v:11}, {k:"Mid‑Market", v:12}, {k:"Emerging", v:11}, {k:"Upper‑Market", v:11}];
+// Section: request rate (survey sent) + response rate (rating returned), % of conversations, by channel and segment.
+// Read from filtered monthly lines (approximate). req = recent (≈May–Jun) level — request rate climbed over the period.
+const channelRR = [{k:"Chat (incl. in‑app)", req:84, v:11}, {k:"Phone (call + switch)", req:50, v:9}, {k:"Email", req:18, v:4}];
+const segmentRR = [{k:"SMB", req:73, v:11}, {k:"Mid‑Market", req:75, v:12}, {k:"Emerging", req:73, v:11}, {k:"Upper‑Market", req:74, v:11}];
 
 // Section: negative ratings — split by who was rated
 const neg = {
@@ -323,10 +385,10 @@ const channels = [
 ];
 
 /* ---------- CHART DEFAULTS ---------- */
-Chart.defaults.font.family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+Chart.defaults.font.family="'Plus Jakarta Sans',-apple-system,Segoe UI,system-ui,sans-serif";
 Chart.defaults.font.size=12;
-Chart.defaults.color="#6b7785";
-const GRID={color:"#eef1f5"};
+Chart.defaults.color="#64748b";
+const GRID={color:"#e8f0fe"};
 
 /* 1a. Humans vs Fin bar */
 new Chart(document.getElementById('c_vsFin'),{
@@ -341,8 +403,8 @@ new Chart(document.getElementById('c_vsFin'),{
 new Chart(document.getElementById('c_vsFinMonthly'),{
   type:'line',
   data:{labels:months,datasets:[
-    {label:'Support team CSAT',data:supportMonthly,borderColor:'#22a06b',backgroundColor:'#22a06b',tension:.3,borderWidth:2.5,pointRadius:3},
-    {label:'Fin AI CSAT',data:finMonthly,borderColor:'#e0a73b',backgroundColor:'#e0a73b',tension:.3,borderWidth:2.5,pointRadius:3}
+    {label:'Support team CSAT',data:supportMonthly,borderColor:'#3185fc',backgroundColor:'#3185fc',tension:.3,borderWidth:2.5,pointRadius:3},
+    {label:'Fin AI CSAT',data:finMonthly,borderColor:'#ff4998',backgroundColor:'#ff4998',tension:.3,borderWidth:2.5,pointRadius:3}
   ]},
   options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
     scales:{y:{min:85,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
@@ -352,10 +414,10 @@ new Chart(document.getElementById('c_vsFinMonthly'),{
 new Chart(document.getElementById('c_reqresp'),{
   type:'line',
   data:{labels:months,datasets:[
-    {label:'Request rate — overall',data:reqOverall,borderColor:'#3b6fe0',backgroundColor:'#3b6fe0',tension:.3,borderWidth:2.5,pointRadius:3},
-    {label:'Request rate — Fin‑resolved',data:reqFin,borderColor:'#e0a73b',backgroundColor:'#e0a73b',tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
-    {label:'Request rate — human‑resolved',data:reqHuman,borderColor:'#22a06b',backgroundColor:'#22a06b',tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
-    {label:'Response rate (ratings received)',data:respRate,borderColor:'#d2484b',backgroundColor:'#d2484b',tension:.3,borderWidth:3,pointRadius:3}
+    {label:'Request rate — overall',data:reqOverall,borderColor:'#3185fc',backgroundColor:'#3185fc',tension:.3,borderWidth:2.5,pointRadius:3},
+    {label:'Request rate — Fin‑resolved',data:reqFin,borderColor:'#1a6fd8',backgroundColor:'#1a6fd8',tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
+    {label:'Request rate — human‑resolved',data:reqHuman,borderColor:'#7aa7f0',backgroundColor:'#7aa7f0',tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
+    {label:'Response rate (ratings received)',data:respRate,borderColor:'#ff4998',backgroundColor:'#ff4998',tension:.3,borderWidth:3,pointRadius:3}
   ]},
   options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
     scales:{y:{min:0,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
@@ -371,7 +433,7 @@ function renderTeammateChart(){
     data:{labels:sorted.map(t=>t.name),datasets:[{
       data:sorted.map(t=>t.csat),
       backgroundColor:sorted.map(t=>{
-        const base={primary:'#22a06b',inbound:'#13b6c4',secondary:'#9aa6b2'}[t.grp];
+        const base={primary:'#3185fc',inbound:'#162050',secondary:'#94a3b8'}[t.grp];
         return t.resp<LOWN ? base+'66' : base; // low-volume = translucent
       }),
       borderRadius:4}]},
@@ -395,12 +457,12 @@ function renderTeammateTable(){
   tb.innerHTML=rows.map(t=>{
     const low=t.resp<LOWN;
     const w=(t.assigned/maxAssigned*100).toFixed(1);
-    const slaColor = t.sla==null ? '#9aa6b2' : (t.sla>=75?'#d2484b':(t.sla>=50?'#b27a18':'#1b7a52'));
-    const frtColor = t.frtS==null ? '#9aa6b2' : (t.frtS>=300?'#d2484b':(t.frtS>=180?'#b27a18':'#33404f'));
+    const slaColor = t.sla==null ? '#94a3b8' : (t.sla>=75?'#ff4998':(t.sla>=50?'#b27a18':'#15803d'));
+    const frtColor = t.frtS==null ? '#94a3b8' : (t.frtS>=300?'#ff4998':(t.frtS>=180?'#b27a18':'#475569'));
     return `<tr>
       <td>${t.name}${low?' <span class="tag low">low n</span>':''}</td>
       <td style="font-size:12px;color:var(--muted)">${t.team}</td>
-      <td class="num" style="font-weight:600;color:${low?'#9aa6b2':(t.csat>=95?'#1b7a52':'#33404f')}">${t.csat.toFixed(1)}%</td>
+      <td class="num" style="font-weight:600;color:${low?'#94a3b8':(t.csat>=95?'#15803d':'#475569')}">${t.csat.toFixed(1)}%</td>
       <td class="num" style="color:var(--muted)">${t.pos}/${t.resp}</td>
       <td class="num" style="color:${frtColor}">${t.frt}</td>
       <td class="num" style="color:${slaColor}">${t.sla==null?'—':t.sla.toFixed(1)+'%'}</td>
@@ -421,9 +483,9 @@ document.querySelectorAll('#tbl_team th').forEach(th=>{
 new Chart(document.getElementById('c_channel'),{
   type:'bar',
   data:{labels:channels.map(c=>c.ch),datasets:[
-    {label:'Overall',data:channels.map(c=>c.overall),backgroundColor:'#3b6fe0',borderRadius:5,maxBarThickness:30},
-    {label:'Teammate',data:channels.map(c=>c.teammate),backgroundColor:'#22a06b',borderRadius:5,maxBarThickness:30},
-    {label:'Fin AI',data:channels.map(c=>c.fin),backgroundColor:'#e0a73b',borderRadius:5,maxBarThickness:30}
+    {label:'Overall',data:channels.map(c=>c.overall),backgroundColor:'#3185fc',borderRadius:5,maxBarThickness:30},
+    {label:'Teammate',data:channels.map(c=>c.teammate),backgroundColor:'#162050',borderRadius:5,maxBarThickness:30},
+    {label:'Fin AI',data:channels.map(c=>c.fin),backgroundColor:'#ff4998',borderRadius:5,maxBarThickness:30}
   ]},
   options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>{
     const tiny = c.dataset.label==='Fin AI' && c.label[0]!=='C';
@@ -432,29 +494,34 @@ new Chart(document.getElementById('c_channel'),{
 });
 document.querySelector('#tbl_channel tbody').innerHTML=channels.map(c=>`
   <tr><td>${c.ch}</td><td class="num">${c.overall}%</td><td class="num">${c.teammate}%</td>
-  <td class="num" style="color:#9aa6b2">${c.fin}%${(c.ch[0]!=='C')?' *':''}</td></tr>`).join('');
+  <td class="num" style="color:#94a3b8">${c.fin}%${(c.ch[0]!=='C')?' *':''}</td></tr>`).join('');
 
 /* 5. Response rate by channel + segment */
+const rrTip={callbacks:{label:c=>c.dataset.label+': ~'+c.parsed.y+'% of conversations'}};
 new Chart(document.getElementById('c_channelRR'),{
   type:'bar',
-  data:{labels:channelRR.map(c=>c.k),datasets:[{data:channelRR.map(c=>c.v),
-    backgroundColor:['#3b6fe0','#13b6c4','#d2484b'],borderRadius:6,maxBarThickness:60}]},
-  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'~'+c.parsed.y+'% of conversations rated'}}},
-    scales:{y:{beginAtZero:true,max:15,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+  data:{labels:channelRR.map(c=>c.k),datasets:[
+    {label:'Request rate (survey sent)',data:channelRR.map(c=>c.req),backgroundColor:'#3185fc',borderRadius:6,maxBarThickness:46},
+    {label:'Response rate (rating returned)',data:channelRR.map(c=>c.v),backgroundColor:'#ff4998',borderRadius:6,maxBarThickness:46}
+  ]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:rrTip},
+    scales:{y:{beginAtZero:true,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
 });
 new Chart(document.getElementById('c_segmentRR'),{
   type:'bar',
-  data:{labels:segmentRR.map(c=>c.k),datasets:[{data:segmentRR.map(c=>c.v),
-    backgroundColor:'#8b5cf6',borderRadius:6,maxBarThickness:55}]},
-  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'~'+c.parsed.y+'% of conversations rated'}}},
-    scales:{y:{beginAtZero:true,max:15,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+  data:{labels:segmentRR.map(c=>c.k),datasets:[
+    {label:'Request rate (survey sent)',data:segmentRR.map(c=>c.req),backgroundColor:'#3185fc',borderRadius:6,maxBarThickness:40},
+    {label:'Response rate (rating returned)',data:segmentRR.map(c=>c.v),backgroundColor:'#ff4998',borderRadius:6,maxBarThickness:40}
+  ]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:rrTip},
+    scales:{y:{beginAtZero:true,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
 });
 
 /* 6. CSAT by topic */
 new Chart(document.getElementById('c_topics'),{
   type:'bar',
   data:{labels:topics.map(t=>t.t),datasets:[{data:topics.map(t=>t.csat),
-    backgroundColor:topics.map(t=>t.csat<88?'#e0a73b':'#3b6fe0'),borderRadius:4}]},
+    backgroundColor:topics.map(t=>t.csat<88?'#ff4998':'#3185fc'),borderRadius:4}]},
   options:{indexAxis:'y',plugins:{legend:{display:false},
     tooltip:{callbacks:{label:c=>c.parsed.x+'% CSAT  ·  '+topics[c.dataIndex].vol.toLocaleString()+' topic matches'}}},
     scales:{x:{min:80,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
@@ -464,11 +531,18 @@ new Chart(document.getElementById('c_topics'),{
 new Chart(document.getElementById('c_weekly'),{
   type:'line',
   data:{labels:weekLabels,datasets:[
-    {label:'Overall CSAT',data:weekOverall,borderColor:'#3b6fe0',backgroundColor:'#3b6fe0',tension:.3,borderWidth:2,pointRadius:3},
-    {label:'Fin AI CSAT',data:weekFin,borderColor:'#e0a73b',backgroundColor:'#e0a73b',tension:.3,borderWidth:2.5,pointRadius:3}
+    {label:'Overall CSAT',data:weekOverall,borderColor:'#3185fc',backgroundColor:'#3185fc',tension:.3,borderWidth:2,pointRadius:3},
+    {label:'Fin AI CSAT',data:weekFin,borderColor:'#ff4998',backgroundColor:'#ff4998',tension:.3,borderWidth:2.5,pointRadius:3}
   ]},
   options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
     scales:{y:{min:70,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+
+/* Section number badges */
+document.querySelectorAll('.wrap > h2').forEach(h=>{
+  const m=h.textContent.trim().match(/^(\d+)\.\s+([\s\S]+)$/);
+  if(m){ const rest=m[2].replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    h.innerHTML='<span class="badge">'+m[1]+'</span>'+rest; }
 });
 </script>
 </body>
