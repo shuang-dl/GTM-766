@@ -3,979 +3,473 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSAT Pipeline Health v2 — DoorLoop Customer Support</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<title>CSAT Analysis — Mar 1 to Jun 19, 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root {
-    --blue:       #3185fc;   /* Core Blue — links, values, active states         */
-    --navy:       #162050;   /* Navy — headings, dark text, footer                */
-    --green:      #dffe02;   /* Neon Green — CTAs / badges ON DARK BG ONLY        */
-    --pink:       #ff4998;   /* Pink — alerts, warning states                     */
-    --light-blue: #dbeaff;   /* Light Blue — callout bg, card hover               */
-    --cloud:      #f0efeb;   /* Cloud Dancer — neutral section bg, table headers  */
-    --white:      #ffffff;
-    --body:       #475569;
-    --muted:      #64748b;
-    --faint:      #94a3b8;
-    --border:     #e8f0fe;
-    --page-bg:    #f8fafc;
-    --shadow:     0 2px 16px rgba(22, 32, 80, 0.08);
-    --font:       'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1c2430; --muted:#6b7785;
+    --line:#e6e9ee; --blue:#3b6fe0; --green:#22a06b; --amber:#e0a73b;
+    --red:#d2484b; --purple:#8b5cf6; --teal:#13b6c4;
+    --shadow:0 1px 3px rgba(20,30,50,.07),0 1px 2px rgba(20,30,50,.04);
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font); color: var(--body); background: var(--page-bg); font-size: 15px; line-height: 1.65; }
-
-  /* ─── STICKY NAV ─────────────────────────────────────────── */
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    height: 52px; background: var(--white);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 40px;
-  }
-  .nav-brand { font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--navy); text-transform: uppercase; }
-  .nav-right { display: flex; align-items: center; gap: 10px; }
-  .nav-badge { background: var(--navy); color: var(--white); font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 99px; letter-spacing: .04em; }
-  .nav-dot { display: flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; color: var(--muted); }
-  .nav-dot::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
-
-  /* ─── HERO ────────────────────────────────────────────────── */
-  .hero {
-    background: linear-gradient(150deg, #3d8ef5 0%, #2060cc 35%, #162050 100%);
-    padding: 64px 40px 96px;
-    position: relative; overflow: hidden;
-  }
-  .hero-squiggle {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; pointer-events: none; opacity: 1;
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,.12); border-radius: 99px;
-    padding: 5px 14px; margin-bottom: 22px;
-    font-size: 11px; font-weight: 700; letter-spacing: .08em;
-    color: rgba(255,255,255,.9); text-transform: uppercase;
-  }
-  .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-  .hero h1 {
-    font-size: clamp(34px, 5.5vw, 58px); font-weight: 900;
-    letter-spacing: -.03em; color: var(--white);
-    line-height: 1.03; margin-bottom: 16px; max-width: 720px;
-  }
-  .hero h1 .accent { color: var(--green); }
-  .hero-sub {
-    font-size: 15px; line-height: 1.65;
-    color: rgba(255,255,255,.68); max-width: 580px; margin-bottom: 40px;
-  }
-  .hero-meta { display: flex; gap: 36px; flex-wrap: wrap; }
-  .hero-meta-item .meta-label { font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.48); margin-bottom: 3px; }
-  .hero-meta-item .meta-val   { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.88); }
-
-  /* ─── KPI STRIP ───────────────────────────────────────────── */
-  .kpi-strip {
-    display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
-    max-width: 1200px; margin: -40px auto 0; padding: 0 40px;
-    position: relative; z-index: 10;
-  }
-  .kpi-card {
-    background: var(--white); border-radius: 16px;
-    box-shadow: var(--shadow); padding: 22px 24px;
-    border-top: 3px solid var(--blue);
-  }
-  .kpi-card.kpi-alert { border-top-color: var(--pink); }
-  .kpi-card .k-label  { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); margin-bottom: 9px; }
-  .kpi-card .k-value  { font-size: 34px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 6px; }
-  .kpi-card.kpi-alert .k-value { color: var(--pink); }
-  .kpi-card .k-sub    { font-size: 12px; color: var(--muted); }
-
-  /* ─── LAYOUT HELPERS ─────────────────────────────────────── */
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-  .section-wrap          { padding: 56px 0; }
-  .section-wrap.on-cloud { background: var(--cloud); }
-  .section-wrap.on-white { background: var(--white); }
-  .section-wrap.on-page  { background: var(--page-bg); }
-
-  .sec-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
-  .sec-title   { font-size: 26px; font-weight: 800; letter-spacing: -.02em; color: var(--navy); margin-bottom: 8px; }
-  .sec-desc    { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.55; max-width: 720px; }
-
-  /* ─── CALLOUTS ───────────────────────────────────────────── */
-  .callout { border-radius: 10px; padding: 15px 20px; margin: 14px 0; display: flex; gap: 13px; }
-  .callout.info    { background: var(--light-blue); border-left: 3px solid var(--blue); }
-  .callout.warn    { background: #fff0f5;            border-left: 3px solid var(--pink); }
-  .callout.success { background: #f0fdf4;            border-left: 3px solid #22c55e; }
-  .callout.neutral { background: var(--cloud);       border-left: 3px solid #6b7280; }
-  .callout .co-icon { font-size: 17px; flex-shrink: 0; margin-top: 2px; }
-  .callout .co-body { font-size: 13px; line-height: 1.58; color: var(--navy); }
-  .callout .co-body strong { display: block; font-weight: 700; margin-bottom: 3px; font-size: 13.5px; }
-
-  /* ─── CARDS ──────────────────────────────────────────────── */
-  .card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow); padding: 28px; margin-bottom: 20px; }
-  .card-title { font-size: 17px; font-weight: 700; letter-spacing: -.015em; color: var(--navy); margin-bottom: 4px; }
-  .card-desc  { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
-  .two-col    { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
-  .chart-wrap { position: relative; height: 280px; }
-
-  /* ─── TABS ───────────────────────────────────────────────── */
-  .tabs-card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
-  .tab-nav   { display: flex; border-bottom: 1px solid var(--border); padding: 0 28px; background: var(--white); overflow-x: auto; }
-  .tab-btn {
-    padding: 14px 16px; font-size: 13px; font-weight: 700;
-    color: var(--muted); cursor: pointer; border: none; background: none;
-    border-bottom: 2.5px solid transparent; margin-bottom: -1px;
-    transition: color .15s, border-color .15s;
-    font-family: var(--font); letter-spacing: -.01em; white-space: nowrap;
-  }
-  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
-  .tab-btn:hover:not(.active) { color: var(--navy); }
-  .tab-panel         { display: none; padding: 28px; }
-  .tab-panel.active  { display: block; }
-
-  /* ─── TABLES ─────────────────────────────────────────────── */
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead tr { background: var(--cloud); }
-  th { text-align: left; padding: 10px 20px; color: var(--navy); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid var(--border); }
-  td { padding: 11px 20px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  td:first-child { color: var(--navy); font-weight: 600; }
-  tr:last-child td { border-bottom: none; }
-  tbody tr:hover td { background: #f8faff; }
-  .reco-box tbody tr:hover td { background: transparent; }
-
-  /* ─── RATE BAR ───────────────────────────────────────────── */
-  .rate-bar { display: flex; align-items: center; gap: 8px; min-width: 120px; }
-  .bar-track { flex: 1; height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
-  .bar-fill  { height: 100%; border-radius: 99px; }
-  .bar-label { font-weight: 700; font-size: 13px; min-width: 40px; text-align: right; }
-
-  /* ─── BADGES ─────────────────────────────────────────────── */
-  .badge { display: inline-block; border-radius: 99px; padding: 2px 9px; font-size: 11px; font-weight: 700; letter-spacing: .02em; }
-  .badge-blue   { background: var(--light-blue); color: var(--blue); }
-  .badge-green  { background: #dcfce7; color: #16a34a; }
-  .badge-pink   { background: #fff0f5; color: var(--pink); }
-  .badge-cloud  { background: var(--cloud); color: var(--navy); }
-  .badge-amber  { background: #fef9c3; color: #92400e; border: 1px solid #fde68a; }
-
-  /* ─── SUPPLEMENTAL MINI METRICS ─────────────────────────── */
-  .metric-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px; }
-  .m-card { background: var(--white); border-radius: 14px; padding: 18px 20px; border-top: 3px solid var(--blue); box-shadow: var(--shadow); }
-  .m-card.m-alert   { border-top-color: var(--pink); }
-  .m-card.m-success { border-top-color: #22c55e; }
-  .m-card .m-label  { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); margin-bottom: 6px; }
-  .m-card .m-value  { font-size: 28px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 4px; }
-  .m-card.m-alert .m-value { color: var(--pink); }
-  .m-card.m-success .m-value { color: #16a34a; }
-  .m-card .m-sub    { font-size: 12px; color: var(--muted); }
-
-  /* ─── RECOMMENDATION BOX ─────────────────────────────────── */
-  .reco-box { background: var(--navy); border-radius: 16px; padding: 44px; }
-  .reco-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
-  .reco-title { font-size: 26px; font-weight: 800; letter-spacing: -.025em; color: var(--white); margin-bottom: 22px; line-height: 1.2; }
-  .reco-title .accent { color: var(--green); }
-  .reco-body { font-size: 14.5px; line-height: 1.72; color: rgba(255,255,255,.72); margin-bottom: 14px; }
-  .reco-body strong { color: var(--white); font-weight: 700; }
-  .reco-verdict {
-    margin-top: 28px; padding: 22px 26px;
-    background: rgba(255,73,152,.10); border: 1px solid rgba(255,73,152,.30);
-    border-radius: 12px;
-  }
-  .reco-verdict-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
-  .reco-steps { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .reco-steps li { display: flex; gap: 12px; align-items: flex-start; }
-  .step-num { background: var(--blue); color: var(--white); font-size: 10px; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
-  .step-text { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,.78); }
-  .step-text strong { color: var(--white); }
-
-  /* ─── FOOTER ─────────────────────────────────────────────── */
-  .footer { background: var(--navy); padding: 30px 40px; text-align: center; }
-  .footer p { font-size: 12px; color: rgba(255,255,255,.38); line-height: 1.7; }
-
-  /* ─── RESPONSIVE ─────────────────────────────────────────── */
-  @media (max-width: 960px) {
-    .kpi-strip   { grid-template-columns: repeat(2,1fr); }
-    .two-col     { grid-template-columns: 1fr; }
-    .metric-grid { grid-template-columns: 1fr 1fr; }
-    .hero        { padding: 48px 24px 88px; }
-    .nav         { padding: 0 24px; }
-    .container   { padding: 0 24px; }
-    .kpi-strip   { padding: 0 24px; }
-  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{margin-bottom:8px;}
+  h1{font-size:26px;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 4px;}
+  .pill{display:inline-block;background:#eef2fb;color:var(--blue);
+    font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;margin-top:6px;}
+  h2{font-size:19px;margin:38px 0 4px;padding-top:14px;border-top:1px solid var(--line);}
+  h2:first-of-type{border-top:none;}
+  .lead{color:var(--muted);font-size:14px;margin:0 0 16px;max-width:760px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:18px 0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);}
+  .card .lbl{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .card .val{font-size:30px;font-weight:700;letter-spacing:-.5px;}
+  .card .note{font-size:12px;color:var(--muted);margin-top:4px;}
+  .chartbox{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin:16px 0;}
+  .chartbox h3{margin:0 0 2px;font-size:15px;}
+  .chartbox .cap{font-size:12.5px;color:var(--muted);margin:0 0 14px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr;}}
+  canvas{max-width:100%;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);}
+  th{background:#f1f4f9;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);cursor:pointer;user-select:none;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:none;}
+  .bar-cell{position:relative;}
+  .bar-fill{position:absolute;left:0;top:0;bottom:0;background:#e8f0ff;z-index:0;}
+  .bar-cell span{position:relative;z-index:1;}
+  .tag{font-size:11px;font-weight:600;border-radius:6px;padding:2px 7px;}
+  .tag.low{background:#fdecec;color:var(--red);}
+  .analysis{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 24px 20px;box-shadow:var(--shadow);}
+  .analysis h3{font-size:15.5px;margin:20px 0 6px;color:var(--ink);}
+  .analysis p,.analysis li{font-size:14px;color:#33404f;}
+  .conf{font-weight:700;font-size:11px;border-radius:5px;padding:1px 6px;margin-right:4px;vertical-align:middle;}
+  .c-confirmed{background:#e4f6ee;color:#1b7a52;}
+  .c-likely{background:#eef2fb;color:#3b6fe0;}
+  .c-unverified{background:#fdf3e3;color:#b27a18;}
+  .footnotes{font-size:12px;color:var(--muted);margin-top:26px;border-top:1px solid var(--line);padding-top:14px;}
+  .footnotes a{color:var(--blue);}
+  .legend-inline{font-size:12px;color:var(--muted);margin:6px 0 0;}
+  .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:middle;}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<!-- ─── STICKY NAV ─────────────────────────────────────────── -->
-<nav class="nav">
-  <span class="nav-brand">CSAT Pipeline Health &nbsp;&middot;&nbsp; v2</span>
-  <div class="nav-right">
-    <span class="nav-dot">Mar 2026 – Jun 2026</span>
-    <span class="nav-badge">Internal Report</span>
-  </div>
-</nav>
+  <header class="page">
+    <h1>Customer Satisfaction (CSAT) Analysis <span style="font-size:14px;font-weight:600;color:var(--blue);background:#eef2fb;border-radius:6px;padding:2px 8px;vertical-align:middle;">V2</span></h1>
+    <p class="sub">DoorLoop · Intercom · Customer Support + Inbound Calls teams vs. Fin AI</p>
+    <span class="pill">Date range: March 1 – June 19, 2026 · New York time (GMT‑4)</span>
+    <p class="sub" style="margin-top:8px;font-size:12.5px;">V2 adds: a weekly CSAT trend (§1), response rate by channel &amp; segment (§5), CSAT by topic (§6), the human‑vs‑Fin split of negative ratings with their comments (§7), and first‑response‑time + SLA columns per teammate (§3).</p>
+  </header>
 
-<!-- ─── HERO ────────────────────────────────────────────────── -->
-<section class="hero">
-  <svg class="hero-squiggle" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M -80 320
-         C 40 180, 160 60, 280 160
-         C 360 230, 340 360, 240 400
-         C 150 435, 80 370, 120 290
-         C 155 220, 250 210, 360 240
-         C 520 280, 620 80, 800 60
-         C 960 42, 1060 170, 1160 220
-         C 1260 270, 1340 180, 1460 100"
-      stroke="white"
-      stroke-width="46"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      opacity="0.09"
-    />
-  </svg>
-
-  <div class="container">
-    <div class="hero-eyebrow">
-      <span class="dot"></span>
-      DoorLoop &nbsp;&middot;&nbsp; Customer Support &nbsp;&middot;&nbsp; Internal Analysis &nbsp;&middot;&nbsp; GTM-766
-    </div>
-    <h1>CSAT Pipeline <span class="accent">Health</span></h1>
-    <p class="hero-sub">3-month analysis of CSAT response rate and satisfaction score across channel, monthly trend, agent type, and teammate — sourced from Intercom Operator live queries. Updated scope per GTM-766, superseding V1 (GTM-482 / GTM-506).</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <div class="meta-label">Period</div>
-        <div class="meta-val">Mar 1 – Jun 18, 2026</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="meta-label">Primary Source</div>
-        <div class="meta-val">Intercom Operator (live)</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="meta-label">Generated</div>
-        <div class="meta-val">Jun 18, 2026</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="meta-label">Total Conversations</div>
-        <div class="meta-val">99,963</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── KPI STRIP ──────────────────────────────────────────── -->
-<div class="kpi-strip">
-  <div class="kpi-card">
-    <div class="k-label">Closed Conversations</div>
-    <div class="k-value">99,963</div>
-    <div class="k-sub">Mar 1 – Jun 18, 2026 &middot; Operator verified</div>
-  </div>
-  <div class="kpi-card">
-    <div class="k-label">CSAT Responses</div>
-    <div class="k-value">6,818</div>
-    <div class="k-sub">Conversations with a human CSAT rating &middot; 6,916 total rating events</div>
-  </div>
-  <div class="kpi-card kpi-alert">
-    <div class="k-label">Response Rate</div>
-    <div class="k-value">6.81%</div>
-    <div class="k-sub">6,818 responses &divide; 100,064 convos where customer sent a message</div>
-  </div>
-  <div class="kpi-card">
-    <div class="k-label">CSAT Score</div>
-    <div class="k-value">88.1%</div>
-    <div class="k-sub">6,090 positive ratings &divide; 6,916 total rating events</div>
-  </div>
-</div>
-
-<!-- ─── DATA NOTE + TABS ───────────────────────────────────── -->
-<div class="section-wrap on-page" style="padding-top: 72px;">
-<div class="container">
-
-  <div class="callout info">
-    <div class="co-icon">&#128202;</div>
-    <div class="co-body">
-      <strong>Methodology note: V2 uses a different denominator than V1</strong>
-      Intercom does not expose a standalone "surveys sent" count in the CSAT rating system. In this report, response rate = CSAT responses &divide; conversations where the customer sent at least one message (100,064 total). This denominator is larger than "surveys sent," producing a lower percentage than V1's figures — but it is the most accurate available measure. Surveys-sent data is not available for this period.
-    </div>
+  <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card"><div class="lbl">Support team CSAT</div><div class="val" style="color:var(--green)">96.1%</div><div class="note">2,612 of 2,717 ratings positive · 21 Customer Support team members</div></div>
+    <div class="card"><div class="lbl">Fin AI CSAT</div><div class="val" style="color:var(--amber)">89.1%</div><div class="note">3,018 of 3,387 ratings positive</div></div>
+    <div class="card"><div class="lbl">All‑teammate CSAT</div><div class="val" style="color:var(--blue)">91.8%</div><div class="note">3,019 of 3,287 — every human teammate, all teams</div></div>
+    <div class="card"><div class="lbl">Overall surveyed CSAT</div><div class="val">88.0%</div><div class="note">6,121 of 6,954 — humans + Fin combined</div></div>
   </div>
 
-  <div class="callout neutral">
-    <div class="co-icon">&#128201;</div>
-    <div class="co-body">
-      <strong>Response rate is not computable per agent type — Cut 3 shows CSAT scores only</strong>
-      Intercom does not break down the "conversations where customer sent a message" denominator by rated-actor type (Fin AI vs. Teammate vs. Chatbot). Cut 3 therefore omits response rate and shows CSAT responses and satisfaction scores only. This is a system limitation, not a data gap in the analysis.
-    </div>
+  <!-- SECTION 1: TEAMMATES vs FIN -->
+  <h2>1. Teammates vs. Fin AI</h2>
+  <p class="lead">How satisfied customers are with human agents compared with the Fin AI agent. "Support team" = the Customer Support and Inbound Calls teams only; "All teammates" includes every human across all teams (sales, onboarding, etc.).</p>
+  <div class="grid2">
+    <div class="chartbox"><h3>CSAT: humans vs. Fin (whole period)</h3><p class="cap">Share of ratings that were positive. Bars labeled with positive / total ratings.</p><canvas id="c_vsFin" height="220"></canvas></div>
+    <div class="chartbox"><h3>Support team CSAT vs. Fin AI, by month</h3><p class="cap">Monthly trend. Support team stays high and steady; Fin climbs sharply in June.</p><canvas id="c_vsFinMonthly" height="220"></canvas></div>
   </div>
+  <div class="chartbox"><h3>Weekly CSAT trend — was Fin's June jump steady?</h3><p class="cap">Overall vs. Fin CSAT by week (read from the weekly chart, approximate; * = partial week). The monthly view smooths over a lot: Fin's "June jump" is really <strong>one strong week (week of Jun 1 ≈ 93%)</strong> right after a dip to ~86% — not a steady climb. Both lines bounce week to week in the mid‑80s to low‑90s.</p><canvas id="c_weekly" height="170"></canvas></div>
 
-  <!-- TABBED CUTS -->
-  <div class="tabs-card" style="margin-top: 28px;">
-    <div class="tab-nav">
-      <button class="tab-btn active" onclick="showTab('c1', this)">Cut 1 &mdash; Channel</button>
-      <button class="tab-btn" onclick="showTab('c2', this)">Cut 2 &mdash; Monthly Trend</button>
-      <button class="tab-btn" onclick="showTab('c3', this)">Cut 3 &mdash; Agent Type</button>
-      <button class="tab-btn" onclick="showTab('c4', this)">Cut 4 &mdash; Teammate</button>
-    </div>
+  <!-- SECTION 2: REQUEST vs RESPONSE RATE -->
+  <h2>2. CSAT request rate vs. response rate</h2>
+  <p class="lead">Both measured against <strong>all conversations</strong> (your chosen definition). <strong>Request rate</strong> = share of conversations where a CSAT survey was sent. <strong>Response rate</strong> = share of conversations that received a rating back. The gap between the two is the survey‑answering opportunity.</p>
+  <div class="chartbox"><h3>Request rate vs. response rate, by month</h3><p class="cap">Surveys are sent on most conversations (rising to ~75%), but only ~10% of all conversations come back with a rating.</p><canvas id="c_reqresp" height="150"></canvas></div>
 
-    <!-- ── CUT 1: CHANNEL ─── -->
-    <div id="c1" class="tab-panel active">
-      <div class="card-title">Response Rate &amp; Satisfaction by Channel</div>
-      <div class="card-desc">Source: Intercom Operator &middot; Mar 1 – Jun 18, 2026. Response rate = CSAT responses &divide; conversations where customer sent a message (per channel). CSAT Score = % of rating events that were positive.</div>
+  <!-- SECTION 3: PER-TEAMMATE -->
+  <h2>3. CSAT by teammate (actual Customer Support team membership)</h2>
+  <p class="lead">Roster is now the <strong>21 actual members of the Customer Support team</strong> (from Settings → Teams), with each person's team role shown. The Inbound Calls (phone) Team has 6 members — all of them are also secondary members of Customer Support, so they're tagged "Cust. Support (sec.) + Inbound Calls". "Ratings" = positive / total ratings received. Two operational drivers now sit beside CSAT: <strong>median first response time</strong> and <strong>SLA miss rate</strong> (the share of SLA‑tracked conversations that missed their target — higher is worse; team average 73.8%). Colors flag slower responses (amber/red) and higher SLA misses (red ≥75%). Click any column heading to sort.</p>
+  <div class="cards">
+    <div class="card"><div class="lbl">Customer Support · primary (11)</div><div class="val" style="color:var(--green);font-size:26px">96.9%</div><div class="note">1,999 / 2,063 ratings</div></div>
+    <div class="card"><div class="lbl">Inbound Calls Team (6)</div><div class="val" style="color:var(--teal);font-size:26px">93.5%</div><div class="note">575 / 615 ratings</div></div>
+    <div class="card"><div class="lbl">Customer Support · secondary only (4)</div><div class="val" style="font-size:26px">97.4%</div><div class="note">38 / 39 ratings · very low volume</div></div>
+  </div>
+  <div class="chartbox"><h3>CSAT score by teammate</h3><p class="cap">Sorted highest to lowest. Color = team group (green = CS primary, teal = Inbound Calls, grey = CS secondary). Teammates with fewer than 10 ratings (low confidence) use a lighter shade.</p>
+    <p class="legend-inline"><span class="swatch" style="background:#22a06b"></span>CS primary<span class="swatch" style="background:#13b6c4"></span>Inbound Calls<span class="swatch" style="background:#9aa6b2"></span>CS secondary</p>
+    <canvas id="c_teammates" height="300"></canvas></div>
+  <table id="tbl_team">
+    <thead><tr>
+      <th data-k="name">Teammate</th>
+      <th data-k="team">Team</th>
+      <th class="num" data-k="csat">CSAT %</th>
+      <th class="num" data-k="resp">Ratings</th>
+      <th class="num" data-k="frtS">Median 1st response</th>
+      <th class="num" data-k="sla">SLA miss rate</th>
+      <th class="num" data-k="assigned">Conversations</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
 
-      <div class="callout success">
-        <div class="co-icon">&#128222;</div>
-        <div class="co-body"><strong>Phone Call leads on satisfaction at 89.9% CSAT</strong> — and confirms that the 65% figure cited in GTM-482 was an early-window artifact. With 486 responses over 3 months, phone CSAT is now on par with the team-wide benchmark.</div>
-      </div>
-      <div class="callout info">
-        <div class="co-icon">&#128172;</div>
-        <div class="co-body"><strong>Chat drives 90% of all CSAT responses — workspace health is essentially Chat's number</strong> — 6,134 responses at 7.49% response rate and 87.9% satisfaction. The 81,817 closed chat conversations represent 81.8% of total volume.</div>
-      </div>
-      <div class="callout warn">
-        <div class="co-icon">&#9993;</div>
-        <div class="co-body"><strong>Email: critically low response rate at 2.26%</strong> — only 198 responses on 8,763 closed conversations. CSAT at 87.6% is in line with chat, but the response rate means the email CSAT signal is the least reliable of the three channels.</div>
-      </div>
-
-      <div class="two-col" style="margin-top:24px">
-        <div class="chart-wrap"><canvas id="chartCh"></canvas></div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Channel</th><th>Responses</th><th>Response Rate</th><th>CSAT Score</th></tr></thead>
-            <tbody id="tbCh"></tbody>
-          </table>
-        </div>
-      </div>
-      <p style="font-size:12px;color:var(--muted);margin-top:10px">Response rate = responses &divide; conversations where customer sent a message (per channel). Source: Intercom Operator.</p>
-    </div>
-
-    <!-- ── CUT 2: MONTHLY TREND ─── -->
-    <div id="c2" class="tab-panel">
-      <div class="card-title">Response Rate &amp; CSAT by Month (Mar – Jun 18, 2026)</div>
-      <div class="card-desc">Source: Intercom Operator &middot; 4 months (June partial). Response Rate = CSAT responses &divide; conversations closed. CSAT Score = % positive ratings out of all rating events received that month.</div>
-
-      <div class="callout success">
-        <div class="co-icon">&#127381;</div>
-        <div class="co-body"><strong>April 2026: peak response rate (7.55%) and highest CSAT (90.0%)</strong> — 1,988 responses on 26,215 closed conversations. The strongest month in the 3-month window on both dimensions.</div>
-      </div>
-      <div class="callout warn">
-        <div class="co-icon">&#9888;</div>
-        <div class="co-body"><strong>May 2026: lowest CSAT in the window at 86.0%</strong> — a 4-point drop from April. Volume was similar (26,614 closed, 1,829 responses). Worth monitoring whether this continues into June.</div>
-      </div>
-      <div class="callout neutral">
-        <div class="co-icon">&#128337;</div>
-        <div class="co-body"><strong>June 1-18 data is partial — lower response rate (5.48%) expected</strong> — 18,677 conversations closed in the first 18 days. Do not compare June response rate directly to full months.</div>
-      </div>
-
-      <div class="chart-wrap" style="height:300px; margin: 24px 0;"><canvas id="chartMo"></canvas></div>
-
-      <div style="overflow-x:auto">
-        <table>
-          <thead><tr><th>Month</th><th>Closed</th><th>Responses</th><th>Response Rate</th><th>CSAT</th></tr></thead>
-          <tbody id="tbMo"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ── CUT 3: AGENT TYPE ─── -->
-    <div id="c3" class="tab-panel">
-      <div class="card-title">CSAT Satisfaction by Agent Type</div>
-      <div class="card-desc">Source: Intercom Operator &middot; Mar 1 – Jun 18, 2026. Agent type = primary actor for the conversation: Fin AI Agent (sole), Teammate (human sole), or Chatbot workflow (sole). Response rate not computable per agent type — see methodology note above.</div>
-
-      <div class="callout warn">
-        <div class="co-icon">&#128680;</div>
-        <div class="co-body"><strong>Chatbot CSAT is critically low at 30.3% — the #1 quality crisis</strong> — 268 genuine human ratings on 31,145 chatbot-only conversations. Chatbot (sole) handled the highest single-category volume in this period, more than teammate-only conversations (12,624). At this sample size, 30.3% is not noise.</div>
-      </div>
-      <div class="callout success">
-        <div class="co-icon">&#9989;</div>
-        <div class="co-body"><strong>Fin AI (89.1%) and Teammate (91.9%) are within 2.8 points of each other</strong> — on 3,370 and 3,183 responses respectively. This is a robust sample for Fin AI. The gap is small and consistent with V1 findings. Fin is not the quality problem.</div>
-      </div>
-      <div class="callout info">
-        <div class="co-icon">&#128202;</div>
-        <div class="co-body">
-          <strong>Conversation volume by category (Mar 1 – Jun 18, 2026):</strong>
-          Fin AI sole: <strong>35,492</strong> &nbsp;&middot;&nbsp; Chatbot sole: <strong>31,145</strong> &nbsp;&middot;&nbsp; Fin + Teammate collaboration: <strong>12,990</strong> &nbsp;&middot;&nbsp; Teammate sole: <strong>12,624</strong> &nbsp;&middot;&nbsp; Unknown: <strong>7,717</strong>
-        </div>
-      </div>
-
-      <div class="two-col" style="margin-top:24px">
-        <div class="chart-wrap"><canvas id="chartAgent"></canvas></div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Agent Type</th><th>CSAT Responses</th><th>CSAT Score</th><th>Convos Closed (Sole)</th></tr></thead>
-            <tbody id="tbFin"></tbody>
-          </table>
-        </div>
-      </div>
-      <p style="font-size:12px;color:var(--muted);margin-top:10px">Response rate omitted — denominator not available per agent type. CSAT Score = % positive ratings. Source: Intercom Operator.</p>
-    </div>
-
-    <!-- ── CUT 4: TEAMMATE ─── -->
-    <div id="c4" class="tab-panel">
-      <div class="card-title">CSAT by Teammate</div>
-      <div class="card-desc">Customer Support &amp; Inbound Calls Team members only &middot; 17 teammates &middot; sorted by CSAT responses (highest first) &middot; Source: Intercom Operator &middot; Mar 1 – Jun 18, 2026. Team membership verified via Intercom Team Inboxes settings.</div>
-
-      <div class="callout success">
-        <div class="co-icon">&#127942;</div>
-        <div class="co-body"><strong>Danny leads at 98.8% CSAT (86 responses) — followed by Alejandro Grahammer at 97.3% (144) and Paolo G at 97.1% (207)</strong> — three teammates with consistently excellent scores across meaningful response volumes.</div>
-      </div>
-      <div class="callout info">
-        <div class="co-icon">&#128202;</div>
-        <div class="co-body"><strong>Franco Bolivar has the most CSAT responses at 367</strong> — the highest signal volume on the team at 88.7% satisfaction. Milly Castellon (354) and Andres (265) follow with strong volumes as well.</div>
-      </div>
-
-      <div style="margin-top:20px; overflow-x:auto">
-        <table>
-          <thead><tr><th>#</th><th>Teammate</th><th>CSAT Responses</th><th>CSAT Score</th><th>Signal</th></tr></thead>
-          <tbody id="tbTm"></tbody>
-        </table>
-      </div>
-    </div>
-
-  </div><!-- /tabs-card -->
-
-</div>
-</div>
-
-<!-- ─── GTM RECOMMENDATION ─────────────────────────────────── -->
-<div class="section-wrap on-cloud">
-<div class="container">
-  <div class="sec-eyebrow">GTM-766 &middot; Supersedes GTM-482 &amp; GTM-506</div>
-  <div class="sec-title">Are the CSAT samples from GTM-482/GTM-506 <span style="color:var(--blue)">representative?</span></div>
-
-  <div class="reco-box">
-    <div class="reco-eyebrow">&#127919; Analysis &middot; GTM-766</div>
-    <div class="reco-title">Two critical signals — a <span class="accent">declining trend</span> and a quality crisis</div>
-
-    <p class="reco-body">The 3-month window (Mar 1 – Jun 18, 2026) produces two findings that exceed the GTM-766 acceptance criteria: a sharp decline in Fin AI involvement rate over the period, and a Chatbot CSAT score so low it constitutes the #1 unresolved quality problem in the workspace. Both are addressed here alongside the GTM-482 and GTM-506 representativeness verdict.</p>
-
-    <!-- GTM-482 Verdict -->
-    <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px;margin-top:20px"><strong>GTM-482 (Fin Voice / Phone) — the 65% was not representative. Current phone CSAT is 89.9%.</strong> GTM-482 cited a "Fin Resolved CSAT of 65%" sourced from Feb–Mar 2026 before the Fin Voice CSAT survey step was fully operational. V2 data confirms the correction: phone channel CSAT for Mar 1 – Jun 18 is 89.9% on 486 genuine responses — on par with the team-wide phone benchmark. The early figure should not be carried forward as a baseline.</p>
-
-    <!-- GTM-506 Verdict -->
-    <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px"><strong>GTM-506 (Fin Involved, all channels) — the 79% was a CX Score, not human CSAT. Current Fin AI CSAT is 89.1%.</strong> V1 identified that the 79% figure matched Intercom's AI-generated CX Score, not human satisfaction ratings. V2 confirms: Fin AI human CSAT is 89.1% on 3,370 responses — robust enough for a strong benchmark claim. The gap between Fin AI (89.1%) and human teammate (91.9%) is just 2.8 points, consistent across both the 3-month and 12-month windows.</p>
-
-    <!-- Anomaly 1: Fin Involvement Rate Declining -->
-    <div style="margin:28px 0 0;border-top:1px solid rgba(255,255,255,0.12);padding-top:24px">
-      <p style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px">Anomaly 1 &mdash; Fin AI Involvement Rate: Declining (Operator, All Types) &middot; Stable (Custom Report, Chat Only)</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px 20px">
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Operator &mdash; March Peak</div>
-          <div style="font-size:28px;font-weight:700;color:#dffe02;letter-spacing:-.01em">52.75%</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">All conversation types &middot; 15,114 / 28,650</div>
-        </div>
-        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px 20px">
-          <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Operator &mdash; June 1-18</div>
-          <div style="font-size:28px;font-weight:700;color:#ff4998;letter-spacing:-.01em">41.04%</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">All conversation types &middot; 7,648 / 18,637</div>
-        </div>
-        <div style="background:rgba(49,133,252,.12);border-radius:10px;padding:16px 20px;border:1px solid rgba(49,133,252,.3)">
-          <div style="font-size:11px;color:rgba(49,133,252,.85);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Custom Report &mdash; Chat Only &#10003;</div>
-          <div style="font-size:28px;font-weight:700;color:#dffe02;letter-spacing:-.01em">95.2%</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">Stable all 4 months &middot; 46,224 / 48,537 Chat-USER</div>
-        </div>
-      </div>
-
-      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px">
-        <thead>
-          <tr style="background:rgba(255,255,255,.08)">
-            <th style="text-align:left;padding:9px 16px;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Month</th>
-            <th style="text-align:right;padding:9px 16px;color:#dffe02;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Involvement Rate</th>
-            <th style="text-align:right;padding:9px 16px;color:#3185fc;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Resolution Rate</th>
-            <th style="text-align:right;padding:9px 16px;color:rgba(255,255,255,.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Fin-Involved / Total</th>
-            <th style="text-align:right;padding:9px 16px;color:rgba(255,255,255,.75);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12)">Fin CSAT</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">March 2026</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#dffe02;font-weight:700">52.75%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">68.68%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">15,114 / 28,650</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">88.5%</td>
-          </tr>
-          <tr>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">April 2026</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#dffe02;font-weight:700">51.92%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">70.39%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">13,673 / 26,336</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">88.8%</td>
-          </tr>
-          <tr>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">May 2026</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#ff9ec8;font-weight:700">46.31% <span style="font-size:10px;color:rgba(255,100,100,.7)">&#8595;</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">69.18%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">12,250 / 26,454</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">88.5%</td>
-          </tr>
-          <tr>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:white;font-weight:600">June 1-18 <span style="font-size:10px;background:rgba(255,73,152,.25);color:#ff9ec8;padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">partial</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#ff4998;font-weight:700">41.04% <span style="font-size:10px;color:rgba(255,100,100,.7)">&#8595;</span></td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.75)">70.18%</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:rgba(255,255,255,.5)">7,648 / 18,637</td>
-            <td style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right;color:#dffe02;font-weight:700">92.7%*</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,.06)">
-            <td style="padding:9px 16px;color:white;font-weight:700">Overall (Mar–Jun 18)</td>
-            <td style="padding:9px 16px;text-align:right;color:#dffe02;font-weight:700">48.6%</td>
-            <td style="padding:9px 16px;text-align:right;color:#3185fc;font-weight:700">69.5%</td>
-            <td style="padding:9px 16px;text-align:right;color:rgba(255,255,255,.65)">48,685 / 100,077</td>
-            <td style="padding:9px 16px;text-align:right;color:rgba(255,255,255,.75);font-weight:700">89.1%</td>
-          </tr>
-        </tbody>
+  <!-- SECTION 4: CHANNEL -->
+  <h2>4. CSAT by channel</h2>
+  <p class="lead">CSAT split by the channel the conversation came through. In Intercom, in‑app messenger conversations are counted as <strong>Chat</strong>. Slack and SMS conversations exist but received <strong>no</strong> CSAT ratings in this period, so they are not shown. Email and Phone Fin scores rest on very few ratings — read them with caution.</p>
+  <div class="grid2">
+    <div class="chartbox"><h3>CSAT by channel</h3><p class="cap">Overall, teammate‑only, and Fin AI CSAT per channel. Note: Fin on Email (100%) and Phone (66.7%) rests on only a handful of ratings — not meaningful; Fin essentially operates on Chat.</p><canvas id="c_channel" height="240"></canvas></div>
+    <div class="chartbox"><h3>Channel detail</h3><p class="cap">Type‑is‑User conversations only.</p>
+      <table id="tbl_channel">
+        <thead><tr><th>Channel</th><th class="num">Overall</th><th class="num">Teammate</th><th class="num">Fin AI</th></tr></thead>
+        <tbody></tbody>
       </table>
-      <p style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:20px">*June Fin CSAT based on 413 ratings vs. ~975–1,012 in full months — interpret cautiously.</p>
-
-      <p class="reco-body" style="border-left:3px solid rgba(49,133,252,.6);padding-left:14px"><strong>Cross-reference resolved — this is a mix-shift artifact, not a Fin performance regression.</strong> The Operator denominator includes ALL conversation types (Chat, Phone, Email, chatbot-only, internal). As non-Chat volume grew from ~48% to ~58% of total conversations over the period, the Operator's overall involvement rate declined mathematically — even though Fin's actual Chat involvement never changed. The "Fin AI Agent (New)" custom report (Chat + USER only — Fin's primary domain) confirms involvement was <strong>95.2% overall and stable every month</strong>: Mar 95.6%, Apr 95.1%, May 95.3%, Jun 94.8%. Absolute Fin-involved Chat conversations declined (14,160 → 7,307) because total Chat volume declined — not because Fin was deployed less within Chat. Resolution rate on Chat is also stable at 71.8% (vs. 69.5% all-channel from Operator). CSAT confirmed across both sources at 89.1–89.2%.</p>
-    </div>
-
-    <!-- Anomaly 2: Chatbot CSAT Crisis -->
-    <div style="margin:28px 0 0;border-top:1px solid rgba(255,255,255,0.12);padding-top:24px">
-      <p style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px">Anomaly 2 &mdash; Chatbot CSAT: Critically Low at 30.3%</p>
-      <p class="reco-body" style="border-left:3px solid rgba(255,73,152,.5);padding-left:16px"><strong>Chatbot (sole) handled 31,145 conversations over 3 months — the highest single-category volume in the period — and produced a 30.3% CSAT score on 268 genuine human ratings.</strong> This is not a small-sample finding. At 268 ratings, the signal is robust. Chatbot volume exceeds teammate-only volume (12,624) by more than 2.5&times;, making this the highest-leverage quality improvement opportunity in the workspace. V1 found the same issue at 36.8% over 12 months — the problem has not improved.</p>
-    </div>
-
-    <div class="reco-verdict">
-      <div class="reco-verdict-title">Verdict: GTM-482's 65% and GTM-506's 79% were both unrepresentative. V2 provides the corrected benchmarks.</div>
-      <ul class="reco-steps">
-        <li>
-          <span class="step-num">1</span>
-          <span class="step-text"><strong>Retire GTM-482's 65% Fin Voice baseline.</strong> Current phone CSAT is 89.9% on 486 responses. The early figure reflected an immature, partially-configured measurement window and is no longer relevant.</span>
-        </li>
-        <li>
-          <span class="step-num">2</span>
-          <span class="step-text"><strong>Relabel GTM-506's 79% as a CX Score (AI-evaluated), not human CSAT.</strong> The real Fin AI human CSAT benchmark is 89.1% on 3,370 responses — use this going forward.</span>
-        </li>
-        <li>
-          <span class="step-num">3</span>
-          <span class="step-text"><strong>Monitor the Chat-USER volume trend — confirmed not a Fin performance issue.</strong> Cross-referencing the Operator against the "Fin AI Agent (New)" custom report confirms that Fin's Chat involvement is stable at 95.2%. The Operator's -11.7 pp decline is a denominator effect: non-Chat volume grew as a share of total conversations. Track whether Chat-USER volume as a share of total continues to decrease, and assess whether that channel mix shift is intentional or a drift.</span>
-        </li>
-        <li>
-          <span class="step-num">4</span>
-          <span class="step-text"><strong>Urgently audit Chatbot workflows.</strong> 30.3% CSAT on 31,145 conversations is the #1 quality problem — not Fin AI. This is a persistent issue (V1 also flagged it at 36.8% over 12 months) with no evidence of improvement.</span>
-        </li>
-      </ul>
+      <p class="legend-inline">Phone = "Phone call" + "Phone switch" combined. Email/Phone Fin scores are based on a handful of ratings only.</p>
     </div>
   </div>
 
-</div>
-</div>
-
-<!-- ─── SUPPLEMENTAL: FIN AI PERFORMANCE (MAR–JUN 2026) ──── -->
-<div class="section-wrap on-white">
-<div class="container">
-  <div class="sec-eyebrow">Intercom Operator + Custom Report &middot; Fin AI Supplemental</div>
-  <div class="sec-title">Fin AI Agent Performance (Mar 1 – Jun 18, 2026)</div>
-  <div class="sec-desc">Dual-source analysis: Intercom Operator (all conversation types, all channels) cross-referenced against the "Fin AI Agent (New)" custom report (Chat + USER type only — Fin's primary domain). CSAT confirmed identical across both sources at 89.1–89.2%.</div>
-
-  <div class="metric-grid">
-    <div class="m-card m-success">
-      <div class="m-label">Fin CSAT Satisfaction</div>
-      <div class="m-value">89.2%</div>
-      <div class="m-sub">2,989 of 3,350 ratings &middot; Custom Report (Chat) &middot; Operator: 89.1% — dual-source confirmed</div>
-    </div>
-    <div class="m-card m-success">
-      <div class="m-label">Chat Involvement Rate</div>
-      <div class="m-value">95.2%</div>
-      <div class="m-sub">46,224 of 48,537 Chat-USER convos &middot; stable all 4 months (95.6 → 94.8%)</div>
-    </div>
-    <div class="m-card">
-      <div class="m-label">Fin CX Score (AI-Evaluated)</div>
-      <div class="m-value">86.1%</div>
-      <div class="m-sub">21,595 convos AI-scored &middot; 68.6% rated 5-star &middot; Chat + USER</div>
-    </div>
-  </div>
-  <div class="metric-grid">
-    <div class="m-card">
-      <div class="m-label">Resolution Rate (Chat)</div>
-      <div class="m-value">71.8%</div>
-      <div class="m-sub">33,189 resolved of 46,223 Fin-involved &middot; flat all 4 months (71.5–72.4%)</div>
-    </div>
-    <div class="m-card">
-      <div class="m-label">Deflection Rate</div>
-      <div class="m-value">72.3%</div>
-      <div class="m-sub">33,434 of 46,224 Fin-involved convos &middot; no human handoff needed</div>
-    </div>
-    <div class="m-card m-success">
-      <div class="m-label">CSAT Request Rate (Fin)</div>
-      <div class="m-value">72.8%</div>
-      <div class="m-sub">35,317 of 48,536 Fin convos surveyed &middot; rising: 62.1% (Mar) &rarr; 84.2% (May)</div>
-    </div>
+  <!-- SECTION 5: RESPONSE RATE BY CHANNEL & SEGMENT -->
+  <h2>5. Response rate by channel &amp; segment</h2>
+  <p class="lead">What share of conversations come back with a rating, split by channel and by customer segment. Read from each filtered monthly response‑rate line, so treat these as approximate (±1–2 pts). The headline: response rate barely moves by segment, but varies a lot by channel — <strong>email customers almost never rate</strong>.</p>
+  <div class="grid2">
+    <div class="chartbox"><h3>Response rate by channel</h3><p class="cap">% of conversations that received a rating.</p><canvas id="c_channelRR" height="210"></canvas></div>
+    <div class="chartbox"><h3>Response rate by segment</h3><p class="cap">Consistent ~10–12% across all segments.</p><canvas id="c_segmentRR" height="210"></canvas></div>
   </div>
 
-  <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600">Source: Intercom "Fin AI Agent (New)" Custom Report &middot; Chat + USER type only &middot; Mar 1 – Jun 18, 2026</div>
-  <div style="background:var(--page-bg);border-radius:12px;padding:20px 20px 16px;margin-bottom:20px;height:300px;position:relative">
-    <canvas id="finPerformanceChart"></canvas>
+  <!-- SECTION 6: CSAT BY TOPIC -->
+  <h2>6. CSAT by topic</h2>
+  <p class="lead">CSAT split by what the conversation was about, using Intercom's AI conversation topics (type‑is‑User). Volume is Intercom's topic‑match count, so a single conversation can land in more than one topic — read volume as relative size, not a clean total. The useful signal: satisfaction is <strong>remarkably even across topics (86–94%)</strong>; no single topic is dragging the score down, though the broad "Custom / Status / Tasks" catch‑all is the softest at 86%.</p>
+  <div class="chartbox"><h3>CSAT by conversation topic</h3><p class="cap">Sorted by volume. Bar length = CSAT %; label shows topic match volume.</p><canvas id="c_topics" height="360"></canvas></div>
+
+  <!-- SECTION 7: NEGATIVE RATINGS -->
+  <h2>7. What unhappy customers say — human vs. Fin</h2>
+  <p class="lead">The <strong>304 negative ratings</strong> (Terrible or Bad) split almost evenly between human agents and Fin — but the <em>reasons</em> are different. Most ratings carry no written comment; the themes below come from the ones that do. <span style="color:var(--muted)">Human negatives are about issues not getting resolved; Fin negatives are about wanting a person.</span></p>
+  <div class="cards">
+    <div class="card"><div class="lbl">Negative ratings (Terrible + Bad)</div><div class="val" style="color:var(--red)">304</div><div class="note">≈ 4% of all surveyed conversations</div></div>
+    <div class="card"><div class="lbl">On human‑agent conversations</div><div class="val" style="color:var(--blue)">151</div><div class="note">rated a teammate</div></div>
+    <div class="card"><div class="lbl">On Fin AI conversations</div><div class="val" style="color:var(--amber)">147</div><div class="note">rated Fin · (~6 chatbot)</div></div>
+  </div>
+  <div class="grid2">
+    <div class="chartbox"><h3 style="color:var(--blue)">Human‑agent complaints</h3><p class="cap">Theme: the problem wasn't resolved or the question wasn't addressed.</p>
+      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#33404f;line-height:1.9">
+        <li>“problem no resolved”</li><li>“Problem still isn't fixed”</li><li>“my question was not addressed…”</li><li>“I can't believe Samuel is asking me to quantify the…”</li><li>“This is annoying… this product has so many dra…”</li></ul></div>
+    <div class="chartbox"><h3 style="color:var(--amber)">Fin AI complaints</h3><p class="cap">Theme: wanting a human / the bot looping without helping.</p>
+      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#33404f;line-height:1.9">
+        <li>“I need a live agent please”</li><li>“I am talking to a stupid non human”</li><li>“This did not help at all. When I tried to post anoth…”</li><li>“I just kept doing the same thing over and over unt…”</li></ul></div>
   </div>
 
-  <div class="callout info" style="margin-top:8px">
-    <div class="co-icon">&#10003;</div>
-    <div class="co-body">
-      <strong>Fin AI performance is stable on all key dimensions — confirmed across two independent data sources</strong>
-      Chat involvement holds at 95%+ each month. Resolution rate is flat at 71.8%. CSAT closes at 92.7% in June after a stable 88.5–88.9% run over March–May. The Operator's overall involvement decline (52.75% → 41.04%) reflects a channel mix shift — non-Chat volume growing relative to Chat — not a degradation in Fin deployment or quality within its domain.
-    </div>
+  <!-- WRITTEN ANALYSIS -->
+  <h2>8. Analysis &amp; findings</h2>
+  <div class="analysis">
+    <h3>Executive summary</h3>
+    <p>Over March 1 – June 19, 2026, the <strong>21‑member Customer Support team scored 96.1% CSAT</strong> (2,612 of 2,717 ratings positive), <strong>about 7 points above Fin AI at 89.1%</strong> (3,018 of 3,387). When every human teammate across all teams is included, human CSAT is 91.8%. The clearest opportunity is not satisfaction quality but <strong>survey response volume</strong>: surveys are sent on most conversations (up to ~75%), yet only about <strong>10% of conversations return a rating</strong>. Fin's satisfaction improved notably in June (to ~92.5%), narrowing the gap with humans.</p>
+
+    <h3>Verified facts <span style="font-weight:400;font-size:12px;color:var(--muted)">(read directly from Intercom reports)</span></h3>
+    <ul>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Customer Support team CSAT (21 members): <strong>96.1%</strong> (2,612/2,717). Sub‑groups: CS primary 96.9% (1,999/2,063), Inbound Calls Team 93.5% (575/615).</li>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Fin AI CSAT: <strong>89.1%</strong> (3,018/3,387). All‑teammate CSAT (all teams): <strong>91.8%</strong> (3,019/3,287). Overall (humans + Fin): <strong>88.0%</strong> (6,121/6,954).</li>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Monthly request rate (vs. all conversations): 53.9% → 62.4% → 75.7% → 73.2% (Mar→Jun). Monthly response rate: 10.5% → 11.3% → 11.6% → 9.2%.</li>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Channel CSAT (overall): Chat 90.6%, Email 88.6%, Phone 90.9%. Teammate‑only: Chat 92.4%, Email 88.3%, Phone 91.9%.</li>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Conversation volume (type‑is‑User): 59,683 total; ~79% involved Fin; 56% Fin‑resolved; 34% closed by a teammate.</li>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Negative ratings (Terrible + Bad): <strong>304</strong> total — <strong>151 on human agents, 147 on Fin</strong> (~6 chatbot). Team SLA miss rate 73.8% (11,057/14,985); team median first response 2m.</li>
+      <li><span class="conf c-confirmed">CONFIRMED</span> Weekly CSAT is volatile; Fin's strongest week was the week of Jun 1 (~93.4%), right after ~85.7% the prior week — the monthly "June jump" is one spike, not a steady climb.</li>
+      <li><span class="conf c-likely">LIKELY</span> Response rate by channel (read from chart): Chat ~11%, Phone ~9%, Email ~4%. By segment: all ~10–12%. CSAT by topic: 86–94% across all topics.</li>
+    </ul>
+
+    <h3>Analysis</h3>
+    <p><strong>Humans outperform Fin on satisfaction, but the gap is closing.</strong> The support team's 96.1% sits well above Fin's 89.1%. However, Fin's monthly CSAT rose from ~88.8% (March) to ~92.5% (June) — its strongest month — while the support team held steady in the high‑90s. <span class="conf c-likely">LIKELY</span> If Fin's June trend holds, the human‑vs‑Fin satisfaction gap will keep narrowing.</p>
+    <p><strong>The real lever is response rate, not score.</strong> Request rate climbed all period (more conversations are being surveyed), but only ~1 in 10 conversations returns a rating. That means every reported CSAT score — for humans and Fin alike — rests on a relatively small, self‑selected slice of customers. Raising response rate would make all of these numbers more reliable and would surface more of the dissatisfied customers who currently stay silent.</p>
+    <p><strong>Channel differences are small.</strong> Chat (the primary channel, including in‑app) and Phone both land around 91–92% for humans; Email is a few points lower at 88.3%. <span class="conf c-likely">LIKELY</span> Email trails slightly because it handles more complex billing/cancellation issues (visible in the email topic mix) and lacks the real‑time back‑and‑forth of chat and phone.</p>
+    <p><strong>Per‑teammate spread is healthy, and the phone team runs a touch lower.</strong> Across the 21 Customer Support team members, almost everyone sits between 94% and 100%; the lowest score on meaningful volume is 88.5% (Jonny Diaz, 78 ratings). Broken out by group: the 11 CS‑primary agents average <strong>96.9%</strong>, while the 6 Inbound Calls (phone) Team members average <strong>93.5%</strong> — a ~3.4‑point gap. <span class="conf c-likely">LIKELY</span> The phone team scores lower because spoken calls tend to handle harder, real‑time issues, which lines up with the channel view in Section 4. The 4 secondary‑only members (97.4%) have too few ratings to read into.</p>
+    <p><strong>Speed and CSAT are loosely linked, not lockstep.</strong> The slowest first‑responders include Jonny Diaz (15m 15s) and Diana (14m 48s); Jonny Diaz also has the lowest CSAT on real volume (88.5%), which fits, but Diana still scores 94.2% — so slow replies don't automatically sink satisfaction. Fast responders like Paolo G (1m 14s) and Oliver Z (31s) post top‑tier CSAT. <span class="conf c-unverified">NOTE</span> The team SLA miss rate is high at 73.8%, but it doesn't track cleanly with CSAT (e.g., Frank misses 79% of SLAs yet scores 97.3%), suggesting the SLA targets themselves may be mis‑set rather than satisfaction being SLA‑driven — worth a separate look.</p>
+    <p><strong>Email is a near‑silent channel.</strong> Only ~4% of email conversations get rated, versus ~11% on chat and ~9% on phone. <span class="conf c-likely">LIKELY</span> That means email's 88.3% CSAT rests on a much thinner base than chat's — and that raising email survey response is the cheapest way to learn more about the lowest‑scoring channel. Response rate is essentially flat across customer segments (~10–12%), so who responds is driven by channel, not company size.</p>
+    <p><strong>No single topic is dragging CSAT down.</strong> Across Intercom's AI topics, CSAT sits in a tight 86–94% band. The lowest is the broad "Custom / Status / Tasks" catch‑all (86%) — likely a grab‑bag of harder, less‑templated requests rather than one fixable issue. <span class="conf c-likely">LIKELY</span> The clearer pattern lives in the negative comments. The 304 negatives split almost evenly — 151 on human agents, 147 on Fin — but for different reasons: <strong>human‑agent</strong> complaints are about issues not getting resolved ("Problem still isn't fixed," "my question was not addressed"), while <strong>Fin</strong> complaints are about wanting a person ("I need a live agent please"). So the two fixes are different: better resolution/closure for human conversations, and a smoother path to a human when Fin is stuck.</p>
+    <p><strong>Read CSAT weekly, not just monthly.</strong> The weekly view shows both lines bounce around in the mid‑80s to low‑90s. Fin's encouraging "June jump" in the monthly chart is really a <strong>single strong week</strong> (week of Jun 1, ~93.4%) immediately after a dip to ~85.7% — so it's too early to call it a durable improvement. <span class="conf c-likely">LIKELY</span> Watching the weekly line through July will show whether Fin holds above ~90% or reverts to the ~88% it has averaged.</p>
+
+    <h3>Assumptions &amp; limitations</h3>
+    <ul>
+      <li><span class="conf c-unverified">NOTE</span> <strong>Roster basis:</strong> the per‑teammate list is the 21 <em>actual members</em> of the Customer Support team (Settings → Teams), not everyone who happened to handle a support conversation. Six people who handled support conversations but are <em>not</em> team members were removed (Kailah Washington, Carlos Wagner, Mei, Francis Lopez, Alexander Bermeo, Eve Falk). The Inbound Calls (phone) Team's 6 members are all also secondary members of Customer Support.</li>
+      <li><span class="conf c-unverified">NOTE</span> <strong>Two different "human CSAT" figures exist and both are correct for their scope:</strong> 96.1% is the Customer Support team; 91.8% is every teammate across all teams. The 96.1% reconciles with the executive dashboard's "Support CSAT" line (~96–98%).</li>
+      <li>Monthly request/response‑rate values and the monthly human‑vs‑Fin line were read from chart tooltips/labels; aggregate figures and the per‑teammate table were read from numeric report tables (higher precision).</li>
+      <li>Per‑teammate <strong>request</strong> counts (surveys sent) are not exposed in these reports — only ratings received. So request rate is reported at team level only.</li>
+      <li>Email and Phone <strong>Fin</strong> CSAT (100% and 66.7%) rest on a handful of ratings and are not statistically meaningful. Slack and SMS had no CSAT ratings at all.</li>
+      <li>"June" is a partial month (through the 19th), so June volumes are lower than full months by construction.</li>
+      <li>Response rates by channel and segment were read from each filtered monthly response‑rate line (no single aggregate number is exposed), so they are approximate to within ~1–2 points.</li>
+      <li>CSAT‑by‑topic uses Intercom's AI conversation topics. Topic names are auto‑generated (some are internal‑sounding) and a conversation can match multiple topics, so topic "volume" overlaps and should be read as relative size, not a clean count.</li>
+      <li>The negative‑rating count (304) is for Terrible + Bad with type‑is‑User and excludes the small "Phone switch" channel; most negative ratings carry no written comment, so the themes come from the minority that do. The human (151) / Fin (147) / chatbot (~6) split uses Intercom's "Agent rated type."</li>
+      <li>Weekly CSAT values were read from the Fin Surveyed CSAT "by week" chart (approximate, ±1–2 pts), and the first plotted week (Mar 23) is partial. The conclusion — Fin's June lift is one spike week — holds regardless of small reading errors.</li>
+      <li>First‑response‑time and SLA‑miss figures are scoped to the same Customer Support + Inbound Calls team filter as the CSAT, so they line up with the per‑teammate CSAT in the table.</li>
+    </ul>
+
+    <h3>Recommended next steps</h3>
+    <ul>
+      <li><strong>Lift CSAT response rate.</strong> At ~10%, response volume is the weakest link. Test survey timing, wording, and placement (e.g., in‑app prompts) to get more customers to rate.</li>
+      <li><strong>Watch the Fin trend monthly.</strong> Fin's June jump to ~92.5% is worth confirming next month to see whether the gap with humans keeps closing.</li>
+      <li><strong>Look at Email specifically.</strong> It is the lowest‑scoring channel; reviewing low‑rated email conversations may reveal a fixable pattern (response time, tone, or topic complexity).</li>
+      <li><strong>Support the Inbound Calls (phone) team.</strong> At 93.5% they trail CS‑primary agents (96.9%) by ~3 points. Reviewing low‑rated calls — or comparing them to chat handling — may surface coaching or process opportunities specific to phone.</li>
+      <li><strong>Smooth the bot‑to‑human handoff.</strong> The clearest reason behind negative ratings is customers wanting a human ("I need a live agent please"). Making it faster/clearer to reach a person when Fin can't resolve should lift the worst ratings — and ties directly to Fin's 22% escalation rate.</li>
+      <li><strong>Review the SLA targets.</strong> A 73.8% miss rate that doesn't correlate with CSAT suggests the SLA thresholds may be set too tight to be meaningful. Worth confirming the targets reflect real expectations before treating misses as a problem.</li>
+      <li><strong>Treat low‑volume teammate scores with care.</strong> Don't act on a teammate's CSAT or response‑time until they have a reasonable number of ratings (the rows tagged "low n", e.g. Jodi Medina, Torez, Matt J).</li>
+    </ul>
   </div>
 
-  <div style="margin-top:24px;background:var(--page-bg);border-radius:12px;padding:20px;overflow-x:auto">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">Monthly Detail — Custom Report (Chat + USER)</div>
-    <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:580px">
-      <thead>
-        <tr style="background:var(--cloud)">
-          <th style="text-align:left;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Month</th>
-          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Chat Involvement</th>
-          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Resolution Rate</th>
-          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">CSAT Score</th>
-          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">CX Score</th>
-          <th style="text-align:right;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border)">Fin-Involved (Chat)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:9px 14px;font-weight:600">March 2026</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">95.6%</td>
-          <td style="padding:9px 14px;text-align:right">71.6%</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:600">88.8%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">87.0%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">14,160</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:9px 14px;font-weight:600">April 2026</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">95.1%</td>
-          <td style="padding:9px 14px;text-align:right">72.4%</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:600">88.9%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">85.8%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">13,138</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:9px 14px;font-weight:600">May 2026</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">95.3%</td>
-          <td style="padding:9px 14px;text-align:right">71.5%</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:600">88.5%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">86.2%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">11,619</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:9px 14px;font-weight:600">Jun 1-18 <span style="font-size:10px;background:#fff0f5;color:var(--pink);padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px">partial</span></td>
-          <td style="padding:9px 14px;text-align:right;font-weight:700;color:#16a34a">94.8%</td>
-          <td style="padding:9px 14px;text-align:right">71.7%</td>
-          <td style="padding:9px 14px;text-align:right;font-weight:600;color:#16a34a">92.7%*</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">84.9%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">7,307</td>
-        </tr>
-        <tr style="background:var(--cloud);font-weight:700">
-          <td style="padding:9px 14px">Overall</td>
-          <td style="padding:9px 14px;text-align:right;color:#16a34a">95.2%</td>
-          <td style="padding:9px 14px;text-align:right">71.8%</td>
-          <td style="padding:9px 14px;text-align:right">89.2%</td>
-          <td style="padding:9px 14px;text-align:right">86.1%</td>
-          <td style="padding:9px 14px;text-align:right;color:var(--muted)">46,224</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="font-size:11px;color:var(--faint);margin-top:8px">*June Fin CSAT 92.7% based on ~750 ratings vs. ~900–1,000 in full months — directionally strong, interpret with slight caution. CX Score is AI-evaluated; CSAT is human-rated.</p>
-  </div>
-
-</div>
-</div>
-
-<!-- ─── FOOTER ─────────────────────────────────────────────── -->
-<footer class="footer">
-  <p>
-    CSAT Pipeline Health Report v2 &nbsp;&middot;&nbsp; DoorLoop Customer Support &nbsp;&middot;&nbsp; Generated Jun 18, 2026<br>
-    Primary source: Intercom Operator (all channels, 100,077 conversations, Mar 1 – Jun 18, 2026) &nbsp;&middot;&nbsp; Cross-referenced: "Fin AI Agent (New)" Custom Report (Chat + USER, 48,537 conversations) &nbsp;&middot;&nbsp; Supersedes V1 (12-month) per GTM-766 &nbsp;&middot;&nbsp; Internal use only
+  <p class="footnotes">
+    <strong>Sources (Intercom · DoorLoop · app njbci459, Mar 1 – Jun 19, 2026):</strong><br>
+    • <a href="https://app.intercom.com/a/apps/njbci459/reports/custom-reports/report/15110202">Unified Teammate Performance</a> — per‑teammate &amp; team CSAT (filtered to Customer Support + Inbound Calls teams)<br>
+    • <a href="https://app.intercom.com/a/apps/njbci459/reports/custom-reports/report/16992354">Customer Support Executive Dashboard</a> — Support vs. Fin monthly CSAT; request/response rates<br>
+    • <a href="https://app.intercom.com/a/apps/njbci459/reports/custom-reports/report/12465831">Fin AI Surveyed CSAT</a> — aggregate Overall / Teammate / Fin CSAT with counts<br>
+    • <a href="https://app.intercom.com/a/apps/njbci459/reports/overview">Reports Overview</a> — channel‑filtered CSAT &amp; conversation volumes (type is User)<br>
+    • <a href="https://app.intercom.com/a/apps/njbci459/reports/conversational-insights/topics">Conversation Topics</a> — CSAT by AI topic<br>
+    • Negative‑rating comments &amp; response‑rate‑by‑channel/segment: drill‑ins and filters on the Executive Dashboard (no report settings were saved)<br>
+    Generated for Samuel · figures reflect report values at time of capture.
   </p>
-</footer>
+
+</div>
 
 <script>
-/* ─── DATA ─────────────────────────────────────────────────── */
-const DATA = {
+/* ---------- DATA (captured from Intercom, Mar 1–Jun 19 2026) ---------- */
+const months = ["Mar","Apr","May","Jun"];
 
-  cut1: [
-    // Source: Intercom Operator. Response rate = responses / convos where customer sent a message (per channel).
-    {channel:"Chat",       responses:6134, response_rate:7.49, csat:87.9, denom:81925},
-    {channel:"Phone Call", responses:486,  response_rate:5.57, csat:89.9, denom:8729},
-    {channel:"Email",      responses:198,  response_rate:2.26, csat:87.6, denom:8773}
-  ],
+// Section 1
+const vsFin = {
+  labels:["Support team\n(CS + Inbound)","All teammates\n(every team)","Fin AI"],
+  vals:[96.1,91.8,89.1],
+  detail:["2,696 / 2,805","3,019 / 3,287","3,018 / 3,387"],
+  colors:["#22a06b","#3b6fe0","#e0a73b"]
+};
+const supportMonthly = [97.6,97.1,96.0,97.8];   // exec dashboard "Support CSAT"
+const finMonthly     = [88.8,89.0,88.5,92.5];   // exec dashboard "Fin AI CSAT"
 
-  cut2: [
-    // Source: Intercom Operator. Response Rate = responses / conversations closed.
-    {month:"Mar 2026",  closed_n:28460, responses:1980, response_rate:6.91, csat:88.2},
-    {month:"Apr 2026",  closed_n:26215, responses:1988, response_rate:7.55, csat:90.0},
-    {month:"May 2026",  closed_n:26614, responses:1829, response_rate:6.91, csat:86.0},
-    {month:"Jun 1-18",  closed_n:18677, responses:1021, response_rate:5.48, csat:87.8}
-  ],
+// Section 2  (all vs total conversations)
+const reqOverall = [53.9,62.4,75.7,73.2];
+const reqFin     = [66.8,76.2,98.2,94.3];
+const reqHuman   = [37.0,44.5,46.3,47.3];
+const respRate   = [10.5,11.3,11.6,9.2];
 
-  cut3: [
-    // Source: Intercom Operator. Response rate NOT available per agent type — see methodology note.
-    {agent:"Fin AI Agent",      responses:3370, csat:89.1, closed_sole:35492},
-    {agent:"Teammate (Human)",  responses:3183, csat:91.9, closed_sole:12624},
-    {agent:"Chatbot",           responses:268,  csat:30.3, closed_sole:31145}
-  ],
+// Section 3 — roster = ACTUAL members of the Customer Support team (21)
+// grp: 'primary' = CS primary inbox · 'inbound' = CS secondary + Inbound Calls Team · 'secondary' = CS secondary only
+// frt = median first response time (display); frtS = same in seconds (for sort/scale)
+// sla = SLA miss rate % (higher = worse); null = too few to report
+let teammates = [
+  // Customer Support — primary inbox (11)
+  {name:"Alejandro Grahammer",team:"Customer Support · primary",       grp:"primary",  csat:99.2, pos:130, resp:131, assigned:2060, frt:"2m 0s",  frtS:120, sla:77.3},
+  {name:"Paolo G",             team:"Customer Support · primary",       grp:"primary",  csat:98.5, pos:197, resp:200, assigned:2909, frt:"1m 14s", frtS:74,  sla:35.3},
+  {name:"Oliver Z",            team:"Customer Support · primary",       grp:"primary",  csat:98.5, pos:134, resp:136, assigned:1159, frt:"31s",    frtS:31,  sla:60.0},
+  {name:"Samuel Little",       team:"Customer Support · primary",       grp:"primary",  csat:98.4, pos:186, resp:189, assigned:1374, frt:"1m 16s", frtS:76,  sla:64.0},
+  {name:"Erick Briones",       team:"Customer Support · primary",       grp:"primary",  csat:98.0, pos:148, resp:151, assigned:2065, frt:"1m 24s", frtS:84,  sla:77.2},
+  {name:"Gabriel Calderon",    team:"Customer Support · primary",       grp:"primary",  csat:97.3, pos:178, resp:183, assigned:2234, frt:"2m 0s",  frtS:120, sla:65.6},
+  {name:"Frank",               team:"Customer Support · primary",       grp:"primary",  csat:97.3, pos:109, resp:112, assigned:2087, frt:"1m 56s", frtS:116, sla:79.4},
+  {name:"Andres",              team:"Customer Support · primary",       grp:"primary",  csat:96.2, pos:229, resp:238, assigned:3086, frt:"1m 52s", frtS:112, sla:75.4},
+  {name:"Milly Castellon",     team:"Customer Support · primary",       grp:"primary",  csat:94.6, pos:295, resp:312, assigned:3194, frt:"2m 17s", frtS:137, sla:78.6},
+  {name:"Franco Bolivar",      team:"Customer Support · primary",       grp:"primary",  csat:94.5, pos:312, resp:330, assigned:3270, frt:"1m 56s", frtS:116, sla:70.3},
+  {name:"Danny",               team:"Customer Support · primary",       grp:"primary",  csat:100.0, pos:81, resp:81, assigned:1022, frt:"1m 20s", frtS:80,  sla:81.2},
+  // Customer Support — secondary + Inbound Calls Team (6)
+  {name:"Andrew",              team:"Cust. Support (sec.) + Inbound Calls", grp:"inbound", csat:95.8, pos:115, resp:120, assigned:2073, frt:"3m 57s", frtS:237, sla:20.8},
+  {name:"Alex Judasin",        team:"Cust. Support (sec.) + Inbound Calls", grp:"inbound", csat:94.8, pos:109, resp:115, assigned:1483, frt:"2m 16s", frtS:136, sla:69.1},
+  {name:"Diana",               team:"Cust. Support (sec.) + Inbound Calls", grp:"inbound", csat:94.2, pos:65, resp:69, assigned:1031, frt:"14m 48s", frtS:888, sla:20.3},
+  {name:"Nicole",              team:"Cust. Support (sec.) + Inbound Calls", grp:"inbound", csat:93.0, pos:133, resp:143, assigned:1975, frt:"1m 56s", frtS:116, sla:66.0},
+  {name:"Aileen",              team:"Cust. Support (sec.) + Inbound Calls", grp:"inbound", csat:93.3, pos:84, resp:90, assigned:1098, frt:"3m 3s",  frtS:183, sla:81.3},
+  {name:"Jonny Diaz",          team:"Cust. Support (sec.) + Inbound Calls", grp:"inbound", csat:88.5, pos:69, resp:78, assigned:1968, frt:"15m 15s", frtS:915, sla:76.5},
+  // Customer Support — secondary only (4)
+  {name:"Eric F",              team:"Customer Support · secondary",     grp:"secondary", csat:100.0, pos:15, resp:15, assigned:163, frt:"37s",   frtS:37,   sla:74.4},
+  {name:"Matt J",              team:"Customer Support · secondary",     grp:"secondary", csat:93.8, pos:15, resp:16, assigned:184, frt:"54m 8s", frtS:3248, sla:100.0},
+  {name:"Jodi Medina",         team:"Customer Support · secondary",     grp:"secondary", csat:100.0, pos:5, resp:5, assigned:112, frt:"47s",    frtS:47,   sla:89.7},
+  {name:"Torez",               team:"Customer Support · secondary",     grp:"secondary", csat:100.0, pos:3, resp:3, assigned:27, frt:"—",      frtS:null, sla:null}
+];
+const LOWN = 10; // ratings threshold for "low confidence"
 
-  cut4: [
-    // Source: Intercom Operator. Sorted by CSAT responses (highest first).
-    // Surveys sent and response rate not available per teammate in this period.
-    {tm:"Franco Bolivar",      responses:367,  csat:88.7},
-    {tm:"Milly Castellon",     responses:354,  csat:87.3},
-    {tm:"Andres",              responses:265,  csat:92.1},
-    {tm:"Paolo G",             responses:207,  csat:97.1},
-    {tm:"Gabriel Calderon",    responses:204,  csat:93.2},
-    {tm:"Samuel Little",       responses:199,  csat:97.0},
-    {tm:"Erick Briones",       responses:170,  csat:94.2},
-    {tm:"Oliver Z",            responses:144,  csat:96.6},
-    {tm:"Alejandro Grahammer", responses:144,  csat:97.3},
-    {tm:"Nicole",              responses:142,  csat:92.8},
-    {tm:"Andrew",              responses:129,  csat:89.8},
-    {tm:"Alex Judasin",        responses:128,  csat:93.9},
-    {tm:"Frank",               responses:120,  csat:94.2},
-    {tm:"Aileen",              responses:89,   csat:91.4},
-    {tm:"Danny",               responses:86,   csat:98.8},
-    {tm:"Jonny Diaz",          responses:80,   csat:88.0},
-    {tm:"Diana",               responses:75,   csat:91.3}
-  ]
+// Section: CSAT by topic (Intercom AI conversation topics, type=User). Volume = topic match count (topics can overlap).
+const topics = [
+  {t:"Accounting topics", vol:42935, csat:92},
+  {t:"S2 Reporting conversations", vol:30504, csat:91},
+  {t:"Tenant (rent pay, pay rent)", vol:11226, csat:90},
+  {t:"Custom / Status / Tasks / tenant & owner requests", vol:7014, csat:86},
+  {t:"Portal (owner & tenant portal)", vol:6983, csat:91},
+  {t:"Move out", vol:6522, csat:91},
+  {t:"Rental application screening (TransUnion)", vol:4598, csat:91},
+  {t:"Lease (end / renew / lease ledger)", vol:4256, csat:93},
+  {t:"Listings & marketing (apartments.com, Zumper)", vol:4234, csat:91},
+  {t:"Expectation mismatch (“this doesn’t make sense”)", vol:3047, csat:91},
+  {t:"Fin – Listings", vol:2841, csat:92},
+  {t:"Owner contributions / payments", vol:2634, csat:90},
+  {t:"Created a lease as a draft", vol:2267, csat:94},
+  {t:"Blockers (“stuck / can’t proceed”)", vol:2157, csat:90}
+];
+
+// Section: response rate by channel and by segment (% of conversations returning a rating; read from monthly response-rate line, approximate)
+const channelRR = [{k:"Chat (incl. in‑app)", v:11}, {k:"Phone (call + switch)", v:9}, {k:"Email", v:4}];
+const segmentRR = [{k:"SMB", v:11}, {k:"Mid‑Market", v:12}, {k:"Emerging", v:11}, {k:"Upper‑Market", v:11}];
+
+// Section: negative ratings — split by who was rated
+const neg = {
+  total:304, human:151, fin:147, other:6,
+  humanComments:["“problem no resolved”","“Problem still isn't fixed”","“my question was not addressed. and then the con…”","“I can't believe Samuel is asking me to quantify the…”","“This is annoying… This product has so many dra…”","“read the conversation and you will see.”"],
+  finComments:["“I am talking to a stupid non human”","“I need a live agent please”","“This did not help at all. When I tried to post anoth…”","“I just kept doing the same thing over and over unt…”"]
 };
 
-/* ─── HELPERS ──────────────────────────────────────────────── */
-function fmtN(n) { return n == null ? '—' : n.toLocaleString(); }
+// Section: weekly CSAT trend (read from Fin Surveyed CSAT 'by Week' chart; * = partial week). Overall vs Fin.
+const weekLabels = ["Mar 23*","Mar 30","Apr 6","Apr 13","Apr 20","Apr 27","May 4","May 11","May 18","May 25","Jun 1","Jun 8"];
+const weekOverall = [72.2, 89.6, 92.8, 88.7, 89.6, 90.3, 86.7, 85.8, 88.6, 81.6, 86.3, 88.6];
+const weekFin     = [75.0, 89.6, 92.8, 86.0, 87.1, 90.3, 91.9, 88.4, 85.8, 85.7, 93.4, 88.6];
 
-// Response rate color thresholds tuned for V2's lower rates (max ~7.5%)
-function rrColor(rr) {
-  if (rr >= 7)   return '#16a34a';
-  if (rr >= 4.5) return '#3185fc';
-  if (rr >= 2.5) return '#d97706';
-  return '#ff4998';
+// Section 4 — channel CSAT (type is User)
+const channels = [
+  {ch:"Chat (incl. in‑app)", overall:90.6, teammate:92.4, fin:89.2},
+  {ch:"Email",               overall:88.6, teammate:88.3, fin:100.0},
+  {ch:"Phone (call+switch)", overall:90.9, teammate:91.9, fin:66.7}
+];
+
+/* ---------- CHART DEFAULTS ---------- */
+Chart.defaults.font.family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+Chart.defaults.font.size=12;
+Chart.defaults.color="#6b7785";
+const GRID={color:"#eef1f5"};
+
+/* 1a. Humans vs Fin bar */
+new Chart(document.getElementById('c_vsFin'),{
+  type:'bar',
+  data:{labels:vsFin.labels,datasets:[{data:vsFin.vals,backgroundColor:vsFin.colors,borderRadius:6,maxBarThickness:70}]},
+  options:{plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:(c)=>c.parsed.y+'%  ('+vsFin.detail[c.dataIndex]+' positive)'}}},
+    scales:{y:{beginAtZero:false,min:80,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+
+/* 1b. Support vs Fin monthly */
+new Chart(document.getElementById('c_vsFinMonthly'),{
+  type:'line',
+  data:{labels:months,datasets:[
+    {label:'Support team CSAT',data:supportMonthly,borderColor:'#22a06b',backgroundColor:'#22a06b',tension:.3,borderWidth:2.5,pointRadius:3},
+    {label:'Fin AI CSAT',data:finMonthly,borderColor:'#e0a73b',backgroundColor:'#e0a73b',tension:.3,borderWidth:2.5,pointRadius:3}
+  ]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
+    scales:{y:{min:85,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+
+/* 2. Request vs response rate */
+new Chart(document.getElementById('c_reqresp'),{
+  type:'line',
+  data:{labels:months,datasets:[
+    {label:'Request rate — overall',data:reqOverall,borderColor:'#3b6fe0',backgroundColor:'#3b6fe0',tension:.3,borderWidth:2.5,pointRadius:3},
+    {label:'Request rate — Fin‑resolved',data:reqFin,borderColor:'#e0a73b',backgroundColor:'#e0a73b',tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
+    {label:'Request rate — human‑resolved',data:reqHuman,borderColor:'#22a06b',backgroundColor:'#22a06b',tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
+    {label:'Response rate (ratings received)',data:respRate,borderColor:'#d2484b',backgroundColor:'#d2484b',tension:.3,borderWidth:3,pointRadius:3}
+  ]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
+    scales:{y:{min:0,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+
+/* 3. Teammate CSAT bar (sorted desc) + table */
+function renderTeammateChart(){
+  const sorted=[...teammates].sort((a,b)=>b.csat-a.csat);
+  const c=document.getElementById('c_teammates');
+  if(c._chart)c._chart.destroy();
+  c._chart=new Chart(c,{
+    type:'bar',
+    data:{labels:sorted.map(t=>t.name),datasets:[{
+      data:sorted.map(t=>t.csat),
+      backgroundColor:sorted.map(t=>{
+        const base={primary:'#22a06b',inbound:'#13b6c4',secondary:'#9aa6b2'}[t.grp];
+        return t.resp<LOWN ? base+'66' : base; // low-volume = translucent
+      }),
+      borderRadius:4}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.x+'%  ('+sorted[c.dataIndex].pos+'/'+sorted[c.dataIndex].resp+' ratings)'}}},
+      scales:{x:{min:0,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
+  });
 }
+renderTeammateChart();
 
-function csatColor(c) {
-  if (c >= 90) return '#16a34a';
-  if (c >= 85) return '#d97706';
-  return '#ff4998';
+let sortKey="assigned",sortDir=-1;
+function renderTeammateTable(){
+  const tb=document.querySelector('#tbl_team tbody');
+  const maxAssigned=Math.max(...teammates.map(t=>t.assigned));
+  const rows=[...teammates].sort((a,b)=>{
+    let av=a[sortKey],bv=b[sortKey];
+    if(sortKey==='conf'){av=a.resp;bv=b.resp;}
+    if(typeof av==='string')return sortDir*av.localeCompare(bv);
+    return sortDir*(av-bv);
+  });
+  tb.innerHTML=rows.map(t=>{
+    const low=t.resp<LOWN;
+    const w=(t.assigned/maxAssigned*100).toFixed(1);
+    const slaColor = t.sla==null ? '#9aa6b2' : (t.sla>=75?'#d2484b':(t.sla>=50?'#b27a18':'#1b7a52'));
+    const frtColor = t.frtS==null ? '#9aa6b2' : (t.frtS>=300?'#d2484b':(t.frtS>=180?'#b27a18':'#33404f'));
+    return `<tr>
+      <td>${t.name}${low?' <span class="tag low">low n</span>':''}</td>
+      <td style="font-size:12px;color:var(--muted)">${t.team}</td>
+      <td class="num" style="font-weight:600;color:${low?'#9aa6b2':(t.csat>=95?'#1b7a52':'#33404f')}">${t.csat.toFixed(1)}%</td>
+      <td class="num" style="color:var(--muted)">${t.pos}/${t.resp}</td>
+      <td class="num" style="color:${frtColor}">${t.frt}</td>
+      <td class="num" style="color:${slaColor}">${t.sla==null?'—':t.sla.toFixed(1)+'%'}</td>
+      <td class="num bar-cell"><div class="bar-fill" style="width:${w}%"></div><span>${t.assigned.toLocaleString()}</span></td>
+    </tr>`;
+  }).join('');
 }
-
-function rateBar(rr, max) {
-  const pct = Math.min(rr / (max || 10) * 100, 100);
-  return '<div class="rate-bar">'
-    + '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + rrColor(rr) + '"></div></div>'
-    + '<span class="bar-label" style="color:' + rrColor(rr) + '">' + rr + '%</span>'
-    + '</div>';
-}
-
-function csatSignal(csat) {
-  if (csat >= 95) return '<span class="badge badge-green">Excellent</span>';
-  if (csat >= 90) return '<span class="badge badge-blue">Strong</span>';
-  if (csat >= 85) return '<span class="badge badge-cloud">Solid</span>';
-  if (csat >= 80) return '<span class="badge badge-amber">Watch</span>';
-  return '<span class="badge badge-pink">Critical</span>';
-}
-
-/* ─── CUT 1: CHANNEL TABLE ─────────────────────────────────── */
-const tbCh = document.getElementById('tbCh');
-DATA.cut1.forEach(function(r) {
-  tbCh.innerHTML += '<tr>'
-    + '<td>' + r.channel + '</td>'
-    + '<td>' + fmtN(r.responses) + '</td>'
-    + '<td>' + rateBar(r.response_rate, 10) + '</td>'
-    + '<td><strong style="color:' + csatColor(r.csat) + '">' + r.csat + '%</strong></td>'
-    + '</tr>';
+renderTeammateTable();
+document.querySelectorAll('#tbl_team th').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const k=th.dataset.k; if(k==='name'){sortDir=(sortKey===k)?-sortDir:1;}
+    else {sortDir=(sortKey===k)?-sortDir:-1;}
+    sortKey=k; renderTeammateTable();
+  });
 });
 
-/* ─── CUT 1: CHANNEL CHART ─────────────────────────────────── */
-new Chart(document.getElementById('chartCh'), {
-  type: 'bar',
-  data: {
-    labels: DATA.cut1.map(function(r){ return r.channel; }),
-    datasets: [
-      { label: 'Response Rate %', data: DATA.cut1.map(function(r){ return r.response_rate; }), backgroundColor: '#3185fc', hoverBackgroundColor: '#3185fc', borderRadius: 6 },
-      { label: 'CSAT Score %',    data: DATA.cut1.map(function(r){ return r.csat; }),          backgroundColor: '#162050', hoverBackgroundColor: '#162050', borderRadius: 6 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'bottom', labels: { font: { family: "'Plus Jakarta Sans', sans-serif", size: 12 }, padding: 16 } },
-      tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + ctx.raw + '%'; } } }
-    },
-    scales: {
-      y: { beginAtZero: true, max: 100, ticks: { callback: function(v){ return v + '%'; }, font: { family: "'Plus Jakarta Sans', sans-serif" } }, grid: { color: '#e8f0fe' } },
-      x: { grid: { display: false }, ticks: { font: { family: "'Plus Jakarta Sans', sans-serif" } } }
-    }
-  }
+/* 4. Channel chart + table */
+new Chart(document.getElementById('c_channel'),{
+  type:'bar',
+  data:{labels:channels.map(c=>c.ch),datasets:[
+    {label:'Overall',data:channels.map(c=>c.overall),backgroundColor:'#3b6fe0',borderRadius:5,maxBarThickness:30},
+    {label:'Teammate',data:channels.map(c=>c.teammate),backgroundColor:'#22a06b',borderRadius:5,maxBarThickness:30},
+    {label:'Fin AI',data:channels.map(c=>c.fin),backgroundColor:'#e0a73b',borderRadius:5,maxBarThickness:30}
+  ]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>{
+    const tiny = c.dataset.label==='Fin AI' && c.label[0]!=='C';
+    return c.dataset.label+': '+c.parsed.y+'%'+(tiny?' (very few ratings)':'');}}}},
+    scales:{y:{min:60,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+document.querySelector('#tbl_channel tbody').innerHTML=channels.map(c=>`
+  <tr><td>${c.ch}</td><td class="num">${c.overall}%</td><td class="num">${c.teammate}%</td>
+  <td class="num" style="color:#9aa6b2">${c.fin}%${(c.ch[0]!=='C')?' *':''}</td></tr>`).join('');
+
+/* 5. Response rate by channel + segment */
+new Chart(document.getElementById('c_channelRR'),{
+  type:'bar',
+  data:{labels:channelRR.map(c=>c.k),datasets:[{data:channelRR.map(c=>c.v),
+    backgroundColor:['#3b6fe0','#13b6c4','#d2484b'],borderRadius:6,maxBarThickness:60}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'~'+c.parsed.y+'% of conversations rated'}}},
+    scales:{y:{beginAtZero:true,max:15,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+new Chart(document.getElementById('c_segmentRR'),{
+  type:'bar',
+  data:{labels:segmentRR.map(c=>c.k),datasets:[{data:segmentRR.map(c=>c.v),
+    backgroundColor:'#8b5cf6',borderRadius:6,maxBarThickness:55}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'~'+c.parsed.y+'% of conversations rated'}}},
+    scales:{y:{beginAtZero:true,max:15,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
 });
 
-/* ─── CUT 2: MONTHLY TABLE ─────────────────────────────────── */
-const tbMo = document.getElementById('tbMo');
-DATA.cut2.forEach(function(r, i) {
-  var isPartial = r.month === 'Jun 1-18';
-  var monthLabel = isPartial
-    ? r.month + ' <span style="font-size:10px;background:#fff0f5;color:var(--pink);padding:1px 6px;border-radius:4px;font-weight:700;margin-left:4px">partial</span>'
-    : r.month;
-  tbMo.innerHTML += '<tr>'
-    + '<td>' + monthLabel + '</td>'
-    + '<td>' + fmtN(r.closed_n) + '</td>'
-    + '<td>' + fmtN(r.responses) + '</td>'
-    + '<td>' + rateBar(r.response_rate, 10) + '</td>'
-    + '<td style="color:' + csatColor(r.csat) + ';font-weight:700">' + r.csat.toFixed(1) + '%</td>'
-    + '</tr>';
+/* 6. CSAT by topic */
+new Chart(document.getElementById('c_topics'),{
+  type:'bar',
+  data:{labels:topics.map(t=>t.t),datasets:[{data:topics.map(t=>t.csat),
+    backgroundColor:topics.map(t=>t.csat<88?'#e0a73b':'#3b6fe0'),borderRadius:4}]},
+  options:{indexAxis:'y',plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>c.parsed.x+'% CSAT  ·  '+topics[c.dataIndex].vol.toLocaleString()+' topic matches'}}},
+    scales:{x:{min:80,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
 });
 
-/* ─── CUT 2: MONTHLY CHART ─────────────────────────────────── */
-new Chart(document.getElementById('chartMo'), {
-  type: 'line',
-  data: {
-    labels: DATA.cut2.map(function(r){ return r.month; }),
-    datasets: [
-      {
-        label: 'Response Rate',
-        data: DATA.cut2.map(function(r){ return r.response_rate; }),
-        borderColor: '#3185fc', backgroundColor: 'rgba(49,133,252,0.07)',
-        tension: 0.3, pointRadius: 5, pointBackgroundColor: '#3185fc', fill: true,
-        yAxisID: 'y'
-      },
-      {
-        label: 'CSAT Score',
-        data: DATA.cut2.map(function(r){ return r.csat; }),
-        borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.06)',
-        tension: 0.3, pointRadius: 5, pointBackgroundColor: '#16a34a', fill: false,
-        yAxisID: 'y2'
-      }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'bottom', labels: { font: { family: "'Plus Jakarta Sans', sans-serif", size: 12 }, padding: 16 } },
-      tooltip: { callbacks: { label: function(ctx){ return '  ' + ctx.dataset.label + ': ' + ctx.raw + '%'; } } }
-    },
-    scales: {
-      y: {
-        beginAtZero: true, max: 10, position: 'left',
-        ticks: { callback: function(v){ return v + '%'; }, font: { family: "'Plus Jakarta Sans', sans-serif" } },
-        grid: { color: '#e8f0fe' },
-        title: { display: true, text: 'Response Rate', font: { size: 11 } }
-      },
-      y2: {
-        min: 80, max: 95, position: 'right',
-        ticks: { callback: function(v){ return v + '%'; }, font: { family: "'Plus Jakarta Sans', sans-serif" } },
-        grid: { drawOnChartArea: false },
-        title: { display: true, text: 'CSAT Score', font: { size: 11 } }
-      },
-      x: { grid: { display: false }, ticks: { font: { family: "'Plus Jakarta Sans', sans-serif" } } }
-    }
-  }
+/* Weekly CSAT trend */
+new Chart(document.getElementById('c_weekly'),{
+  type:'line',
+  data:{labels:weekLabels,datasets:[
+    {label:'Overall CSAT',data:weekOverall,borderColor:'#3b6fe0',backgroundColor:'#3b6fe0',tension:.3,borderWidth:2,pointRadius:3},
+    {label:'Fin AI CSAT',data:weekFin,borderColor:'#e0a73b',backgroundColor:'#e0a73b',tension:.3,borderWidth:2.5,pointRadius:3}
+  ]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
+    scales:{y:{min:70,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
 });
-
-/* ─── CUT 3: AGENT TYPE TABLE ──────────────────────────────── */
-const tbFin = document.getElementById('tbFin');
-DATA.cut3.forEach(function(r) {
-  var c = csatColor(r.csat);
-  var agentBadge = r.agent === 'Fin AI Agent'
-    ? '<span class="badge badge-blue">Fin AI</span>'
-    : r.agent === 'Teammate (Human)'
-    ? '<span class="badge badge-green">Human</span>'
-    : '<span class="badge badge-pink">Chatbot &#9888;</span>';
-  tbFin.innerHTML += '<tr>'
-    + '<td>' + r.agent + ' ' + agentBadge + '</td>'
-    + '<td>' + fmtN(r.responses) + '</td>'
-    + '<td><strong style="color:' + c + '">' + r.csat + '%</strong></td>'
-    + '<td>' + fmtN(r.closed_sole) + '</td>'
-    + '</tr>';
-});
-
-/* ─── CUT 3: AGENT TYPE CHART (CSAT ONLY) ─────────────────── */
-new Chart(document.getElementById('chartAgent'), {
-  type: 'bar',
-  data: {
-    labels: DATA.cut3.map(function(r){ return r.agent; }),
-    datasets: [
-      {
-        label: 'CSAT Score %',
-        data: DATA.cut3.map(function(r){ return r.csat; }),
-        backgroundColor: DATA.cut3.map(function(r){ return r.csat >= 70 ? (r.agent === 'Fin AI Agent' ? '#3185fc' : '#162050') : '#ff4998'; }),
-        borderRadius: 6
-      }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'bottom', labels: { font: { family: "'Plus Jakarta Sans', sans-serif", size: 12 }, padding: 16 } },
-      tooltip: { callbacks: { label: function(ctx){ return 'CSAT Score: ' + ctx.raw + '%'; } } }
-    },
-    scales: {
-      y: { beginAtZero: true, max: 100, ticks: { callback: function(v){ return v + '%'; }, font: { family: "'Plus Jakarta Sans', sans-serif" } }, grid: { color: '#e8f0fe' } },
-      x: { grid: { display: false }, ticks: { font: { family: "'Plus Jakarta Sans', sans-serif" } } }
-    }
-  }
-});
-
-/* ─── CUT 4: TEAMMATE TABLE ────────────────────────────────── */
-const tbTm = document.getElementById('tbTm');
-DATA.cut4.forEach(function(r, i) {
-  tbTm.innerHTML += '<tr>'
-    + '<td style="color:var(--muted);font-weight:400">' + (i + 1) + '</td>'
-    + '<td>' + r.tm + '</td>'
-    + '<td>' + fmtN(r.responses) + '</td>'
-    + '<td><strong style="color:' + csatColor(r.csat) + '">' + r.csat.toFixed(1) + '%</strong></td>'
-    + '<td>' + csatSignal(r.csat) + '</td>'
-    + '</tr>';
-});
-
-/* ─── FIN PERFORMANCE CHART (Custom Report: Chat + USER) ─────── */
-new Chart(document.getElementById('finPerformanceChart'), {
-  type: 'line',
-  data: {
-    labels: ['Mar 26', 'Apr 26', 'May 26', 'Jun 1-18'],
-    datasets: [
-      {
-        label: 'Chat Involvement Rate',
-        data: [95.6, 95.1, 95.3, 94.8],
-        borderColor: '#dffe02', backgroundColor: 'rgba(223,254,2,0.06)',
-        tension: 0.4, pointRadius: 5, pointBackgroundColor: '#dffe02',
-        pointHoverRadius: 6, fill: false
-      },
-      {
-        label: 'CSAT Score',
-        data: [88.8, 88.9, 88.5, 92.7],
-        borderColor: '#ff4998', backgroundColor: 'rgba(255,73,152,0.06)',
-        tension: 0.4, pointRadius: 5, pointBackgroundColor: '#ff4998',
-        pointHoverRadius: 6, fill: false
-      },
-      {
-        label: 'Resolution Rate',
-        data: [71.6, 72.4, 71.5, 71.7],
-        borderColor: '#3185fc', backgroundColor: 'rgba(49,133,252,0.06)',
-        tension: 0.4, pointRadius: 5, pointBackgroundColor: '#3185fc',
-        pointHoverRadius: 6, fill: false
-      }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: { font: { size: 12, family: "'Plus Jakarta Sans', sans-serif" }, usePointStyle: true, padding: 20 }
-      },
-      tooltip: {
-        callbacks: { label: function(ctx){ return '  ' + ctx.dataset.label + ': ' + ctx.raw + '%'; } }
-      }
-    },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 12, family: "'Plus Jakarta Sans', sans-serif" } } },
-      y: {
-        min: 60, max: 100,
-        grid: { color: '#e8f0fe' },
-        ticks: { font: { size: 11, family: "'Plus Jakarta Sans', sans-serif" }, callback: function(v){ return v + '%'; } }
-      }
-    }
-  }
-});
-
-/* ─── TAB LOGIC ────────────────────────────────────────────── */
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 50);
-}
 </script>
 </body>
 </html>
