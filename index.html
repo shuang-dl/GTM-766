@@ -97,6 +97,15 @@
   .c-confirmed{background:#eafaf0;color:#15803d;}
   .c-likely{background:var(--lightblue);color:var(--core);}
   .c-unverified{background:#fff0f5;color:var(--pink);}
+  .offenders{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:18px 0;}
+  .callout{background:#f6f8ff;border:1px solid var(--border);border-left:3px solid var(--core);border-radius:12px;padding:16px 18px;}
+  .callout.c-pink{border-left-color:var(--pink);}
+  .callout .cut{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--caption);margin-bottom:6px;}
+  .callout .who{font-size:17px;font-weight:700;color:var(--navy);line-height:1.3;}
+  .callout .who .n{font-size:12px;font-weight:500;color:var(--caption);}
+  .callout .hyp{font-size:13px;color:var(--body);margin-top:8px;line-height:1.6;}
+  .samplenote{background:var(--cloud);border-radius:10px;padding:13px 16px;font-size:12.5px;color:var(--body);line-height:1.6;margin:14px 0 0;}
+  .samplenote strong{color:var(--navy);}
   .footnotes{font-size:12px;color:rgba(255,255,255,.72);margin-top:44px;background:var(--navy8);
     border-radius:12px;padding:24px 28px;line-height:1.8;}
   .footnotes strong{color:#fff;}
@@ -169,7 +178,8 @@
     <div class="tile t-navy"><div class="lbl">Inbound Calls Team (6)</div><div class="val">93.5%</div><div class="note">575 / 615 ratings</div></div>
     <div class="tile t-navy6"><div class="lbl">Customer Support · secondary only (4)</div><div class="val">97.4%</div><div class="note">38 / 39 ratings · very low volume</div></div>
   </div>
-  <div class="chartbox"><h3>CSAT score by teammate</h3><p class="cap">Sorted highest to lowest. Color = team group (green = CS primary, teal = Inbound Calls, grey = CS secondary). Teammates with fewer than 10 ratings (low confidence) use a lighter shade.</p>
+  <div class="callout"><div class="cut">Read this before comparing people</div><div class="hyp">The six teammates tagged <b>“Cust. Support (sec.) + Inbound Calls”</b> spend much of their time on the <b>phone</b> — a different job than chat and email. Calls are real‑time, first‑response and SLA are measured differently (and often look worse on tickets handled between calls), and phone CSAT runs a few points lower across the board. So their CSAT, response‑time, and SLA numbers <b>aren't directly comparable</b> to the chat‑first Customer Support agents. Judge the phone team within its own group (it averaged <b>93.5%</b> vs <b>96.9%</b> for CS‑primary), not against the whole table.</div></div>
+  <div class="chartbox"><h3>CSAT score by teammate</h3><p class="cap">Sorted highest to lowest. Color = team group (blue = CS primary, navy = Inbound Calls, grey = CS secondary). Teammates with fewer than 20 ratings (small sample) use a lighter shade.</p>
     <p class="legend-inline"><span class="swatch" style="background:#3185fc"></span>CS primary<span class="swatch" style="background:#162050"></span>Inbound Calls<span class="swatch" style="background:#94a3b8"></span>CS secondary</p>
     <canvas id="c_teammates" height="300"></canvas></div>
   <table id="tbl_team">
@@ -184,6 +194,7 @@
     </tr></thead>
     <tbody></tbody>
   </table>
+  <p class="samplenote"><strong>Sample sizes.</strong> The “Ratings” column is each member's number of returned ratings — read every CSAT % against it. Four members have too few to judge and are flagged <span class="tag low">low n</span> (under 10: Jodi Medina · 5, Torez · 3; under 20: Eric F · 15, Matt J · 16); their bars are also shaded lighter in the chart. Treat anyone under ~30 ratings as directional only.</p>
 
   <!-- SECTION 4: CHANNEL -->
   <h2>4. CSAT by channel</h2>
@@ -229,8 +240,24 @@
         <li>“I need a live agent please”</li><li>“I am talking to a stupid non human”</li><li>“This did not help at all. When I tried to post anoth…”</li><li>“I just kept doing the same thing over and over unt…”</li></ul></div>
   </div>
 
+  <!-- SECTION 8: WORST OFFENDERS -->
+  <h2>8. Where to look — worst offenders by cut</h2>
+  <p class="lead">The single weakest result in each cut, with a short hypothesis to test. Teammate rankings use only members with enough ratings to be meaningful (≥30); smaller samples are flagged in the note below, not ranked.</p>
+  <div class="offenders">
+    <div class="callout c-pink"><div class="cut">Lowest‑CSAT teammate (≥30 ratings)</div><div class="who">Jonny Diaz — 88.5% <span class="n">(78 ratings)</span></div><div class="hyp">On the Inbound Calls team and the slowest first responder (~15 min). Phone issues are harder and real‑time; slow replies likely compound the dissatisfaction. Phone stats aren't directly comparable to chat‑first agents (see §3).</div></div>
+    <div class="callout c-pink"><div class="cut">Lowest‑CSAT channel</div><div class="who">Email — 88.3% <span class="n">(teammate CSAT)</span></div><div class="hyp">Email skews toward complex billing and cancellation threads and lacks the live back‑and‑forth of chat and phone.</div></div>
+    <div class="callout c-pink"><div class="cut">Lowest‑CSAT topic</div><div class="who">“Custom / Status / Tasks” — 86%</div><div class="hyp">A catch‑all bucket of non‑standard, harder requests — likely many different issues rolled together, not one fixable problem.</div></div>
+    <div class="callout c-pink"><div class="cut">Weakest Fin week</div><div class="who">Week of May 25 — ~85.7%</div><div class="hyp">Fin CSAT bounces week to week; the late‑May dip was a single bad week right before the Jun 1 spike, not a trend.</div></div>
+    <div class="callout"><div class="cut">Lowest request rate · channel</div><div class="who">Email — ~18% surveyed</div><div class="hyp">Email conversations rarely trigger a CSAT survey today; the cheapest win is simply to send more of them.</div></div>
+    <div class="callout"><div class="cut">Lowest response rate · channel</div><div class="who">Email — ~4% returned</div><div class="hyp">Even when surveyed, email customers rarely come back to rate once the thread is closed.</div></div>
+    <div class="callout"><div class="cut">Lowest response rate · month</div><div class="who">June — 9.2%</div><div class="hyp">June is a partial month (through the 19th) and dipped; worth checking whether surveys are being delivered, not just answered.</div></div>
+    <div class="callout"><div class="cut">Worst SLA miss rate (≥100 SLAs)</div><div class="who">Aileen 81.3% · Danny 81.2% · Frank 79.4%</div><div class="hyp">The SLA targets look mis‑set — misses don't track CSAT (Frank misses 79% yet scores 97%). Re‑check the thresholds before treating these as a problem.</div></div>
+    <div class="callout"><div class="cut">Slowest first response (≥30 ratings)</div><div class="who">Jonny Diaz 15m 15s · Diana 14m 48s</div><div class="hyp">Both are inbound‑phone members, likely answering async tickets in the gaps between live calls.</div></div>
+  </div>
+  <p class="samplenote"><strong>Sample sizes &amp; small‑N flags.</strong> Of the 21 Customer Support members, two have fewer than 10 ratings (Jodi Medina · 5, Torez · 3) and two more are under 20 (Eric F · 15, Matt J · 16) — too few to rank or coach on, so they're shaded “low n” in the §3 table and excluded above. Likewise, Fin CSAT on Email (100%) and Phone (66.7%) each rest on only a handful of ratings, and topic “volume” counts overlapping matches rather than ratings — none are reliable on their own.</p>
+
   <!-- WRITTEN ANALYSIS -->
-  <h2>8. Analysis &amp; findings</h2>
+  <h2>9. Analysis &amp; findings</h2>
   <div class="analysis">
     <h3>Executive summary</h3>
     <p>Over March 1 – June 19, 2026, the <strong>21‑member Customer Support team scored 96.1% CSAT</strong> (2,612 of 2,717 ratings positive), <strong>about 7 points above Fin AI at 89.1%</strong> (3,018 of 3,387). When every human teammate across all teams is included, human CSAT is 91.8%. The clearest opportunity is not satisfaction quality but <strong>survey response volume</strong>: surveys are sent on most conversations (up to ~75%), yet only about <strong>10% of conversations return a rating</strong>. Fin's satisfaction improved notably in June (to ~92.5%), narrowing the gap with humans.</p>
@@ -270,6 +297,7 @@
       <li>The negative‑rating count (304) is for Terrible + Bad with type‑is‑User and excludes the small "Phone switch" channel; most negative ratings carry no written comment, so the themes come from the minority that do. The human (151) / Fin (147) / chatbot (~6) split uses Intercom's "Agent rated type."</li>
       <li>Weekly CSAT values were read from the Fin Surveyed CSAT "by week" chart (approximate, ±1–2 pts), and the first plotted week (Mar 23) is partial. The conclusion — Fin's June lift is one spike week — holds regardless of small reading errors.</li>
       <li>First‑response‑time and SLA‑miss figures are scoped to the same Customer Support + Inbound Calls team filter as the CSAT, so they line up with the per‑teammate CSAT in the table.</li>
+      <li><strong>Phone vs. chat isn't apples‑to‑apples.</strong> The 6 Inbound Calls members work largely on the phone, where the job, the response‑time/SLA definitions, and typical CSAT all differ from chat/email. Their per‑teammate stats should be read within the phone group, not ranked directly against chat‑first agents.</li>
     </ul>
 
     <h3>Recommended next steps</h3>
@@ -347,7 +375,7 @@ let teammates = [
   {name:"Jodi Medina",         team:"Customer Support · secondary",     grp:"secondary", csat:100.0, pos:5, resp:5, assigned:112, frt:"47s",    frtS:47,   sla:89.7},
   {name:"Torez",               team:"Customer Support · secondary",     grp:"secondary", csat:100.0, pos:3, resp:3, assigned:27, frt:"—",      frtS:null, sla:null}
 ];
-const LOWN = 10; // ratings threshold for "low confidence"
+const LOWN = 20; // ratings threshold for "low confidence" small-N flag
 
 // Section: CSAT by topic (Intercom AI conversation topics, type=User). Volume = topic match count (topics can overlap).
 const topics = [
