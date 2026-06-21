@@ -312,6 +312,28 @@
     </ul>
   </div>
 
+  <!-- SECTION 10: OPERATOR CROSS-CHECK -->
+  <h2>10. Operator cross‑check</h2>
+  <p class="lead">To validate the report figures independently, I asked Intercom's <strong>Fin AI Operator</strong> the same questions directly, with fresh prompts (nothing reused from the reports). <strong>Operator confirms the core CSAT scores almost exactly.</strong> The only two differences — response rate and total negative ratings — come from different denominators and scopes, not conflicting data.</p>
+  <table>
+    <thead><tr><th>Metric (Mar 1 – Jun 19, 2026)</th><th>From the reports</th><th>From Operator</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>Overall surveyed CSAT</td><td>88.0% (6,121/6,954)</td><td>88.00% (6,125/6,960)</td><td><span class="conf c-confirmed">Match</span></td></tr>
+      <tr><td>All‑teammate CSAT</td><td>91.8% (3,019/3,287)</td><td>91.85% (3,020/3,288)</td><td><span class="conf c-confirmed">Match</span></td></tr>
+      <tr><td>Fin AI CSAT</td><td>89.1% (3,018/3,387)</td><td>89.09% (3,020/3,390)</td><td><span class="conf c-confirmed">Match</span></td></tr>
+      <tr><td>Support team CSAT (CS + Inbound)</td><td>96.1% (2,696/2,805)</td><td>96.1% combined (2,697/2,806)</td><td><span class="conf c-confirmed">Match</span></td></tr>
+      <tr><td>CSAT response rate</td><td>~10–11% <span style="color:var(--caption)">(of type‑is‑User conversations)</span></td><td>6.8% <span style="color:var(--caption)">(of all conversations)</span></td><td><span class="conf c-unverified">Differs — denominator</span></td></tr>
+      <tr><td>Negative ratings — total</td><td>304 <span style="color:var(--caption)">(type‑User, excl. phone‑switch)</span></td><td>463 <span style="color:var(--caption)">(all agents &amp; types)</span></td><td><span class="conf c-unverified">Differs — scope</span></td></tr>
+      <tr><td>Negative ratings — human / Fin</td><td>151 / 147</td><td>164 / 153</td><td><span class="conf c-likely">Directional match</span></td></tr>
+    </tbody>
+  </table>
+  <div class="offenders" style="margin-top:16px">
+    <div class="callout"><div class="cut">Why response rate differs</div><div class="hyp">Same numerator, different denominator. Operator divides ratings by <b>all</b> conversations (~6.8%); the report's ~10–11% divides by <b>type‑is‑User</b> conversations only. Both are correct for their scope — the report's is the more support‑relevant cut.</div></div>
+    <div class="callout"><div class="cut">Why the negative totals differ</div><div class="hyp">Operator counts <b>every agent type</b> with no channel/type filter, including <b>146 chatbot/workflow</b> negatives, for 463 total. The report's 304 is filtered to type‑User and excludes the small phone‑switch channel. The human (164 vs 151) and Fin (153 vs 147) splits line up directionally — Fin slightly fewer than humans in both.</div></div>
+    <div class="callout"><div class="cut">Bonus: Operator's team split</div><div class="hyp">Operator breaks the support cut into <b>Customer Support 96.98%</b> (2,281/2,352) and <b>Inbound Calls 91.63%</b> (416/454); combined they equal the report's 96.1%. Our §3 sub‑groups (96.9% / 93.5%) group by each person's team role rather than the conversation's assigned team — a slightly different lens, same story.</div></div>
+  </div>
+  <p class="samplenote"><strong>Method.</strong> Operator queried in a fresh thread on the Fin AI Operator page on June 21, 2026, with three independent prompts (CSAT scores; response rate + negatives; team‑level CSAT). Figures are Operator's own query results. Small differences in the matched rows (±a few ratings) reflect live‑data refresh between when the reports and Operator were read.</p>
+
   <p class="footnotes">
     <strong>Sources (Intercom · DoorLoop · app njbci459, Mar 1 – Jun 19, 2026):</strong><br>
     • <a href="https://app.intercom.com/a/apps/njbci459/reports/custom-reports/report/15110202">Unified Teammate Performance</a> — per‑teammate &amp; team CSAT (filtered to Customer Support + Inbound Calls teams)<br>
