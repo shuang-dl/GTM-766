@@ -170,6 +170,9 @@
   <p class="lead">Both measured against <strong>all conversations</strong> (your chosen definition). <strong>Request rate</strong> = share of conversations where a CSAT survey was sent. <strong>Response rate</strong> = share of conversations that received a rating back. The gap between the two is the survey‑answering opportunity.</p>
   <div class="chartbox"><h3>Request rate vs. response rate, by month</h3><p class="cap">Surveys are sent on most conversations (rising to ~75%), but only ~10% of all conversations come back with a rating.</p><canvas id="c_reqresp" height="150"></canvas></div>
 
+  <div class="chartbox"><h3>Request &amp; response rate by teammate</h3><p class="cap">Per‑teammate <strong>request rate</strong> (survey sent) and <strong>response rate</strong> (rating returned), from Operator. Denominator = new conversations where the customer sent a message (Intercom's CSAT metric definition). Sorted by request rate. Hover for the exact figures and conversation count.</p><canvas id="c_teamRR" height="430"></canvas></div>
+  <p class="samplenote"><strong>What stands out.</strong> Request rate varies a lot by person (Milly Castellon surveys 70% of her conversations, Alejandro Grahammer 27%) — likely a mix of channel and how conversations are closed. Response rate is uniformly low (6–17%). <strong>Jonny Diaz is the clearest outlier</strong>: 44% of his conversations get a survey but only ~6% come back rated. <em>Source note:</em> Operator lists teammates by their conversation's assigned team, so this view includes Kailah Washington (handled CS‑assigned conversations but not a current CS‑team member — excluded here) and omits three very‑low‑volume members (Matt J, Jodi Medina, Torez).</p>
+
   <!-- SECTION 3: PER-TEAMMATE -->
   <h2>3. CSAT by teammate (actual Customer Support team membership)</h2>
   <p class="lead">Roster is now the <strong>21 actual members of the Customer Support team</strong> (from Settings → Teams), with each person's team role shown. The Inbound Calls (phone) Team has 6 members — all of them are also secondary members of Customer Support, so they're tagged "Cust. Support (sec.) + Inbound Calls". "Ratings" = positive / total ratings received. Two operational drivers now sit beside CSAT: <strong>median first response time</strong> and <strong>SLA miss rate</strong> (the share of SLA‑tracked conversations that missed their target — higher is worse; team average 73.8%). Colors flag slower responses (amber/red) and higher SLA misses (red ≥75%). Click any column heading to sort.</p>
@@ -367,6 +370,29 @@ const reqFin     = [66.8,76.2,98.2,94.3];
 const reqHuman   = [37.0,44.5,46.3,47.3];
 const respRate   = [10.5,11.3,11.6,9.2];
 
+// Section 2 — per-teammate request & response rate (from Operator). Denominator = new conversations where the customer messaged.
+// Conversation-team-assignment cut; excludes non-member Kailah Washington and 3 very-low-volume members.
+const teammateRR = [
+  {n:"Milly Castellon", req:70.44, resp:13.74, conv:2263},
+  {n:"Samuel Little",   req:62.92, resp:17.29, conv:1122},
+  {n:"Andrew",          req:57.11, resp:14.09, conv:823},
+  {n:"Aileen",          req:56.74, resp:9.13,  conv:920},
+  {n:"Nicole",          req:53.20, resp:11.61, conv:1111},
+  {n:"Alex Judasin",    req:53.15, resp:9.79,  conv:1144},
+  {n:"Oliver Z",        req:53.05, resp:15.50, conv:903},
+  {n:"Eric F",          req:52.59, resp:11.85, conv:135},
+  {n:"Danny",           req:52.01, resp:13.56, conv:671},
+  {n:"Diana",           req:49.87, resp:9.22,  conv:770},
+  {n:"Franco Bolivar",  req:43.72, resp:13.88, conv:2342},
+  {n:"Jonny Diaz",      req:43.62, resp:5.81,  conv:1325},
+  {n:"Erick Briones",   req:43.06, resp:11.70, conv:1368},
+  {n:"Gabriel Calderon",req:37.90, resp:11.29, conv:1612},
+  {n:"Andres",          req:36.36, resp:10.59, conv:2313},
+  {n:"Paolo G",         req:32.30, resp:9.80,  conv:2152},
+  {n:"Frank",           req:31.66, resp:8.49,  conv:1437},
+  {n:"Alejandro Grahammer", req:27.19, resp:9.40, conv:1372}
+];
+
 // Section 3 — roster = ACTUAL members of the Customer Support team (21)
 // grp: 'primary' = CS primary inbox · 'inbound' = CS secondary + Inbound Calls Team · 'secondary' = CS secondary only
 // frt = median first response time (display); frtS = same in seconds (for sort/scale)
@@ -478,6 +504,19 @@ new Chart(document.getElementById('c_reqresp'),{
   ]},
   options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
     scales:{y:{min:0,max:100,grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+
+/* 2b. Per-teammate request & response rate (horizontal grouped) */
+new Chart(document.getElementById('c_teamRR'),{
+  type:'bar',
+  data:{labels:teammateRR.map(t=>t.n),datasets:[
+    {label:'Request rate (survey sent)',data:teammateRR.map(t=>t.req),backgroundColor:'#3185fc',borderRadius:3,barPercentage:.9,categoryPercentage:.8},
+    {label:'Response rate (rating returned)',data:teammateRR.map(t=>t.resp),backgroundColor:'#ff4998',borderRadius:3,barPercentage:.9,categoryPercentage:.8}
+  ]},
+  options:{indexAxis:'y',plugins:{legend:{position:'bottom'},
+    tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%',
+      afterbody:items=>'Conversations: '+teammateRR[items[0].dataIndex].conv.toLocaleString()}}},
+    scales:{x:{min:0,max:80,grid:GRID,ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
 });
 
 /* 3. Teammate CSAT bar (sorted desc) + table */
